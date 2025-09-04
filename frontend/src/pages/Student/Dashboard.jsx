@@ -7,6 +7,7 @@ import DiscussionForum from '../../components/DiscussionForum/DiscussionForum';
 import MockTestPage from './MockTests/MockTestPage';
 import { fetchLiveClasses } from '../../utils/liveClassesApi';
 import { getCache as getLiveCache, setCache as setLiveCache, shouldRevalidate as shouldRevalidateLive } from '../../utils/liveClassesCache';
+import NextStepCard from '../../components/Student/NextStep/NextStepCard';
 import {
   FiHome,
   FiBook,
