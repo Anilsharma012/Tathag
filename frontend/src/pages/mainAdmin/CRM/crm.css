@@ -22,7 +22,7 @@
 .inv-paid{background:#e8f7ee;color:#1a7f37}.inv-partial{background:#fff5e6;color:#9a6700}.inv-pending{background:#ffe6e6;color:#ae2e24}
 .type-call{background:#dbeafe}.type-note{background:#e2e8f0}.type-meeting{background:#fef3c7}
 .tabs{display:flex;gap:8px;margin:12px 0}.tab{background:#eef2ff;border:none;border-radius:999px;padding:8px 12px;color:#1e40af;cursor:pointer}.tab.active{background:#1e40af;color:#fff}
-.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.overview-grid{display:flex;flex-wrap:wrap;gap:16px}.overview-grid .status-card{flex:0 1 280px}
 .status-card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px;box-shadow:0 6px 20px rgba(0,0,0,.05)}
 .status-head{display:flex;justify-content:space-between;align-items:center}
 .status-count{display:flex;gap:6px;align-items:center}
