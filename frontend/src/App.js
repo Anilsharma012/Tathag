@@ -115,6 +115,7 @@ import AdminEvaluateAnswers from "./pages/mainAdmin/Evaluation/AdminEvaluateAnsw
 import OCRDashboard from "./pages/mainAdmin/Evaluation/OCRDashboard";
 import AdminReports from "./pages/mainAdmin/Reports/AdminReports";
 import AdminLiveClasses from "./pages/mainAdmin/LiveClasses/AdminLiveClasses";
+import BatchManagement from "./pages/mainAdmin/BatchManagement/BatchManagement";
 import TeacherLiveClasses from "./pages/MainSubAdmin/LiveClasses/TeacherLiveClasses";
 import StudentLiveClasses from "./pages/Student/LiveClasses/StudentLiveClasses";
 import PurchaseHistory from "./pages/Student/PurchaseHistory/PurchaseHistory";
