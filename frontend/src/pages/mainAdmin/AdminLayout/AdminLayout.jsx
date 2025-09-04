@@ -4,6 +4,7 @@ import "./AdminLayout.css";
 import AdminTopbar from "../AdminTopbar/AdminTopbar";
 import "../../../admin-theme.css";
 import AdminThemeProvider from "../../../components/AdminTheme/AdminThemeProvider";
+import AdminThemeCheck from "../../../components/AdminTheme/AdminThemeCheck";
 
 const AdminLayout = ({ children }) => {
   return (
@@ -14,7 +15,7 @@ const AdminLayout = ({ children }) => {
         <AdminSidebar />
         <div className="admin-main">
           {children}
-          <div className="admin-theme-check" id="admin-theme-check"></div>
+          <AdminThemeCheck />
         </div>
       </div>
     </div>
