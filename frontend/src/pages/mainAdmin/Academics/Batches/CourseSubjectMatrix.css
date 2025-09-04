@@ -1,0 +1,393 @@
+.matrix-section {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.matrix-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.matrix-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 4px 0;
+}
+
+.matrix-header p {
+  color: #6b7280;
+  margin: 0;
+  font-size: 14px;
+}
+
+.matrix-container {
+  overflow-x: auto;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.matrix-table {
+  display: table;
+  width: 100%;
+  min-width: 600px;
+}
+
+.matrix-header-row,
+.matrix-data-row {
+  display: table-row;
+}
+
+.matrix-cell {
+  display: table-cell;
+  padding: 12px 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f3f4f6;
+  position: relative;
+}
+
+.matrix-header-row .matrix-cell {
+  background: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.matrix-course-header {
+  width: 250px;
+  min-width: 250px;
+}
+
+.matrix-subject-header {
+  width: 120px;
+  text-align: center;
+}
+
+.matrix-course-cell {
+  width: 250px;
+  min-width: 250px;
+  position: sticky;
+  left: 0;
+  background: white;
+  z-index: 5;
+  border-right: 2px solid #e5e7eb;
+}
+
+.matrix-data-row:nth-child(even) .matrix-course-cell {
+  background: #f9fafb;
+}
+
+.course-name-wrapper {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 4px 0;
+}
+
+.course-name-wrapper:hover {
+  color: #3b82f6;
+}
+
+.course-name {
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.course-meta {
+  font-size: 12px;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.matrix-status-cell {
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 120px;
+}
+
+.matrix-status-cell:hover {
+  background: #f3f4f6;
+}
+
+.matrix-data-row:nth-child(even) .matrix-status-cell {
+  background: #f9fafb;
+}
+
+.matrix-data-row:nth-child(even) .matrix-status-cell:hover {
+  background: #e5e7eb;
+}
+
+.cell-actions {
+  margin-top: 4px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.cell-action-btn {
+  background: none;
+  border: none;
+  padding: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell-action-btn:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.cell-action-btn:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 1px;
+}
+
+/* Matrix Empty State */
+.matrix-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+}
+
+.matrix-empty svg {
+  margin-bottom: 16px;
+  color: #9ca3af;
+}
+
+.matrix-empty h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 8px 0;
+}
+
+.matrix-empty p {
+  margin: 0;
+  color: #6b7280;
+}
+
+/* Matrix Skeleton */
+.matrix-skeleton {
+  padding: 20px;
+}
+
+.matrix-skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.skeleton-course-name {
+  width: 200px;
+  height: 40px;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 8px;
+}
+
+.skeleton-cell {
+  width: 80px;
+  height: 32px;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 12px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Tooltip */
+.matrix-tooltip {
+  position: fixed;
+  background: #1f2937;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  max-width: 300px;
+  pointer-events: none;
+}
+
+.tooltip-header {
+  font-weight: 600;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #374151;
+  padding-bottom: 6px;
+}
+
+.tooltip-stats,
+.tooltip-session {
+  margin-bottom: 6px;
+}
+
+.tooltip-stats div,
+.tooltip-session div {
+  margin-bottom: 2px;
+}
+
+.tooltip-status {
+  font-weight: 500;
+  color: #d1d5db;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .matrix-course-header,
+  .matrix-course-cell {
+    width: 200px;
+    min-width: 200px;
+  }
+  
+  .matrix-subject-header,
+  .matrix-status-cell {
+    width: 100px;
+  }
+  
+  .matrix-cell {
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .matrix-header {
+    padding: 16px 20px;
+  }
+  
+  .matrix-course-header,
+  .matrix-course-cell {
+    width: 180px;
+    min-width: 180px;
+  }
+  
+  .matrix-subject-header,
+  .matrix-status-cell {
+    width: 90px;
+  }
+  
+  .matrix-cell {
+    padding: 8px 10px;
+  }
+  
+  .course-name {
+    font-size: 13px;
+  }
+  
+  .course-meta {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .matrix-container {
+    max-height: 400px;
+  }
+  
+  .matrix-tooltip {
+    font-size: 12px;
+    padding: 10px 12px;
+    max-width: 250px;
+  }
+}
+
+/* Scrollbar Styling */
+.matrix-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.matrix-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.matrix-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.matrix-container::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.matrix-container::-webkit-scrollbar-corner {
+  background: #f1f5f9;
+}
+
+/* Focus Management */
+.course-name-wrapper:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.matrix-status-cell:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
+}
+
+/* Print Styles */
+@media print {
+  .matrix-tooltip,
+  .cell-actions {
+    display: none;
+  }
+  
+  .matrix-container {
+    max-height: none;
+    overflow: visible;
+  }
+  
+  .matrix-section {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .matrix-cell {
+    border-bottom-width: 2px;
+  }
+  
+  .matrix-course-cell {
+    border-right-width: 3px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .course-name-wrapper,
+  .matrix-status-cell,
+  .cell-action-btn,
+  .skeleton-course-name,
+  .skeleton-cell {
+    transition: none;
+    animation: none;
+  }
+}
