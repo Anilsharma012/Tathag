@@ -213,6 +213,7 @@
 }
 
 .payments-summary {display:grid;gap:8px}
+.empty-row{text-align:center;color:#6c757d}
 
 .payment-item {
   display: flex;
