@@ -1,44 +1,45 @@
 .admin-topbar {
   position: fixed;
   top: 0;
-  left: 240px; /* Sidebar width */
+  left: 240px;
   height: 60px;
-  width: calc(100% - 230px);
-  background-color: #1e1e3f;
-  color: white;
+  width: calc(100% - 240px);
+  background-color: var(--admin-surface);
+  color: var(--admin-text);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 30px;
+  padding: 0 24px;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--admin-shadow-md);
+  border-bottom: 1px solid var(--admin-border);
+  border-radius: 0 0 var(--admin-radius-xl) var(--admin-radius-xl);
 }
 
-.topbar-title {
-  font-size: 20px;
-  font-weight: 500;
-}
+.topbar-title { font-size: 18px; font-weight: 600; }
 
-.topbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
+.topbar-actions { display: flex; align-items: center; gap: 16px; }
 
 .topbar-search {
-  padding: 6px 12px;
-  border-radius: 4px;
-  border: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--admin-border);
   outline: none;
-  background-color: #2e2e4d;
-  color: white;
+  background-color: var(--admin-bg);
+  color: var(--admin-text);
   font-size: 14px;
+  transition: border var(--admin-transition), box-shadow var(--admin-transition);
 }
+.topbar-search:focus { border-color: var(--admin-primary); box-shadow: var(--admin-focus); }
 
 .topbar-profile img {
   height: 40px;
   width: 40px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid white;
+  border: 2px solid var(--admin-border);
+}
+
+@media (max-width: 1024px) {
+  .admin-topbar { left: 72px; width: calc(100% - 72px); }
 }

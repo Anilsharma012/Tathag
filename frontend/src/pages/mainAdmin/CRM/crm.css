@@ -22,7 +22,14 @@
 .inv-paid{background:#e8f7ee;color:#1a7f37}.inv-partial{background:#fff5e6;color:#9a6700}.inv-pending{background:#ffe6e6;color:#ae2e24}
 .type-call{background:#dbeafe}.type-note{background:#e2e8f0}.type-meeting{background:#fef3c7}
 .tabs{display:flex;gap:8px;margin:12px 0}.tab{background:#eef2ff;border:none;border-radius:999px;padding:8px 12px;color:#1e40af;cursor:pointer}.tab.active{background:#1e40af;color:#fff}
-.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+/* Overview grid defaults */
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+/* Leads header summary: force 4->3->2->1 columns responsively */
+.crm-header{flex-direction:column;align-items:stretch;gap:8px}
+.crm-header .overview-grid{grid-template-columns:repeat(4,minmax(0,1fr));width:100%}
+@media (max-width:1200px){.crm-header .overview-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:800px){.crm-header .overview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:500px){.crm-header .overview-grid{grid-template-columns:1fr}}
 .status-card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px;box-shadow:0 6px 20px rgba(0,0,0,.05)}
 .status-head{display:flex;justify-content:space-between;align-items:center}
 .status-count{display:flex;gap:6px;align-items:center}

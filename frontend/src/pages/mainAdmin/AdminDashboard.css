@@ -1,14 +1,14 @@
 .dashboard-container {
   padding: 20px 30px;
-  background: #f4f6fc;
+  background: var(--admin-bg);
   min-height: 100vh;
 }
 
 .dashboard-title {
   font-size: 26px;
-  font-weight: bold;
-  margin-bottom: 30px;
-  color: #222;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--admin-text);
 }
 
 .dashboard-widgets {
@@ -18,34 +18,31 @@
 }
 
 .dashboard-card {
-  background-color: white;
-  border-radius: 12px;
+  background-color: var(--admin-surface);
+  border-radius: var(--admin-radius-2xl);
   padding: 20px;
   display: flex;
   align-items: center;
-  gap: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  gap: 12px;
+  box-shadow: var(--admin-shadow-md);
+  transition: transform var(--admin-transition), box-shadow var(--admin-transition);
 }
 
-.dashboard-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-}
+.dashboard-card:hover { transform: translateY(-3px); box-shadow: var(--admin-shadow-lg); }
 
 .dashboard-icon {
-  font-size: 28px;
-  color: #DF0000;
+  font-size: 18px; /* wrapped in circle via admin-theme */
 }
 
 .dashboard-card h2 {
-  font-size: 20px;
+  font-size: 22px;
   margin: 0;
-  color: #111;
+  color: var(--admin-text);
+  font-weight: 600;
 }
 
 .dashboard-card p {
-  margin: 4px 0 0;
-  color: #555;
+  margin: 2px 0 0;
+  color: var(--admin-text-muted);
   font-size: 14px;
 }

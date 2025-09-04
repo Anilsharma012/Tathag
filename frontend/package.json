@@ -38,6 +38,8 @@
   },
   "scripts": {
     "start": "cross-env PORT=3001 react-scripts start",
+    "start:backend": "cd ../backend && npm start",
+    "dev": "concurrently -n backend,frontend -c green,blue \"npm run start:backend\" \"cross-env PORT=3001 react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -64,6 +66,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "react-scripts": "^5.0.1",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "concurrently": "^8.2.2"
   }
 }

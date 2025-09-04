@@ -4,64 +4,52 @@
   left: 0;
   height: 100vh;
   width: 240px;
-  background: #0e0e2e;
-  color: white;
+  background: var(--admin-surface-2);
+  color: #fff;
   display: flex;
   flex-direction: column;
   padding: 20px 0;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
-  overflow-y: auto; /* ✅ scrollable */
-  scrollbar-width: none; /* Firefox */
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 
-/* ✅ Hide scrollbar for Chrome, Safari and Edge */
-.admin-sidebar::-webkit-scrollbar {
-  display: none;
-}
+.admin-sidebar::-webkit-scrollbar { display: none; }
 
+.admin-logo { text-align: left; margin-bottom: 24px; }
+.admin-logo img { width: 80%; height: 100%; }
 
-.admin-logo {
-  
-  text-align: left;
-  margin-bottom: 40px;}
- 
-.admin-logo img {
-    width: 80%;
-    height:100%
-}
-
-.admin-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
+.admin-nav { display: flex; flex-direction: column; gap: 10px; }
 
 .admin-link {
   color: #ffffff;
   text-decoration: none;
-  padding: 12px 20px;
+  padding: 10px 14px;
   display: flex;
   align-items: center;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  border-left: 4px solid transparent;
+  font-size: 15px;
+  transition: all var(--admin-transition);
+  border-left: 0;
+  border-radius: 999px;
+  margin: 0 12px;
 }
 
-.admin-link .admin-icon {
-  margin-right: 12px;
-  font-size: 18px;
-}
+.admin-link .admin-icon { margin-right: 8px; font-size: 18px; }
 
 .admin-link:hover {
-  background-color: #1e1e3f;
-  border-left: 4px solid #DF0000;
-  transform: translateX(4px);
-  color: #DF0000;
+  background: color-mix(in oklab, var(--admin-primary) 15%, transparent);
+  transform: translateX(2px);
+  color: #fff;
 }
 
 .admin-link.active {
-  background-color: #1e1e3f;
-  color: #DF0000;
-  border-left: 4px solid #DF0000;
-  font-weight: bold;
+  background: color-mix(in oklab, var(--admin-primary) 22%, transparent);
+  color: #fff;
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .admin-sidebar { width: 72px; }
+  .admin-link { justify-content: center; padding: 10px; font-size: 0; }
+  .admin-link .admin-icon { margin: 0; font-size: 20px; }
 }
