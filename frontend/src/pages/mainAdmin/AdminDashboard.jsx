@@ -4,7 +4,6 @@ import "./AdminDashboard.css";
 import axios from 'axios';
 import { useEffect, useMemo, useState } from 'react';
 import MetricCard from "../../components/AdminUI/MetricCard";
-import { LineChartCard, DonutChartCard } from "../../components/AdminUI/ChartCard";
 import TableMini from "../../components/AdminUI/TableMini";
 import ListCompact from "../../components/AdminUI/ListCompact";
 import QuickActionsBar from "../../components/AdminUI/QuickActionsBar";
@@ -14,8 +13,6 @@ import { FaUsers, FaBookOpen, FaChalkboardTeacher, FaUserGraduate } from "react-
 
 const AdminDashboard = () => {
   const [metrics, setMetrics] = useState({ users:null, courses:null, teachers:null, students:null, enroll7:0, rev7:0 });
-  const [trend, setTrend] = useState([]);
-  const [stages, setStages] = useState({ labels:[], values:[] });
   const [classes, setClasses] = useState([]);
   const [payments, setPayments] = useState([]);
   const [alerts, setAlerts] = useState({ pendingInv:0, expiring:0 });
@@ -60,13 +57,6 @@ const AdminDashboard = () => {
           setClasses(upcoming);
         } catch { setClasses([]); }
 
-        // CRM lead stages summary
-        try {
-          const s = await axios.get('/api/crm/leads/summary', { headers });
-          const totals = s.data?.totals || {}; const labels = Object.keys(totals); const values = labels.map(k=> totals[k] || 0);
-          setStages({ labels, values });
-        } catch {}
-
         setMetrics({ users: metrics.users, courses: coursesCount, teachers: teachersCount, students: studentsCount, enroll7: enrollCount, rev7: rev });
         setPayments(payRows);
 
@@ -80,26 +70,6 @@ const AdminDashboard = () => {
           const enr = await axios.get('/api/admin/students-with-purchases', { headers });
           const expiring = (enr.data?.students||[]).filter(u => (u.enrolledCourses||[]).some(c => c.expiresAt && (new Date(c.expiresAt)-now) < 30*24*60*60*1000)).length;
           setAlerts(a=>({ ...a, expiring }));
-        } catch {}
-
-        // Enrollments 12-week trend from payments list (fallback synthetic buckets)
-        try {
-          const weeks = Array.from({length:12}).map((_,i)=>{
-            const dt = new Date(now.getTime() - (11-i)*7*86400000);
-            return `${dt.getMonth()+1}/${dt.getDate()}`;
-          });
-          const data = Array.from({length:12}).map(()=>0);
-          // if we had payments list earlier, reuse payRows source from pr above by refetching larger window
-          try {
-            const pr2 = await axios.get('/api/admin/payments', { headers, params: { startDate: new Date(now.getTime()-84*86400000).toISOString(), endDate: now.toISOString(), limit: 500 } });
-            const list2 = pr2.data?.payments || pr2.data?.items || [];
-            list2.forEach(p=>{
-              const d = new Date(p.createdAt||now);
-              const diffWeeks = Math.max(0, Math.min(11, Math.floor((now - d)/ (7*86400000))));
-              const idx = 11 - diffWeeks; data[idx] = (data[idx]||0) + 1;
-            });
-          } catch {}
-          setTrend(data);
         } catch {}
       } catch {}
     };
@@ -130,15 +100,6 @@ const AdminDashboard = () => {
           <div style={{gridColumn:'span 2'}}><MetricCard title="Students" value={metrics.students ?? '—'} icon={<FaUserGraduate/>} /></div>
           <div style={{gridColumn:'span 2'}}><MetricCard title="New Enrollments (7d)" value={metrics.enroll7 ?? 0} icon={<FaUserGraduate/>} /></div>
           <div style={{gridColumn:'span 2'}}><MetricCard title="Revenue (7d)" value={new Intl.NumberFormat('en-IN',{style:'currency', currency:'INR'}).format(Number(metrics.rev7||0))} icon={<FaBookOpen/>} /></div>
-        </div>
-
-        <div className="admin-grid" style={{marginTop:16}}>
-          <div style={{gridColumn:'span 8'}}>
-            <LineChartCard title="Enrollments Trend (12 weeks)" labels={Array.from({length:12}).map((_,i)=>`W${i+1}`)} data={trend} />
-          </div>
-          <div style={{gridColumn:'span 4'}}>
-            <DonutChartCard title="CRM Lead Stages" labels={stages.labels} data={stages.values} />
-          </div>
         </div>
 
         <div className="admin-grid" style={{marginTop:16}}>
