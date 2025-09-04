@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AdminLayout from '../AdminLayout/AdminLayout';
 import axios from 'axios';
 import './PaymentManagement.css';
+import { toast } from 'react-toastify';
 
 const PaymentManagement = () => {
   const [payments, setPayments] = useState([]);
@@ -23,11 +24,13 @@ const PaymentManagement = () => {
   const [manualForm, setManualForm] = useState({ userId: '', courseId: '', amount: '', note: '', status: 'paid' });
   const [manualFile, setManualFile] = useState(null);
   const [submittingManual, setSubmittingManual] = useState(false);
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     loadPayments();
     loadStudentsWithPurchases();
     loadOffline();
+    loadCoursesPublic();
   }, []);
 
   const loadPayments = async () => {
@@ -39,12 +42,15 @@ const PaymentManagement = () => {
         params: filters
       });
 
-      if (response.data.success) {
-        setPayments(response.data.payments);
+      if (response.data?.success) {
+        setPayments(response.data.payments || []);
+      } else {
+        setPayments([]);
       }
     } catch (error) {
       console.error('Error loading payments:', error);
-      alert('Failed to load payments');
+      toast.error(error.response?.data?.message || 'Failed to load payments');
+      setPayments([]);
     } finally {
       setLoading(false);
     }
@@ -58,12 +64,15 @@ const PaymentManagement = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      if (response.data.success) {
-        setStudents(response.data.students);
+      if (response.data?.success) {
+        setStudents(response.data.students || []);
+      } else {
+        setStudents([]);
       }
     } catch (error) {
       console.error('Error loading students:', error);
-      alert('Failed to load students data');
+      toast.error(error.response?.data?.message || 'Failed to load students data');
+      setStudents([]);
     } finally {
       setLoading(false);
     }
@@ -73,9 +82,11 @@ const PaymentManagement = () => {
     try {
       const token = localStorage.getItem('adminToken');
       const res = await axios.get('/api/admin/offline-payments', { headers: { Authorization: `Bearer ${token}` } });
-      if (res.data.success) setOfflineItems(res.data.items || []);
+      if (res.data?.success) setOfflineItems(res.data.items || []); else setOfflineItems([]);
     } catch (e) {
       console.error('Error loading offline payments:', e);
+      toast.error(e.response?.data?.message || 'Failed to load offline payments');
+      setOfflineItems([]);
     }
   };
 
@@ -84,8 +95,9 @@ const PaymentManagement = () => {
       const token = localStorage.getItem('adminToken');
       await axios.put(`/api/admin/payment/${paymentId}/offline/approve`, {}, { headers: { Authorization: `Bearer ${token}` } });
       await Promise.all([loadOffline(), loadPayments(), loadStudentsWithPurchases()]);
+      toast.success('Offline payment verified');
     } catch (e) {
-      alert('Failed to approve');
+      toast.error(e.response?.data?.message || 'Failed to approve');
     }
   };
 
@@ -94,30 +106,35 @@ const PaymentManagement = () => {
       const token = localStorage.getItem('adminToken');
       await axios.put(`/api/admin/payment/${paymentId}/offline/reject`, {}, { headers: { Authorization: `Bearer ${token}` } });
       await loadOffline();
+      toast.success('Offline payment rejected');
     } catch (e) {
-      alert('Failed to reject');
+      toast.error(e.response?.data?.message || 'Failed to reject');
     }
   };
 
   const submitManual = async (e) => {
     e.preventDefault();
-    if (!manualForm.userId || !manualForm.courseId || !manualForm.amount || !manualFile) return;
+    if (!manualForm.userId || !manualForm.courseId || !manualForm.amount || !manualFile) {
+      toast.error('Student, Course, Amount and Slip are required');
+      return;
+    }
     try {
       setSubmittingManual(true);
       const token = localStorage.getItem('adminToken');
       const fd = new FormData();
-      fd.append('userId', manualForm.userId);
-      fd.append('courseId', manualForm.courseId);
+      fd.append('userId', manualForm.userId.trim());
+      fd.append('courseId', manualForm.courseId.trim());
       fd.append('amount', String(Math.round(Number(manualForm.amount) * 100)));
       fd.append('status', manualForm.status);
       if (manualForm.note) fd.append('note', manualForm.note);
       fd.append('slip', manualFile);
       await axios.post('/api/admin/payment/manual', fd, { headers: { Authorization: `Bearer ${token}` } });
+      toast.success('Manual payment submitted');
       setManualForm({ userId: '', courseId: '', amount: '', note: '', status: 'paid' });
       setManualFile(null);
       await Promise.all([loadOffline(), loadPayments(), loadStudentsWithPurchases()]);
     } catch (e) {
-      alert('Failed to submit');
+      toast.error(e.response?.data?.message || 'Failed to submit');
     } finally {
       setSubmittingManual(false);
     }
@@ -150,7 +167,6 @@ const PaymentManagement = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Create and download HTML file
       const blob = new Blob([response.data], { type: 'text/html' });
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -162,7 +178,7 @@ const PaymentManagement = () => {
       document.body.removeChild(a);
     } catch (error) {
       console.error('Error downloading receipt:', error);
-      alert('Failed to download receipt');
+      toast.error(error.response?.data?.message || 'Failed to download receipt');
     }
   };
 
@@ -170,7 +186,7 @@ const PaymentManagement = () => {
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
       currency: 'INR'
-    }).format(amount / 100);
+    }).format((Number(amount) || 0) / 100);
   };
 
   const formatDate = (date) => {
@@ -184,8 +200,34 @@ const PaymentManagement = () => {
       case 'failed': return 'chip-failed';
       case 'unlocked': return 'chip-unlocked';
       case 'locked': return 'chip-locked';
+      case 'pending_offline': return 'chip-created';
+      case 'rejected': return 'chip-failed';
       default: return 'chip-default';
     }
+  };
+
+  // Load published courses for manual upload convenience (public endpoint)
+  const loadCoursesPublic = async () => {
+    try {
+      const res = await axios.get('/api/courses/student/published-courses');
+      setCourses(res.data?.courses || res.data || []);
+    } catch (e) {
+      setCourses([]);
+    }
+  };
+
+  // Resolve helpers: allow entering email/name/ID or course name/ID
+  const resolveStudentId = (value) => {
+    const v = String(value||'').trim().toLowerCase();
+    if (!v) return '';
+    const s = students.find(x => String(x._id) === v || String(x.email||'').toLowerCase() === v || String(x.name||'').toLowerCase() === v);
+    return s ? s._id : value;
+  };
+  const resolveCourseId = (value) => {
+    const v = String(value||'').trim().toLowerCase();
+    if (!v) return '';
+    const c = courses.find(x => String(x._id) === v || String(x.name||'').toLowerCase() === v);
+    return c ? c._id : value;
   };
 
   return (
@@ -251,38 +293,37 @@ const PaymentManagement = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {payments.map((payment) => (
-                      <tr key={payment._id}>
-                        <td>{payment._id.substring(0, 8)}...</td>
-                        <td>
-                          <div className="student-cell">
-                            <div className="avatar">{initials(payment.userId?.name || 'S')}</div>
-                            <div>
-                              <div>{payment.userId?.name || 'N/A'}</div>
-                              <div className="email">{payment.userId?.email}</div>
+                    {payments.length === 0 ? (
+                      <tr><td colSpan={7} style={{ textAlign: 'center', color: '#6c757d' }}>No payments found</td></tr>
+                    ) : (
+                      payments.map((payment) => (
+                        <tr key={payment._id}>
+                          <td>{payment._id.substring(0, 8)}...</td>
+                          <td>
+                            <div className="student-cell">
+                              <div className="avatar">{initials(payment.userId?.name || 'S')}</div>
+                              <div>
+                                <div>{payment.userId?.name || 'N/A'}</div>
+                                <div className="email">{payment.userId?.email}</div>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td>{payment.courseId?.name || 'N/A'}</td>
-                        <td>{formatCurrency(payment.amount)}</td>
-                        <td>
-                          <span className={`status-chip ${getStatusClass(payment.status)}`}>
-                            {payment.status.toUpperCase()}
-                          </span>
-                        </td>
-                        <td>{formatDate(payment.createdAt)}</td>
-                        <td>
-                          {payment.status === 'paid' && (
-                            <button
-                              onClick={() => downloadReceipt(payment._id)}
-                              className="action-btn"
-                            >
-                              Download Receipt
-                            </button>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
+                          </td>
+                          <td>{payment.courseId?.name || 'N/A'}</td>
+                          <td>{formatCurrency(payment.amount)}</td>
+                          <td>
+                            <span className={`status-chip ${getStatusClass(payment.status)}`}>
+                              {payment.status.toUpperCase()}
+                            </span>
+                          </td>
+                          <td>{formatDate(payment.createdAt)}</td>
+                          <td>
+                            {payment.status === 'paid' && (
+                              <button onClick={() => downloadReceipt(payment._id)} className="action-btn">Download Receipt</button>
+                            )}
+                          </td>
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -381,8 +422,8 @@ const PaymentManagement = () => {
               <h3>Manual Upload</h3>
               <form onSubmit={submitManual} className="manual-form">
                 <div className="row">
-                  <input placeholder="Student ID" value={manualForm.userId} onChange={e => setManualForm(v => ({ ...v, userId: e.target.value }))} />
-                  <input placeholder="Course ID" value={manualForm.courseId} onChange={e => setManualForm(v => ({ ...v, courseId: e.target.value }))} />
+                  <input placeholder="Student (email or ID)" value={manualForm.userId} onBlur={e => setManualForm(v => ({ ...v, userId: resolveStudentId(e.target.value) }))} onChange={e => setManualForm(v => ({ ...v, userId: e.target.value }))} />
+                  <input placeholder="Course (name or ID)" value={manualForm.courseId} onBlur={e => setManualForm(v => ({ ...v, courseId: resolveCourseId(e.target.value) }))} onChange={e => setManualForm(v => ({ ...v, courseId: e.target.value }))} />
                   <input type="number" step="0.01" placeholder="Amount (INR)" value={manualForm.amount} onChange={e => setManualForm(v => ({ ...v, amount: e.target.value }))} />
                   <select value={manualForm.status} onChange={e => setManualForm(v => ({ ...v, status: e.target.value }))}>
                     <option value="paid">Mark Paid</option>
