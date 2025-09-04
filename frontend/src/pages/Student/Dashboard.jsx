@@ -1123,6 +1123,11 @@ const loadMyCourses = async () => {
         <p>Here's your learning progress today</p>
       </div>
 
+      {/* Next Step Widget */}
+      <div className="next-step-container">
+        <NextStepCard />
+      </div>
+
       <div className="stats-grid">
         <div className="stat-card">
           <div className="stat-icon">
