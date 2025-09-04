@@ -294,7 +294,7 @@ const PaymentManagement = () => {
                   </thead>
                   <tbody>
                     {payments.length === 0 ? (
-                      <tr><td colSpan={7} style={{ textAlign: 'center', color: '#6c757d' }}>No payments found</td></tr>
+                      <tr><td colSpan={7} className="empty-row">No payments found</td></tr>
                     ) : (
                       payments.map((payment) => (
                         <tr key={payment._id}>
