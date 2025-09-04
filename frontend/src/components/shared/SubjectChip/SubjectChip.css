@@ -1,0 +1,210 @@
+/* Subject Chips */
+.subject-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+/* Subject Colors */
+.subject-a {
+  background: #dbeafe;
+  color: #1e40af;
+  border-color: #bfdbfe;
+}
+
+.subject-b {
+  background: #fef3c7;
+  color: #d97706;
+  border-color: #fed7aa;
+}
+
+.subject-c {
+  background: #ede9fe;
+  color: #7c3aed;
+  border-color: #ddd6fe;
+}
+
+.subject-d {
+  background: #dcfce7;
+  color: #16a34a;
+  border-color: #bbf7d0;
+}
+
+/* Status variations */
+.status-done.subject-a { background: #dcfce7; color: #16a34a; border-color: #bbf7d0; }
+.status-done.subject-b { background: #dcfce7; color: #16a34a; border-color: #bbf7d0; }
+.status-done.subject-c { background: #dcfce7; color: #16a34a; border-color: #bbf7d0; }
+.status-done.subject-d { background: #dcfce7; color: #16a34a; border-color: #bbf7d0; }
+
+.status-pending.subject-a { background: #f3f4f6; color: #6b7280; border-color: #e5e7eb; }
+.status-pending.subject-b { background: #f3f4f6; color: #6b7280; border-color: #e5e7eb; }
+.status-pending.subject-c { background: #f3f4f6; color: #6b7280; border-color: #e5e7eb; }
+.status-pending.subject-d { background: #f3f4f6; color: #6b7280; border-color: #e5e7eb; }
+
+/* Sizes */
+.size-small {
+  padding: 4px 8px;
+  font-size: 11px;
+}
+
+.size-large {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+/* Interactive */
+.subject-chip.interactive {
+  cursor: pointer;
+}
+
+.subject-chip.interactive:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.subject-chip.interactive:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Count badge */
+.subject-chip-count {
+  background: rgba(255, 255, 255, 0.8);
+  color: inherit;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+/* Status Chips */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: capitalize;
+  border: 1px solid transparent;
+}
+
+.status-success {
+  background: #dcfce7;
+  color: #16a34a;
+  border-color: #bbf7d0;
+}
+
+.status-warning {
+  background: #fef3c7;
+  color: #d97706;
+  border-color: #fed7aa;
+}
+
+.status-danger {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+.status-primary {
+  background: #dbeafe;
+  color: #1e40af;
+  border-color: #bfdbfe;
+}
+
+.status-neutral {
+  background: #f3f4f6;
+  color: #6b7280;
+  border-color: #e5e7eb;
+}
+
+/* Batch Chips */
+.batch-chip {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  transition: all 0.2s ease;
+  min-width: 140px;
+}
+
+.batch-chip.interactive {
+  cursor: pointer;
+}
+
+.batch-chip.interactive:hover,
+.batch-chip.active {
+  border-color: #3b82f6;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+}
+
+.batch-chip.interactive:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.batch-chip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.batch-chip-name {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 14px;
+}
+
+.batch-chip-meta {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .subject-chip {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+  
+  .size-small {
+    padding: 3px 6px;
+    font-size: 10px;
+  }
+  
+  .batch-chip {
+    min-width: 120px;
+    padding: 10px;
+  }
+  
+  .batch-chip-name {
+    font-size: 13px;
+  }
+}
+
+/* Animation for status changes */
+.subject-chip, .status-chip {
+  animation: chipIn 0.2s ease-out;
+}
+
+@keyframes chipIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

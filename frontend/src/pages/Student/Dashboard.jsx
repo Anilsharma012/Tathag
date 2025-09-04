@@ -7,6 +7,7 @@ import DiscussionForum from '../../components/DiscussionForum/DiscussionForum';
 import MockTestPage from './MockTests/MockTestPage';
 import { fetchLiveClasses } from '../../utils/liveClassesApi';
 import { getCache as getLiveCache, setCache as setLiveCache, shouldRevalidate as shouldRevalidateLive } from '../../utils/liveClassesCache';
+import NextStepCard from '../../components/Student/NextStep/NextStepCard';
 import {
   FiHome,
   FiBook,
@@ -1120,6 +1121,11 @@ const loadMyCourses = async () => {
       <div className="dashboard-header">
         <h1>Welcome back, {userDetails.name.split(' ')[0]}! 👋</h1>
         <p>Here's your learning progress today</p>
+      </div>
+
+      {/* Next Step Widget */}
+      <div className="next-step-container">
+        <NextStepCard />
       </div>
 
       <div className="stats-grid">
