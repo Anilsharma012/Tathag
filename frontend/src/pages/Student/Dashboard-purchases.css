@@ -1,0 +1,282 @@
+/* Purchase History Styles */
+.purchases-content {
+  padding: 20px;
+}
+
+.section-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.section-header h2 {
+  color: #2c3e50;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.section-header p {
+  color: #7f8c8d;
+  font-size: 16px;
+}
+
+.purchases-section {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 10px;
+}
+
+.section-title h3 {
+  color: #2c3e50;
+  font-size: 22px;
+  margin: 0;
+}
+
+.loading-indicator {
+  color: #3498db;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 2px dashed #dee2e6;
+}
+
+.empty-state svg {
+  color: #6c757d;
+  margin-bottom: 20px;
+}
+
+.empty-state h4 {
+  color: #495057;
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  color: #6c757d;
+  margin: 0;
+}
+
+.purchases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 20px;
+}
+
+.purchase-card {
+  background: white;
+  border: 1px solid #e1e1e1;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.purchase-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.purchase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.course-info h4 {
+  color: #2c3e50;
+  font-size: 18px;
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+
+.course-info p {
+  color: #7f8c8d;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.status-badge {
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.purchase-details {
+  margin-bottom: 20px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.detail-row span:first-child {
+  color: #495057;
+  font-weight: 500;
+}
+
+.detail-row span:last-child {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.detail-row .amount {
+  color: #27ae60;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.purchase-actions {
+  padding-top: 16px;
+  border-top: 1px solid #f8f9fa;
+}
+
+.download-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-1px);
+}
+
+.download-btn.small {
+  padding: 6px 10px;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+.receipts-table {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.receipts-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.receipts-table th {
+  background-color: #f8f9fa;
+  color: #495057;
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.receipts-table td {
+  padding: 16px;
+  border-bottom: 1px solid #f8f9fa;
+  color: #495057;
+}
+
+.receipts-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.receipt-actions {
+  display: flex;
+  gap: 5px;
+}
+
+/* Responsive design */
+.offline-upload {
+  background: #ffffff;
+  border: 1px solid #e1e1e1;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 12px 0 24px;
+}
+.upload-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr 2fr auto;
+  gap: 12px;
+  align-items: end;
+}
+.upload-field label {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+.upload-field input,
+.upload-field select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.upload-actions button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.link {
+  color: #2563eb;
+  text-decoration: none;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .purchases-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .purchase-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .receipts-table {
+    overflow-x: auto;
+  }
+
+  .receipts-table table {
+    min-width: 600px;
+  }
+  .upload-row {
+    grid-template-columns: 1fr;
+  }
+}

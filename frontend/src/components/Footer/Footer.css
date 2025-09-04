@@ -1,0 +1,243 @@
+.tg-footer {
+  background-color: #0d0e26;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  padding: 60px 40px 30px;
+}
+
+.tg-footer-top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.tg-footer-left h2 {
+  font-size: 58px;
+  font-family: 'DM Serif Display', serif;
+  font-weight: 400;
+  color: #fff;
+  display: block;
+  text-align: left;
+}
+
+.tg-footer-right {
+  flex: 1;
+  min-width: 300px;
+}
+
+.tg-subscribe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.TgRight{
+  display: flex;
+  flex-direction:row;
+  justify-content: space-around;
+}
+.tg-subscribe-form input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #666;
+  padding: 10px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  margin-left: 300px;
+}
+
+.tg-subscribe-form p {
+  font-size: 13px;
+  color: #999;
+  line-height: 1.4;
+  margin-left: 250px;
+  display: block;
+  text-align: left;
+}
+
+.tg-subscribe-form button {
+  background-color: #d8583f;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  align-self: flex-end;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.tg-footer-watermark {
+  text-align: center;
+  margin: 0 40px;
+  margin-top: -300px;
+  margin-left: 850px;
+  position: relative;
+}
+
+.tg-watermark-img {
+  width: 246px;
+  height: 174px;
+  opacity: 0.1;
+  margin: -85 auto -92px;
+}
+
+.tg-footer-watermark p {
+  font-size: 14px;
+  
+  margin-left: -600px;
+  margin-bottom: 600px;
+  display: flex;
+  color: #999;
+  margin-bottom: 10px;
+  position: absolute;
+  left: 630px;
+  bottom: 100px;
+  display: block;
+  text-align: left;
+}
+
+.tg-footer-watermark h3 {
+  font-size: 32px;
+  color: #999;
+  font-weight: 600;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #333;
+  margin: 40px 0;
+}
+
+.tg-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.tg-footer-brand {
+  max-width: 250px;
+}
+
+.tg-footer-brand img {
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.tg-footer-social {
+  display: flex;
+  gap: 12px;
+  font-size: 18px;
+  margin-bottom: 15px;
+  margin-top: 100px;
+  padding: 0px 40px;
+}
+
+.tg-footer-social svg {
+  cursor: pointer;
+  color: #fff;
+  transition: color 0.2s ease;
+}
+
+.tg-footer-social svg:hover {
+  color: #d8583f;
+}
+
+.tg-footer-brand p {
+  font-size: 13px;
+  color: #aaa;
+}
+
+.tg-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 100px;
+  flex: 1;
+}
+
+.tg-footer-links h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.tg-footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tg-footer-links li {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 8px;
+}
+
+.tg-footer-links p {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 20px;
+  display: block;
+  text-align: left;
+  align-items: center;
+  gap: 8px;
+}
+
+
+
+/* ✅ By default: 2 div in 1 row */
+.tg-footer-top,
+.tg-footer-bottom {
+  display: grid;
+  grid-template-columns: 2fr 2fr;  /* exactly 2 columns */
+  gap: 20px;
+  align-items: start;
+}
+
+/* ✅ For mobile view - stack into 1 column */
+@media (max-width: 768px) {
+  .tg-footer-top,
+  .tg-footer-bottom {
+    grid-template-columns: 1fr;  /* single column on small screen */
+  }
+
+  .tg-footer-left h2 {
+    font-size: 26px;
+    text-align: center;
+  }
+
+  .tg-footer-right {
+    text-align: center;
+  }
+
+  .tg-subscribe-form {
+    align-items: center;
+  }
+
+  .tg-subscribe-form input,
+  .tg-subscribe-form p {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .tg-footer-watermark {
+    display: none;
+  }
+
+.tg-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  flex: 1;
+}
+
+}
+
+
+
+
+
+

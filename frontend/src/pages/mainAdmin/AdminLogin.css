@@ -1,0 +1,86 @@
+.admin-login__container {
+    display: flex;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .admin-login__left {
+    flex: 1;
+    background-color: #0e0e2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    font-family: "DM serif Display";
+    user-select: none;
+    text-align: center;
+  }
+  
+  .admin-login__right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:  #d3544b;
+    padding: 40px 20px;
+  }
+  
+  .admin-login__form {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 0.1);
+  }
+  
+  .admin-login__form h2 {
+    margin-bottom: 30px;
+    font-weight: 600;
+    color: #333;    
+    text-align: center;
+    font-family: "DM serif Display";
+  }
+  
+  .admin-login__input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  
+  .admin-login__input:focus {
+    border-color: #005ae0;
+    outline: none;
+  }
+  
+  .admin-login__button {
+    width: 100%;
+    padding: 14px;
+    background-color:  #d3544b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .admin-login__button:hover {
+    background-color: #0041b3;
+  }
+  
+  .admin-login__error {
+    color: #d32f2f;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 500;
+  }
+  

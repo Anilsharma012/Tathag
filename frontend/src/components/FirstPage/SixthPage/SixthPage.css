@@ -1,0 +1,124 @@
+/* ✅ Free Session Banner Section */
+.free-session-banner {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 60px;
+  color: #fff;
+  background-image: url('../../../images/zoomMeeting.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  overflow: hidden;
+}
+
+.free-session-banner::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40%; /* right half */
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* black overlay */
+  backdrop-filter: blur(4px); /* blur effect */
+  z-index: 1;
+}
+
+.free-session-banner .free-content-box {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 40px;
+  max-width: 500px;
+  text-align: left;
+  border-radius: 12px;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.free-session-banner .free-content-box h2 {
+  font-size: 48px;
+  font-weight: 400;
+  font-family: 'DM Serif Display', serif;
+  color: #fff;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.free-session-banner .free-content-box button {
+  padding: 12px 24px;
+  background: #f25c54;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.free-session-banner .free-content-box button:hover {
+  background: #d9493c;
+}
+
+
+/* 📱 Tablet and below */
+@media (max-width: 1024px) {
+  .free-session-banner {
+    padding: 0 40px;
+    justify-content: center;
+  }
+
+  .free-session-banner::after {
+    width: 100%; /* full overlay */
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+  }
+
+  .free-session-banner .free-content-box {
+    text-align: center;
+    padding: 30px;
+  }
+
+  .free-session-banner .free-content-box h2 {
+    font-size: 36px;
+  }
+
+  .free-session-banner .free-content-box button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+
+
+/* 📱 Mobile screens */
+@media (max-width: 768px) {
+  .free-session-banner {
+    padding: 0 20px;
+    justify-content: center;
+  }
+
+  .free-session-banner::after {
+    content: none; /* ❌ remove blur on mobile */
+  }
+
+  .free-session-banner .free-content-box {
+    padding: 24px;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .free-session-banner .free-content-box h2 {
+    font-size: 28px;
+  }
+
+  .free-session-banner .free-content-box button {
+    padding: 10px 18px;
+    font-size: 13px;
+  }
+}

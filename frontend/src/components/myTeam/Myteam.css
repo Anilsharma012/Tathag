@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600&display=swap');
+
+:root {
+  --teacher-text: #0f172a;
+  --teacher-muted: #475569;
+  --teacher-border: #e2e8f0;
+  --teacher-bg: #ffffff;
+  --teacher-accent: #f36b4f;
+}
+
+/* ===== Section ===== */
+.teachersection {
+  background: var(--teacher-bg);
+  color: var(--teacher-text);
+  padding: clamp(32px, 6vw, 60px) 0;
+}
+
+.teacher-container {
+  width: min(1220px, 92vw);
+  margin: 0 auto;
+}
+
+/* ===== Header (title + text + button) ===== */
+.teacher-header {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: start;
+  gap: clamp(16px, 3vw, 28px);
+  margin-bottom: clamp(16px, 3vw, 28px);
+}
+
+.teacher-eyebrow {
+  font-family: "Manrope", sans-serif;
+  letter-spacing: .12em;
+  font-size: 14px;
+  font-weight: 600;
+  color: #EE6A4D;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+
+.teacher-title {
+  font-family: "DM Serif Display", serif;
+  font-size: clamp(28px, 5.4vw, 48px);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 0;
+  color: #000;
+}
+
+.teacher-subtext {
+  font-family: Inter, sans-serif;
+  font-size: clamp(14px, 2.2vw, 16px);
+  line-height: 1.7;
+  color: #000;
+  margin: 6px 0 16px;
+  text-align: left;
+}
+
+/* Right column layout so the button stays neat */
+.teacher-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* CTA button (no fixed margins!) */
+.teacher-cta {
+  border: none;
+  background: #EE6A4D;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: .2s;
+  align-self: flex-start;
+  margin: 0; /* ← old margin-left:480px removed */
+}
+.teacher-cta:hover { opacity: .9; transform: translateY(-1px); }
+.teacher-cta:active { transform: translateY(0); }
+
+/* ===== Horizontal scroll cards ===== */
+.teacher-cards-scroll {
+  display: flex;
+  gap: clamp(12px, 2.4vw, 20px);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;           /* Firefox */
+}
+.teacher-cards-scroll::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+.teacher-card {
+  flex: 0 0 auto;
+  width: clamp(180px, 44vw, 240px);  /* responsive card width */
+  background: #fff;
+  border: 1px solid var(--teacher-border);
+  border-radius: 16px;
+  overflow: hidden;
+  scroll-snap-align: start;
+  box-shadow: 0 1px 2px rgba(15,23,42,.06);
+}
+
+.teacher-card-imgWrap {
+  aspect-ratio: 4 / 5; /* little tighter on phones */
+  background: #f8fafc;
+}
+.teacher-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.teacher-card-info {
+  padding: 12px 14px 16px;
+}
+
+.teacher-card-name {
+  margin: 0 0 2px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.teacher-card-role {
+  margin: 0;
+  font-size: 13px;
+  color: #505050;
+}
+.teacher-card-expertise {
+  font-size: 14px;
+  color: #505050;
+  margin-top: 2px;
+}
+
+/* ===== Responsive breakpoints ===== */
+
+/* ≤ 1024px (iPad/tablets): stack header */
+@media (max-width: 1024px) {
+  .teacher-header { grid-template-columns: 1fr; }
+}
+
+/* ≤ 768px (phones): full-width button, better gutters for scroll */
+@media (max-width: 768px) {
+  .teacher-cta { width: 100%; text-align: center; }
+  .teacher-cards-scroll { margin-inline: -12px; padding-inline: 12px; }
+}
+
+/* ≤ 480px (small phones): tighter sizing */
+@media (max-width: 480px) {
+  .teacher-title { font-size: clamp(24px, 8vw, 34px); }
+  .teacher-card { width: clamp(160px, 72vw, 220px); }
+}

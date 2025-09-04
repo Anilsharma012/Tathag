@@ -1,0 +1,185 @@
+.instructions-container {
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header-blue {
+  background-color: #2a64d3;
+  color: white;
+  padding: 8px 12px;
+  font-weight: bold;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.note {
+  color: red;
+  padding: 8px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 23px;
+  border-bottom: 1px solid #ddd;
+}
+
+.scrollable-content {
+  padding: 20px 30px;
+  overflow-y: auto;
+  flex-grow: 1;
+  font-size: 17px;
+}
+
+.scrollable-content h3 {
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.scrollable-content h2 {
+  font-size: 19px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-decoration: underline;
+  color: black;
+  
+}
+.scrollable-content h4 {
+  font-size: 19px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  
+}
+
+.scrollable-content p {
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.scrollable-content strong {
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+.status-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.status-table th,
+.status-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.status-table th {
+  background-color: #f5f5f5;
+}
+
+.status-icon {
+  width: 38px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+
+
+
+
+/* Wrapper to align table to left now */
+.tgv-table-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start; /* 👈 shifted to left */
+  margin: 20px 0;
+  padding-left: 15px; /* optional spacing from edge */
+}
+
+/* Table remains same */
+.tgv-status-table {
+  width: 680px;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  font-size: 13px;
+  background-color: #fff;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+}
+
+.tgv-status-table th,
+.tgv-status-table td {
+  border: 1px solid #ccc;
+  padding: 8px 10px;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.tgv-status-table th {
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+.tgv-status-table img {
+  width: 34px;
+  height: 34px;
+  display: block;
+  margin: auto;
+}
+
+
+
+
+
+
+
+.zoom-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  margin: 0 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 13px;
+  background-color: #fff;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.zoom-icon {
+  width: 18px;
+  height: 18px;
+}
+
+
+
+
+
+
+
+
+.scrollable-content h4 {
+  font-size: 19px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-decoration: underline;
+}

@@ -1,0 +1,21 @@
+.ns-card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,.06);max-width:720px}
+.ns-header{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ns-title{font-weight:700;color:#111827}
+.ns-badge{background:#f1f5f9;color:#475569;border-radius:999px;padding:4px 10px;font-size:12px;margin-left:6px}
+.ns-chips{display:flex;gap:6px;flex-wrap:wrap}
+.ns-cta{margin-top:10px;display:grid;gap:8px}
+.ns-cta-title{font-weight:600}
+.ns-btn{display:inline-block;background:#2563eb;color:#fff;text-decoration:none;padding:8px 12px;border-radius:10px}
+.ns-btn-disabled{pointer-events:none;opacity:.6}
+.ns-chip{padding:2px 8px;border-radius:999px;background:#eef2ff;color:#1e40af;font-weight:700}
+.ns-A{background:#e0f2fe;color:#075985}
+.ns-B{background:#fee2e2;color:#991b1b}
+.ns-C{background:#ede9fe;color:#5b21b6}
+.ns-D{background:#dcfce7;color:#065f46}
+.ns-sessions{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ns-session{padding:8px;border:1px solid #eef2ff;border-radius:10px}
+.ns-time{color:#334155;font-size:12px}
+.ns-link{color:#2563eb}
+.ns-muted{color:#6b7280;font-size:12px}
+.ns-live{color:#16a34a;font-weight:800}
+.ns-error{background:#fef2f2;border-color:#fee2e2}

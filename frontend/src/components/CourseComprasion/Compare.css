@@ -1,0 +1,116 @@
+.ts-compare-container {
+  background: #fff;
+  width: 100%;
+  padding: 60px;
+  overflow-x: auto; /* Ensure table scrolls horizontally on small screens */
+}
+
+.ts-compare-heading {
+  font-size: 58px;
+  font-weight: 400;
+  color: #000;
+  font-family: 'DM Serif Display', serif;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.ts-compare-scroll-wrapper {
+  max-height: 550px; /* Show ~12-15 rows */
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+}
+
+.ts-compare-scroll-wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.ts-compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Prevent cramping on very small screens */
+}
+
+.ts-compare-header th {
+  background: #fff;
+  color: #000;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+  border: 1px solid #333;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.ts-compare-table th,
+.ts-compare-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.ts-compare-feature-cell {
+  font-weight: 700;
+  text-align: left;
+  padding-left: 12px;
+  background-color: #f7f7f7;
+}
+
+.ts-compare-value-cell {
+  font-weight: 600;
+  color: #000;
+  background-color: #fff;
+  text-align: center;
+}
+
+.ts-compare-value-cell.buy-now {
+  background-color: green;
+  color: white;
+  font-weight: bold;
+}
+
+.ts-sticky-row {
+  position: sticky;
+  bottom: 0;
+  background: #fff;
+  z-index: 1;
+}
+
+/* Learn More button styling */
+.ts-compare-value-cell.learn-more {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
+
+/* RESPONSIVE MEDIA QUERIES */
+@media (max-width: 1024px) {
+  .ts-compare-heading {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ts-compare-container {
+    padding: 10px;
+  }
+  .ts-compare-heading {
+    font-size: 32px;
+  }
+  .ts-compare-table th, 
+  .ts-compare-table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ts-compare-heading {
+    font-size: 24px;
+  }
+  .ts-compare-table {
+    min-width: 500px; /* Let it scroll horizontally */
+  }
+}

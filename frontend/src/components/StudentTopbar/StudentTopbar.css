@@ -1,0 +1,139 @@
+.ttstudent-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 0 30px;
+  height: 72px;
+  border-bottom: 1px solid #eaeaea;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Left side: menu + title */
+.ttleft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ttmenu-icon {
+  font-size: 24px;
+  cursor: pointer;
+  color: #2c3e50;
+}
+
+.ttpage-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+}
+
+/* Right side layout */
+.ttright {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Search field */
+.ttsearch-wrapper {
+  position: relative;
+}
+
+.ttsearch-wrapper input {
+  padding: 8px 38px 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  width: 220px;
+  outline: none;
+}
+
+.ttsearch-wrapper input:focus {
+  background-color: #fff;
+  border-color: #005ae0;
+}
+
+.ttsearch-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #666;
+}
+
+/* Icons like ⚡ and 🔔 */
+.tticon {
+  font-size: 20px;
+  cursor: pointer;
+  color: #555;
+  position: relative;
+}
+
+/* Notification bell badge */
+.notification-wrapper {
+  position: relative;
+}
+
+.ttbadge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background-color: red;
+  color: white;
+  font-size: 10px;
+  padding: 2px 5px;
+  border-radius: 999px;
+  font-weight: bold;
+}
+
+/* Profile + name */
+.ttprofile-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ttprofile-pic {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
+.ttusername {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* 🔙 Back to Website Button */
+.ttback-btn {
+  background-color: transparent;
+  border: 1px solid #005ae0;
+  color: #005ae0;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.ttback-btn:hover {
+  background-color: #005ae0;
+  color: #ffffff;
+}
+
+.ttprofile-section:hover {
+  cursor: pointer;
+  opacity: 0.85;
+}

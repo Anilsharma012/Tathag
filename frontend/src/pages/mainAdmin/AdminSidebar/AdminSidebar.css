@@ -1,0 +1,67 @@
+.admin-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 240px;
+  background: #0e0e2e;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  overflow-y: auto; /* ✅ scrollable */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* ✅ Hide scrollbar for Chrome, Safari and Edge */
+.admin-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+
+.admin-logo {
+  
+  text-align: left;
+  margin-bottom: 40px;}
+ 
+.admin-logo img {
+    width: 80%;
+    height:100%
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.admin-link {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.admin-link .admin-icon {
+  margin-right: 12px;
+  font-size: 18px;
+}
+
+.admin-link:hover {
+  background-color: #1e1e3f;
+  border-left: 4px solid #DF0000;
+  transform: translateX(4px);
+  color: #DF0000;
+}
+
+.admin-link.active {
+  background-color: #1e1e3f;
+  color: #DF0000;
+  border-left: 4px solid #DF0000;
+  font-weight: bold;
+}

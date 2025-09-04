@@ -1,0 +1,18 @@
+QUANTITATIVE APTITUDE FORMULA BOOK
+
+Chapter 1: Basic Mathematics
+- Percentage Formula: (Part/Whole) × 100
+- Simple Interest: SI = (P × R × T) / 100
+- Compound Interest: CI = P(1 + R/100)^T - P
+
+Chapter 2: Algebra
+- Quadratic Formula: x = (-b ± √(b²-4ac)) / 2a
+- Arithmetic Progression: an = a + (n-1)d
+- Geometric Progression: an = a × r^(n-1)
+
+Chapter 3: Geometry
+- Area of Circle: πr²
+- Area of Triangle: (1/2) × base × height
+- Volume of Cylinder: πr²h
+
+This is a sample study material for testing purposes.

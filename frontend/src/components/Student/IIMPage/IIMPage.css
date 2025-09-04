@@ -1,0 +1,29 @@
+.iim-predictor-container {
+    background-color:  linear-gradient(135deg, #2c3e50, #4ca1af);
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.iim-predictor-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color:#000;
+}
+
+.iim-predictor-container table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #222;
+}
+
+.iim-predictor-container td {
+    padding: 12px;
+    border-bottom: 1px solid #333;
+}
+
+.iim-predictor-container td:first-child {
+    font-weight: bold;
+    color: #ffd700;
+}

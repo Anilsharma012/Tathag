@@ -1,0 +1,151 @@
+.exam-category-container {
+  display: flex;
+  height: 80vh;
+  width: 100vw;
+}
+
+/* LEFT PANEL: LOGIN STYLE + IMAGE */
+.login-left-panel {
+  width: 50%;
+  background-color: #0e0e2e;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 60px;
+  position: relative;
+  text-align: center;
+}
+
+.login-logo img {
+  height: 50px;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.userdetails-image-wrapper {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  margin: 30px auto;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid #fff;
+}
+
+.userdetails-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.userdetails-edit-overlay {
+  position: absolute;
+  bottom: -7px;
+  right: 14px;
+  background-color: #fff;
+  border: 2px solid #e35c43;
+  border-radius: 50%;
+  padding: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.userdetails-edit-icon {
+  font-size: 16px;
+  color: #e35c43;
+}
+
+.login-tagline {
+  font-size: 22px;
+  font-weight: 400;
+  color: #fff;
+  text-align: left;
+  font-family: "DM Serif Display", serif;
+  margin-top: auto;
+  padding-top: 40px;
+  line-height: 1.5;
+}
+
+.login-tagline strong {
+  font-weight: bold;
+}
+
+.login-tagline span {
+  color: #d3544b;
+}
+
+/* RIGHT PANEL */
+.exam-category-right {
+  width: 50%;
+  background-color: #d1543f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exam-category-box {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.exam-category-box h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+.exam-category-box p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #777;
+}
+
+.exam-category-box select {
+  width: 100%;
+  padding: 10px;
+  margin: 20px 0;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.exam-category-box button {
+  background-color: #e44d26;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+}
+
+.exam-category-box button:hover {
+  background-color: #d13e18;
+}
+
+.exam-category-box button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+.exam-category-back {
+  cursor: pointer;
+  color: #e74c3c;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}

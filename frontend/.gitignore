@@ -1,0 +1,7 @@
+node_modules/
+
+
+/build
+/frontend.zip
+/compoents.zip
+.config/

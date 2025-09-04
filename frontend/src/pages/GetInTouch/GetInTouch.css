@@ -1,0 +1,591 @@
+  .tc-banner {
+    position: relative;
+    background: url('../../images/contact-banner.png') center center / cover no-repeat;
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tc-overlay {
+    /* background-color: rgba(0, 0, 0, 0.5);  */
+    padding: 60px 20px;
+    text-align: center;
+    color: white;
+    width: 100%;
+  }
+
+  .tc-heading {
+    font-size: 64px;
+    font-weight: 400;
+    font-family: 'DM Serif Display', serif;
+    margin-bottom: 20px;
+  }
+
+  .tc-highlight {
+    color: #ee6a4d;
+  }
+
+  .tc-subtext {
+    font-size: 20px;
+    font-weight: 500;
+    max-width: 900px;
+    margin: 0 auto 40px;
+    font-family: 'Manrope', sans-serif;
+    line-height: 1.6;
+    color: #fff;
+  }
+
+  .tc-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .tc-btn {
+    background: white;
+    color: #1A237E;
+    font-size: 16px;
+    font-weight: 600;
+    border: 1px solid #1A237E;
+    border-radius: 24px;
+    padding: 10px 24px;
+    font-family: 'Manrope', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .tc-btn:hover {
+    background-color: #1a237e;
+    color: white;
+  }
+  /* ✅ Mobile-first approach */
+  @media (max-width: 768px) {
+    .tc-heading {
+      font-size: 32px;       /* Thoda aur chhota mobile ke liye */
+      line-height: 1.2;
+      text-align: center;    /* Mobile view me center align helpful */
+    }
+
+    .tc-subtext {
+      font-size: 14px;
+      padding: 0 12px;
+      text-align: center;
+    }
+
+    .tc-buttons {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 8px;               /* 🛠️ Fix: 'opx' → '8px' or as needed */
+      padding: 8px 10px;
+      scrollbar-width: none; /* Firefox hide */
+    }
+
+    .tc-buttons::-webkit-scrollbar {
+      display: none;         /* Chrome hide */
+    }
+
+    .tc-buttons {
+      display: flex;
+      flex-direction: column;     /* 👈 Important: Stack buttons vertically */
+      gap: 10px;                  /* Space between buttons */
+      align-items: center;        /* Center the buttons horizontally */
+      width: 100%;
+      padding: 10px;
+    }
+
+    .tc-btn {
+      width: 100%;                /* Button full-width on mobile */
+      max-width: 320px;           /* Optional: Limit max width */
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 14px;
+      border-radius: 6px;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+  .tc-contact-wrapper {
+    background: #f9f9f9;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tc-contact-box {
+    display: flex;
+    gap: 60px;
+    background-color: #f8f8f8;
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 1400px;
+    width: 100%;
+    flex-wrap: wrap;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  }
+
+  .tc-left {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .tc-title {
+    font-size: 58px;
+    font-weight: 400;
+    font-family: "DM Serif Display", serif;
+    color: #000;
+    margin-bottom: 30px;
+    text-align: left;
+  }
+
+  .tc-label {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ee6a4d;
+    font-family: 'Manrope', sans-serif;
+    margin-bottom: 15px;
+    text-align: left;
+  }
+
+  .tc-text {
+    font-size: 24px;
+    font-weight: 600;
+    color: #000;
+    font-family: 'Manrope', sans-serif;
+    margin-bottom: 16px;
+    line-height: 1.4;
+    text-align: left;
+  }
+
+  .tc-section {
+    margin-bottom: 20px;
+  }
+
+  .tc-right {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .tc-form-heading {
+    font-size: 36px;
+    font-weight: 600;
+    font-family: 'Manrope', sans-serif;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #000;
+  }
+
+  .tc-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .tc-form input,
+  .tc-form textarea {
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Manrope', sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: white;
+    color: #777;
+    outline: none;
+  }
+
+  .tc-form textarea {
+    resize: vertical;
+  }
+
+  .tc-form button {
+    background-color: #e35f41;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: fit-content;       /* ✅ Makes button width match text */
+    align-self: center; 
+  }
+
+  .tc-form button:hover {
+    background-color: #d14d33;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .tc-contact-box {
+      flex-direction: column;
+      padding: 30px 20px;
+      margin-top: -30px;
+    }
+
+    .tc-form-heading {
+      text-align: left;
+    }
+  }
+
+
+
+
+  .map-wrapper {
+    max-width: 1400px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+  }
+
+  .map-wrapper iframe {
+    width: 100%;                        /* ✅ Full width of container */
+    height: 500px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+
+
+
+
+
+
+
+
+
+  .tc-mentor-wrapper {
+    background-color: #f7941d;
+    padding: 80px ;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+    align-items: top;
+  }
+
+  .tc-mentor-left {
+    flex: 1;
+    min-width: 320px;
+    max-width: 500px;
+  }
+
+  .tc-mentor-title {
+    font-size: 58px;
+    font-weight: 400;
+    font-family: "DM Serif Display", serif;
+    color: #000;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    text-align: start;
+  }
+
+  .tc-mentor-subtext {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: "Manrope", sans-serif;
+    color: #000;
+    margin-bottom: 30px;
+    text-align: left;
+  }
+
+  .tc-mentor-button {
+    background-color: #d9534f;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    display:flex ;
+    align-items: left;
+    transition: all 0.3s ease;
+  }
+
+  .tc-mentor-button:hover {
+    background-color: #c9433f;
+  }
+  .tc-mentor-right {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* ✅ 2 columns */
+    gap: 20px;
+    flex: 2;
+    min-width: 350px;
+  }
+
+  .tc-mentor-image,
+  .tc-mentor-card {
+    width: 100%;
+  }
+
+  .tc-mentor-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    position: relative;
+    top: 20px;
+  }
+
+  .tc-mentor-card {
+    border-radius: 16px;
+    padding: 20px;
+    font-family: "Manrope", sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    line-height: 1.6;
+  }
+
+  /* Same dark/light button styles as before */
+  .tc-mentor-card.dark {
+    background-color: #2d2d2d;
+    color: white;
+  }
+  .tc-mentor-card.dark h3 {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Manrope",sans-serif;
+    text-align: left;
+    margin-bottom: 30px;
+  }
+  .tc-mentor-card.dark  p{
+      color: #fff;
+    font-size: 14px;
+    font-weight: 5500;
+    font-family: "Manrope",sans-serif;
+    text-align: left;
+    margin-bottom: 30px;
+  }
+
+  .tc-mentor-card.light {
+    background-color: #f1f1f1;
+    color: #000;
+  }
+
+  .tc-mentor-card.light h4{
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    color: #000;
+    font-family: "Manrope",sans-serif;
+  }
+
+  .tc-mentor-card.light p{
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    color: #000;
+    font-family: "Manrope",sans-serif;
+  }
+  .tc-mentor-card.dark button,
+  .tc-mentor-card.light button {
+    background-color: #e35f41;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .tc-mentor-right {
+      grid-template-columns: 1fr; /* Stack all on small screens */
+    }
+  }
+
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .tc-mentor-wrapper {
+      flex-direction: column;
+      padding: 60px 20px;
+    }
+
+    .tc-mentor-boxes {
+      flex-direction: column;
+    }
+
+    .tc-mentor-title {
+      font-size: 38px;
+      margin-top: -20px;
+    }
+  }
+
+    
+    
+
+
+
+
+
+
+
+
+
+  .tg-faq-section {
+      display: flex;
+      background-color: #0c0f25;
+      color: white;
+      padding: 80px 78px;
+      font-family: 'Poppins', sans-serif;
+      justify-content: space-between;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    
+    .tg-faq-left {
+      flex: 1;
+      max-width: 500px;
+    }
+    
+    .tg-faq-left h5 {
+      color: #EE6A4D;
+      text-transform: uppercase;
+      font-size: 20px;
+      display: flex;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    
+    .tg-faq-left h2 {
+      font-size: 52px;
+      font-weight: bold;
+      color: #fff;
+      display: flex;
+      line-height: 0.9;
+      margin-bottom: 10px;
+      font-family: 'DM Serif Display', serif;
+    }
+    
+    .tg-faq-left p {
+      font-size: 16px;
+      font-weight: 500;
+      color: #d0d3f2;
+      margin-bottom: 30px;
+      display: block;
+      text-align: left;
+    }
+    
+    .tg-faq-left button {
+      background: #D8583F;
+      color: white;
+      font-weight: 600;
+      font-size: 15px;
+      border: none;
+      padding: 14px 24px;
+      display: flex;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    
+    .tg-faq-right {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      max-width: 750px;
+    }
+    
+    .tg-faq-item {
+      background: transparent;
+      border-bottom: 1px solid #2e314e;
+      padding-bottom: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .tg-faq-item.open .tg-faq-answer {
+      margin-top: 10px;
+      font-size: 15px;
+      color: #d0d3f2;
+      line-height: 1.6;
+      display: block;
+      text-align: left;
+    }
+    
+    .tg-faq-question {
+      font-size: 20px;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+    
+    .tg-faq-toggle {
+      font-size: 26px;
+      font-weight: 700;
+      color: white;
+    }
+    
+    @media (max-width: 1024px) {
+      .tg-faq-section {
+        flex-direction: column;
+        padding: 60px 30px;
+      }
+    
+      .tg-faq-left,
+      .tg-faq-right {
+        max-width: 100%;
+      }
+    
+      .tg-faq-left h2 {
+        font-size: 36px;
+      }
+    }
+    
+
+
+
+
+
+
+
+
+  @media (max-width: 480px) {
+    .tc-title {
+      font-size: 32px !important;
+    }
+
+    .tc-label {
+      font-size: 16px !important;
+    }
+
+    .tc-text {
+      font-size: 16px !important;
+    }
+
+    .tc-form-heading {
+      font-size: 22px !important;
+    }
+
+    .tc-form input,
+    .tc-form textarea {
+      font-size: 14px !important;
+    }
+
+    .tc-form button {
+      font-size: 14px !important;
+      padding: 10px 16px !important;
+    }
+  }

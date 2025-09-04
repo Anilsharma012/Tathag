@@ -1,0 +1,103 @@
+.manage-instructors-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* ✅ Left Side - Create Subadmin Form */
+.subadmin-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.subadmin-form h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.subadmin-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.subadmin-form button {
+    width: 100%;
+    padding: 10px;
+    background: #1abc9c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.subadmin-form button:hover {
+    background: #16a085;
+}
+
+/* ✅ Right Side - Subadmins List */
+.subadmin-list {
+    flex-grow: 1;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.subadmin-list h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.subadmin-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.subadmin-list th, .subadmin-list td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.no-data {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 1024px) {
+    .manage-instructors-container {
+        flex-direction: column;
+    }
+
+    .subadmin-form, .subadmin-list {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .subadmin-list th, .subadmin-list td {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .subadmin-form {
+        padding: 15px;
+    }
+
+    .subadmin-list th, .subadmin-list td {
+        font-size: 12px;
+        padding: 6px;
+    }
+}

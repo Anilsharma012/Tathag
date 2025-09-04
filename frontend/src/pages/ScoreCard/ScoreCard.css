@@ -1,0 +1,707 @@
+/* ScorecardWall.css */
+
+.scorecard-grid {
+  display: flex;
+  flex-wrap: nowrap;          /* ek row me sabhi card */
+  overflow-x: auto;           /* horizontal scroll enable */
+  overflow-y: hidden;
+  gap: 10px;
+  padding-bottom: 8px;
+  
+}
+
+
+
+
+
+.scorecard-wrapper {
+  background-color: #fff;
+  padding: 20px 20px;
+  font-family: "DM Serif Display", serif;
+}
+.scorecard-container {
+  max-width: 1400px;
+  /* margin: 0 auto; */
+}
+
+.scorecard-content {
+  max-width: 1400px;
+  /* margin: 0 auto; */
+  display: flex;
+  flex-direction: row;
+  padding: 30px;
+  margin-bottom: -60px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.scorecard-heading h1 {
+  font-size: 64px;
+  font-weight: 400;
+  color: #05071a;
+  margin-bottom: 10px;
+  font-family: DM Serif Display;
+}
+
+.scorecard-heading p {
+  font-size: 20px;
+  font-weight: 700;
+  color: #505050;
+  font-family: "Manrope", sans-serif;
+  margin-bottom: 40px;
+}
+
+.scorecard-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card-box {
+  background-color: #ec6842;
+  color: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  font-family: "Inter", sans-serif;
+}
+
+.card-title {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  font-family: "Manrope", sans-serif;
+  color: #fff;
+  text-align: left;
+}
+
+.card-text {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: normal;
+  text-align: left;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .scorecard-content {
+    align-items: center;
+  }
+
+  .scorecard-heading h1,
+  .scorecard-heading p {
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .scorecard-cards {
+    justify-content: center;
+  }
+}
+
+/* FILTER BUTTONS */
+.scorecard-filters {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.scorecard-filters button {
+  padding: 8px 24px;
+  border-radius: 16px;
+  border: 1px solid #1a237e;
+  background: white;
+  color: #1a237e;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.scorecard-filters .active,
+.scorecard-filters button:hover {
+  background: #2f2f88;
+  color: white;
+}
+
+/* SINGLE STUDENT CARD */
+.student-card.small {
+  background: #ffc107;
+  border: 1px solid#FFC107;
+  border-radius: 16px;
+  padding: 18px;
+  max-width: 350px;
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.student-photo-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+.student-meta-banner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background: #ffc107;
+  padding: 10px 16px;
+  border-radius: 6px 6px 0 0;
+  font-family: "Manrope", sans-serif;
+}
+
+.student-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #000;
+}
+
+.student-percentile {
+  font-weight: 700;
+  font-size: 18px;
+  color: #000;
+}
+
+.student-scorecard {
+  width: 100%;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+/* Grid Layout */
+.scorecard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  justify-content: center; /* ✅ ensures symmetry */
+  padding: 30px; /* ❌ Remove excessive padding here */
+}
+
+/* Student Card */
+.student-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  width: 100%;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Student Photo */
+.student-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 14px;
+}
+
+/* Responsive */
+/* .scorecard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+} */
+
+/* 👇 Mobile pe vertical scroll enable hoga */
+@media (max-width: 768px) {
+  .scorecard-grid {
+    display: flex;
+    flex-direction: column;      /* ek ke niche ek */
+    max-height: 90vh;            /* height jitni chahiye de */
+    overflow-y: auto;            /* vertical scroll */
+    gap: 16px;
+    padding: 10px;
+    scroll-behavior: smooth;
+  }
+
+  .student-card {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .student-scorecard {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  /* Optional: scrollbar styling */
+  .scorecard-grid::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scorecard-grid::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+  }
+}
+
+
+.student-scorecard {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+  .scorecard-filters {
+    display: flex;
+    flex-wrap: nowrap;    
+    margin-top: -40px;      /* wrap off for scroll */
+    overflow-x: auto;           /* horizontal scroll */
+    overflow-y: hidden;
+    gap: 0px;
+    padding-bottom: 6px;
+    scroll-behavior: smooth;
+    justify-content: flex-start; 
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    scrollbar-width: none;
+  }
+
+  .scorecard-filters > button {
+    flex: 0 0 auto;         
+    min-width: 110px;         
+  }
+  .botle p{
+  display: none;
+}
+  .scorecard-filters::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .scorecard-filters::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 2px;
+  }
+}
+
+.scorecard-filters button {
+  padding: 8px 24px;
+  border-radius: 16px;
+  border: 1px solid #1a237e;
+  background: white;
+  color: #1a237e;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.scorecard-filters .active,
+.scorecard-filters button:hover {
+  background: #2f2f88;
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+.tss-demo-wrapper {
+  display: flex;
+  padding: 60px;
+  background-color:#1A237E;
+  color: white;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.tss-demo-left {
+  flex: 3;
+  min-width: 300px;
+}
+
+.tss-demo-right {
+  flex: 2;
+  background: white;
+  color: black;
+  padding: 24px 20px;
+  border-radius: 16px;
+  min-width: 280px;
+  max-width: 500px; /* ✅ limit max width */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+}
+
+.tss-demo-heading {
+  font-size: 48px;
+  color: #FFC107;
+  font-weight: 400;
+  margin-bottom: 10px;
+  line-height: 1.3;
+  font-family: DM serif Display;
+  text-align: left;
+}
+
+.tss-demo-subtext {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: Manrope;
+  text-align: left;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+/* Scrolling testimonials */
+.tss-scrolling-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.tss-scrolling-track {
+  display: flex;
+  gap: 20px;
+  animation: scroll 20s linear infinite;
+}
+
+.tss-scrolling-wrapper:hover .tss-scrolling-track {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+
+
+.tss-testimonial-card {
+  min-width: 300px;
+  max-width: 300px;
+  background: #FFC107;
+  color: #000;
+  border-radius: 15px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tss-testimonial-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.tss-testimonial-image {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.tss-testimonial-content {
+  padding: 15px;
+  text-align: center;
+  width: 100%;
+}
+
+.tss-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.tss-score {
+  font-weight: bold;
+  color: #9747FF;
+  
+}
+
+.tss-testimonial-message {
+  font-style: italic;
+}
+
+.tss-author {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Form */
+.tss-demo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.tss-demo-right h3 {
+  font-weight: 600;
+  font-size: 28px;  /* ✅ slightly smaller */
+  margin-bottom: 20px;
+  color: #1A237E;
+  text-align: center;
+  font-family: 'Manrope', sans-serif;
+}
+
+.tss-demo-form input {
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.tss-demo-form button {
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 6px;
+  background-color: #EE6A4D;
+  color: #fff;
+  padding: 12px 24px;
+
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tss-demo-wrapper {
+    flex-direction: column;
+  }
+}
+
+
+
+
+
+
+
+.tgs-wrapper {
+  width: 100%;                      /* Full screen background */
+  background-color: #feca00;        /* Yellow background full stretch */
+  font-family: 'Georgia', serif;
+  padding: 40px 0;                  /* No horizontal padding */
+}
+
+.tgs-inner {
+  max-width: 1400px;               /* Content constrained */
+  margin: 0 auto;
+  padding: 40px;                 /* Inner padding */
+}
+
+.tgs-header {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.tgs-heading {
+  font-size: 48px;
+  font-weight: 400;
+  color: #000;
+  font-family: "DM Serif Display", serif;
+  text-align: left;
+  margin: 0;
+}
+
+.tgs-btns {
+  font-weight: 700;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  color: #EE6A4D;
+  border: 1px solid #fff;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tgs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.tgs-card {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tgs-img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+/* ✅ Scorecard Wrapper + Heading Responsive */
+@media (max-width: 1024px) {
+  .scorecard-heading h1 {
+    font-size: 52px;
+    margin-top: -30px;
+  }
+  .scorecard-heading p {
+    font-size: 18px;
+  }
+  .card-title {
+    font-size: 28px;
+  }
+  .card-text {
+    font-size: 16px;
+  }
+  .tss-demo-heading {
+    font-size: 36px;
+    display: contents;
+  }
+  .tgs-heading {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .scorecard-content {
+    flex-direction: column;
+    align-items: center;
+  }
+  .scorecard-cards {
+    justify-content: center;
+    display: none;
+  }
+  .scorecard-heading h1 {
+    text-align: center;
+  }
+  .scorecard-heading p {
+    text-align: center;
+  }
+  .tss-demo-wrapper {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+  .tss-demo-heading {
+    text-align: center;
+    display: contents;
+  }
+  .tss-demo-subtext {
+    text-align: center;
+  }
+  .tgs-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scorecard-heading h1 {
+    font-size: 32px;
+  }
+  .scorecard-heading p {
+    font-size: 14px;
+  }
+  .card-title {
+    font-size: 22px;
+  }
+  .card-text {
+    font-size: 14px;
+  }
+  .tss-demo-heading {
+    font-size: 28px;
+    display: contents;
+  }
+  .tss-demo-subtext {
+    font-size: 14px;
+  }
+  .tgs-heading {
+    font-size: 28px;
+  }
+  .tgs-btns {
+    padding: 8px 16px;
+    font-size: 12px;
+    margin-left: 250px;
+  }
+
+  .tss-testimonial-card {
+    min-width: 250px;
+    max-width: 250px;
+  }
+  .tss-testimonial-image {
+    height: 120px;
+  }
+  .tss-demo-form input {
+    font-size: 10px;
+  }
+  .tss-demo-form button {
+    font-size: 13px;
+  }
+}
+
+
+.tss-demo-right {
+  width: 100%;
+  max-width: 500px;
+  padding: 24px 20px;
+  box-sizing: border-box; /* ensures padding doesn't break width */
+}
+
+.tss-demo-form input,
+.tss-demo-form button {
+  width: 100%;  /* full width input + button */
+  box-sizing: border-box;
+}
+
+.tss-demo-form button {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  background-color: #EE6A4D;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .tss-demo-right {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .tss-demo-right {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tss-demo-right {
+    padding: 15px;
+  }
+  .tss-demo-form button {
+    font-size: 14px;
+  }
+}

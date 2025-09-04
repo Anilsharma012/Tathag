@@ -1,0 +1,253 @@
+.payment-management {
+  padding: 20px;
+}
+
+.page-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.page-header h1 {
+  color: #2c3e50;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.page-header p {
+  color: #7f8c8d;
+  font-size: 16px;
+}
+
+.tab-navigation {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  border: none;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  border-radius: 999px;
+  background: linear-gradient(135deg,#6b8afd,#4f46e5);
+  box-shadow: 0 6px 16px rgba(79,70,229,.25);
+  transition: transform .15s ease, box-shadow .15s ease, opacity .2s;
+  opacity: .9;
+}
+
+.tab-btn.active {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(79,70,229,.35);
+  opacity: 1;
+}
+
+.tab-btn:hover { opacity: 1; }
+
+.filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.filters select {
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.filter-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.filter-btn:hover {
+  background-color: #2980b9;
+}
+
+.loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+  color: #7f8c8d;
+}
+
+.payments-table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+.student-cell{display:flex;align-items:center;gap:10px}
+.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#eef2ff;color:#4f46e5;font-weight:700}
+.avatar.small{width:28px;height:28px;font-size:12px}
+
+.payments-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.payments-table th {
+  background-color: #f8f9fa;
+  color: #495057;
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.payments-table td {
+  padding: 16px;
+  border-bottom: 1px solid #f8f9fa;
+  color: #495057;
+}
+
+.payments-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.email {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.status-chip{color:#fff;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.3px}
+.status-chip.small{padding:4px 8px;font-size:10px}
+.status-chip.chip-paid{background:#16a34a}
+.status-chip.chip-created{background:#f59e0b}
+.status-chip.chip-failed{background:#dc2626}
+.status-chip.chip-unlocked{background:#16a34a}
+.status-chip.chip-locked{background:#dc2626}
+.status-chip.chip-default{background:#64748b}
+
+.action-btn {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.action-btn:hover {
+  background-color: #138496;
+}
+
+.students-list {
+  display: grid;
+  gap: 20px;
+}
+
+.student-card {background:#fff;border:1px solid #eaeaea;border-radius:16px;padding:20px;box-shadow:0 10px 24px rgba(0,0,0,.06)}
+.student-header {margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #f1f5f9}
+.header-left{display:flex;align-items:center;gap:12px}
+.student-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#fde68a,#fb923c);color:#111827;font-weight:800;display:flex;align-items:center;justify-content:center}
+.student-header h3 {color:#111827;margin:0 0 6px 0;font-size:18px}
+
+.student-meta {
+  display: flex;
+  gap: 20px;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.student-courses, .student-payments {
+  margin-bottom: 20px;
+}
+
+.student-courses h4, .student-payments h4 {
+  color: #495057;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.courses-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.course-item {display:flex;justify-content:space-between;align-items:center;padding:14px;background:#f8fafc;border-radius:12px;border:1px solid #e5e7eb}
+
+.course-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.course-name {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.enrollment-date {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.course-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-select {
+  padding: 6px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.payments-summary {display:grid;gap:8px}
+
+.payment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .tab-navigation {
+    flex-direction: column;
+  }
+  
+  .filters {
+    flex-direction: column;
+  }
+  
+  .payments-table { overflow-x:auto }
+  .payments-table table { min-width:800px }
+  .course-item { flex-direction:column; align-items:flex-start; gap:10px }
+  .course-actions { width:100%; justify-content:flex-end }
+  .student-meta { flex-direction:column; gap:10px }
+}
+
+/* Offline slips as cards */
+.offline-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:12px}
+.offline-card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.06);display:flex;flex-direction:column}
+.slip-thumb{height:160px;background:#f3f4f6;display:flex;align-items:center;justify-content:center}
+.slip-thumb img{width:100%;height:100%;object-fit:cover}
+.no-thumb{color:#6b7280}
+.offline-meta{padding:12px;display:grid;gap:8px}
+.meta-top{display:flex;gap:10px;align-items:center}
+.offline-actions{display:flex;gap:8px;padding:12px}
+.verify-btn{background:#16a34a;color:#fff;border:none;border-radius:8px;padding:8px 12px;cursor:pointer}
+.reject-btn{background:#ef4444;color:#fff;border:none;border-radius:8px;padding:8px 12px;cursor:pointer}
+.view-btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:8px 12px;cursor:pointer;text-align:center}

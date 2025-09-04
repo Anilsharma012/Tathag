@@ -1,0 +1,111 @@
+.adminCourse-form-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.adminCourse-form-modal {
+  background: #fff;
+  width: 600px;
+  max-height: 90vh;
+  padding: 32px;
+  border-radius: 14px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+  overflow-y: auto;
+}
+
+
+.adminCourse-form-title {
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.adminCourse-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.adminCourse-form-group label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+  color: #333;
+}
+
+.adminCourse-form-group input[type="text"],
+.adminCourse-form-group input[type="number"],
+.adminCourse-form-group input[type="file"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.adminCourse-form-group .ql-container {
+  min-height: 120px;
+  border-radius: 8px;
+}
+
+.adminCourse-thumb-preview {
+  width: 140px;
+  margin-top: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.adminCourse-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.adminCourse-submit {
+  background-color: #005ae0;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.adminCourse-submit:hover {
+  background-color: #0047b3;
+}
+
+.adminCourse-cancel-btn {
+  background-color: #ddd;
+  color: #333;
+  padding: 10px 20px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.adminCourse-cancel-btn:hover {
+  background-color: #bbb;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

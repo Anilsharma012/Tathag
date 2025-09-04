@@ -1,0 +1,232 @@
+/* ✅ Student Information Page Styling */
+.student-container {
+    padding: 30px;
+    background: #f4f4f4;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ✅ Back Button */
+.back-button {
+    background: #2C3E50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.back-button:hover {
+    background: #1abc9c;
+}
+
+/* ✅ Page Heading */
+.student-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2C3E50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ✅ Table Container */
+.student-table-container {
+    overflow-x: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    min-height: 400px; /* ✅ Fix Height */
+}
+
+/* ✅ Loading Spinner */
+.loading-spinner {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2C3E50;
+    margin-top: 50px;
+    animation: blink 1s infinite;
+}
+
+/* ✅ Animation for Loading */
+@keyframes blink {
+    50% { opacity: 0.5; }
+}
+
+/* ✅ Student Table */
+.student-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* ✅ Table Header */
+.student-table thead {
+    background: #2C3E50;
+    color: white;
+}
+
+.student-table th {
+    padding: 14px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* ✅ Table Rows */
+.student-table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+}
+
+/* ✅ Profile Image */
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #2C3E50;
+    object-fit: cover;
+}
+
+/* ✅ Hover Effect on Rows */
+.student-table tbody tr:hover {
+    background: #f1f1f1;
+    transition: 0.3s;
+}
+
+/* ✅ No Data Message */
+.no-data {
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* ✅ Responsive Table */
+@media (max-width: 1024px) {
+    .student-table-container {
+        padding: 15px;
+    }
+
+    .student-table th, .student-table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .student-table img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .student-container h2 {
+        font-size: 20px;
+    }
+
+    .student-table th, .student-table td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .student-table img {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .student-container {
+        padding: 20px;
+    }
+
+    .student-table th, .student-table td {
+        font-size: 11px;
+        padding: 6px;
+    }
+
+    .student-table img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+
+/* ✅ Action Icons */
+.icon {
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+    padding: 6px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.icon.edit {
+    color: #3498db;
+}
+
+.icon.update {
+    color: #27ae60;
+}
+
+.icon.cancel {
+    color: #e74c3c;
+}
+
+.icon.delete {
+    color: #e74c3c;
+}
+
+/* ✅ Hover Effects */
+.icon:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Input Fields */
+.student-table input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 1024px) {
+    .student-table-container {
+        padding: 15px;
+    }
+
+    .student-table th, .student-table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .student-table th, .student-table td {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .student-table th, .student-table td {
+        font-size: 11px;
+        padding: 6px;
+    }
+}

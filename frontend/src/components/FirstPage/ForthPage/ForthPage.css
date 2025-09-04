@@ -1,0 +1,329 @@
+
+
+.tf-testimonial-section {
+    display: flex;
+    background-color: #fef3ef;
+    /* margin-top:80px; */
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .tf-testimonial-left {
+    position: relative;
+    flex: 1;
+    max-width: 900px;
+    /* border-radius: 8px; */
+    overflow: hidden;
+    background-size: cover;
+  }
+  
+  .tf-testimonial-video-img {
+    width: 100%;
+    height: 650px;
+    border: none;
+  
+  }
+.tf-image-scrollable-grid {
+  max-height: 450px; /* same as .tf-testimonial-video-img */
+  overflow-y: scroll;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  padding-right: 6px; /* small right padding for invisible scrollbar */
+}
+.tf-testimonial-only-img {
+  width: 100%;
+  height: 150px;
+  border-radius: 12px;
+  object-fit: cover; /* ⭐ THIS FIXES THE IMAGE ZOOM/STRETCH ISSUE */
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tf-image-scrollable-grid::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Hide scrollbar for Firefox */
+.tf-image-scrollable-grid {
+  scrollbar-width: none; /* Firefox */
+}
+  .tf-testimonial-play-btn {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f25c54;
+    color: white;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+  }
+  
+  .tf-testimonial-bottom-info {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+  }
+  
+  .tf-testimonial-nav-btns button {
+    background: #f25c54;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 16px;
+    margin-left: 6px;
+    cursor: pointer;
+  }
+  
+  .tf-testimonial-right {
+    flex: 1;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .tf-testimonial-heading {
+    font-size: 58px;
+    font-weight: 400;
+    color: #121212;
+    text-align: left;
+    font-family: DM serif Display;
+  }
+  
+  .tf-testimonial-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .tf-testimonial-card {
+  width: 230px;
+  min-height: 300px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+  
+  .tf-testimonial-card.faded {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  
+  .tf-testimonial-review {
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: #333;
+    line-height: 1.5;
+    display: block;
+    text-align: left;
+  }
+  
+  .tf-testimonial-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .tf-testimonial-user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .tf-percentile-label {
+    font-size: 13px;
+    color: #2c4de7;
+    margin-top: 2px;
+  }
+  
+  .tf-testimonial-google-stars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .tf-testimonial-google-stars img {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .tf-star {
+    color: orange;
+    font-size: 16px;
+  }
+  
+  .tf-read-all-link {
+    text-align: center;
+    margin-top: 0px;
+    font-size: 14px;
+    color: #2c4de7;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+
+
+
+@media (max-width: 1024px) {
+  .tf-testimonial-section {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0px;
+    padding: 40px 20px;
+  }
+
+  .tf-testimonial-left,
+  .tf-testimonial-right {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .tf-testimonial-heading {
+    font-size: 36px;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .tf-testimonial-video-img {
+    height: 400px;
+    object-fit: cover;
+  }
+
+  .tf-testimonial-bottom-info {
+    font-size: 14px;
+    padding: 12px;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .tf-testimonial-nav-btns {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    margin-top: 10px;
+    display: none;
+  }
+
+  .tf-testimonial-nav-btns button {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .tf-testimonial-cards {
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding-bottom: 10px;
+  }
+
+  .tf-testimonial-card {
+    flex: 0 0 auto;
+    width: 220px;
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 600px) {
+  .tf-testimonial-heading {
+    font-size: 28px;
+  }
+
+  .tf-testimonial-video-img {
+    height: 300px;
+  }
+
+  .tf-image-scrollable-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .tf-testimonial-card {
+    width: 200px;
+    min-height: 280px;
+  }
+
+  .tf-testimonial-review {
+    font-size: 13px;
+  }
+
+  .tf-testimonial-user-img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .tf-testimonial-bottom-info {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  .tf-testimonial-heading {
+    font-size: 24px;
+    margin-left: -90px;
+  }
+
+  .tf-testimonial-card {
+    width: 180px;
+  }
+
+  .tf-testimonial-video-img {
+    height: 250px;
+  }
+
+  .tf-image-scrollable-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tf-testimonial-review {
+    font-size: 12px;
+  }
+
+  .tf-percentile-label {
+    font-size: 11px;
+  }
+
+  .tf-testimonial-nav-btns button {
+    width: 26px;
+    height: 26px;
+    
+  }
+
+  .tf-testimonial-google-stars img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .tf-read-all-link {
+    font-size: 13px;
+  }
+}

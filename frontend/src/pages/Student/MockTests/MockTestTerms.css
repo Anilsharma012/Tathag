@@ -1,0 +1,452 @@
+/* CAT Exam Style Terms & Conditions Page */
+.cat-terms-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #333;
+}
+
+/* Header Section - Same as Instructions */
+.cat-header {
+  background: linear-gradient(to right, #1e3a8a, #3b82f6, #60a5fa);
+  color: white;
+  padding: 8px 0;
+  border-bottom: 2px solid #1e40af;
+}
+
+.cat-header-top {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.cat-logos {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.logo-item {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.cat-title h1 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+}
+
+.cat-title h2 {
+  font-size: 14px;
+  font-weight: normal;
+  margin: 2px 0 0 0;
+  text-align: center;
+  opacity: 0.9;
+}
+
+/* Main Content */
+.cat-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  min-height: calc(100vh - 60px);
+}
+
+.cat-main-panel {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  height: calc(100vh - 60px);
+}
+
+/* Left Panel - Terms Content */
+.cat-terms-panel {
+  padding: 0;
+  overflow-y: auto;
+  border-right: 2px solid #e5e7eb;
+  background: white;
+}
+
+.terms-content {
+  padding: 20px;
+}
+
+.terms-content h3 {
+  color: #1e40af;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 20px 0 10px 0;
+  line-height: 1.4;
+}
+
+.terms-content p {
+  margin: 8px 0;
+  line-height: 1.5;
+  font-size: 11px;
+  text-align: justify;
+}
+
+.terms-content ul {
+  margin: 8px 0;
+  padding-left: 18px;
+}
+
+.terms-content li {
+  margin-bottom: 8px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+/* Sections Table */
+.sections-table {
+  margin: 15px 0;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.sections-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.sections-table th {
+  background: #1e40af;
+  color: white;
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 1px solid #1d4ed8;
+}
+
+.sections-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+}
+
+.sections-table tr:last-child td {
+  border-bottom: none;
+}
+
+.sections-table td:last-child {
+  border-right: none;
+}
+
+.sections-table tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+/* Login Section */
+.login-section {
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.registration-section,
+.question-section,
+.marking-section,
+.pwd-section,
+.mcq-section,
+.navigation-section,
+.device-section {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+/* Right Panel - Profile & Declarations */
+.cat-profile-panel {
+  background: #f8fafc;
+  padding: 0;
+  border-left: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-section {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+  background: white;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  border: 2px solid #1e40af;
+  overflow: hidden;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-placeholder {
+  font-size: 32px;
+  color: #6b7280;
+}
+
+.profile-info h4 {
+  margin: 0 0 4px 0;
+  font-size: 13px;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.profile-info p {
+  margin: 0;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+/* Declarations Section */
+.declarations-section {
+  padding: 20px;
+  background: white;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.declarations-section h4 {
+  margin: 0 0 20px 0;
+  font-size: 13px;
+  font-weight: bold;
+  color: #1e40af;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 10px;
+}
+
+.declaration-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+.cat-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.cat-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.checkmark {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #1e40af;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.cat-checkbox input[type="checkbox"]:checked + .checkmark {
+  background: #1e40af;
+}
+
+.cat-checkbox input[type="checkbox"]:checked + .checkmark::after {
+  content: '✓';
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.checkbox-text {
+  color: #374151;
+  font-weight: normal;
+  text-align: justify;
+}
+
+/* Action Buttons */
+.action-buttons {
+  padding: 20px;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.cat-btn {
+  padding: 10px 24px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  min-width: 100px;
+}
+
+.cat-btn-back {
+  background: #f3f4f6;
+  color: #374151;
+  border-color: #d1d5db;
+}
+
+.cat-btn-back:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.cat-btn-continue {
+  background: #1e40af;
+  color: white;
+  border-color: #1e40af;
+}
+
+.cat-btn-continue:hover:not(.disabled) {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(30, 64, 175, 0.3);
+}
+
+.cat-btn-continue.disabled {
+  background: #9ca3af;
+  border-color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Loading and Error States */
+.cat-loading, .cat-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+}
+
+.cat-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e5e7eb;
+  border-top: 3px solid #1e40af;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.cat-error h3 {
+  color: #dc2626;
+  margin-bottom: 10px;
+}
+
+.cat-error button {
+  padding: 8px 16px;
+  background: #1e40af;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .cat-main-panel {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  
+  .cat-profile-panel {
+    order: -1;
+  }
+  
+  .declarations-section {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cat-header-top {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .cat-logos {
+    justify-content: center;
+  }
+  
+  .terms-content {
+    padding: 15px;
+  }
+  
+  .profile-section,
+  .declarations-section,
+  .action-buttons {
+    padding: 15px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .cat-btn {
+    width: 100%;
+  }
+  
+  .sections-table {
+    overflow-x: auto;
+  }
+  
+  .sections-table table {
+    min-width: 500px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .cat-terms-page {
+    background: white;
+  }
+  
+  .cat-header {
+    background: white !important;
+    color: black !important;
+    border-bottom: 2px solid black;
+  }
+  
+  .action-buttons {
+    display: none;
+  }
+  
+  .declarations-section {
+    max-height: none;
+    overflow: visible;
+  }
+}

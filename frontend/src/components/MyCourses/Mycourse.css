@@ -1,0 +1,448 @@
+.tsp-programs-section {
+  padding: 60px;
+  background: #fff;
+  font-family: 'Poppins', sans-serif;
+  color: #070a22;
+}
+
+.tsp-programs-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.tsp-programs-header h5 {
+  color: #EE6A4D;
+  font-weight: 500;
+  font-size: 20px;
+  font-family: "Manrope", sans-serif;
+  margin: 0 0 8px;
+line-height: 120%;
+letter-spacing: 10%;
+text-transform: uppercase;
+
+}
+
+.tsp-programs-header h2 {
+
+  font-family: 'DM Serif Display', serif;
+ 
+  color: #000;
+  margin: 0;
+font-weight: 400;
+font-size: 58px;
+line-height: 100%;
+letter-spacing: 0%;
+
+}
+
+.tsp-programs-header p {
+  font-size: 13px;
+  color: #000;
+  font-weight: 500;
+  max-width: 583px;
+  margin-top: 20px;
+  font-family: 'Manrope',sans-serif;
+line-height: 160%;
+letter-spacing: 0%;
+text-align: right;
+
+
+
+}
+
+.tsp-programs-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.tsp-programs-actions button {
+  padding: 10px 20px;
+  border: 1px solid #1A237E;
+  background: transparent;
+  color: #1A237E;
+  font-weight: 600;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tsp-programs-actions button:hover {
+  background: #1A237E;
+  color: #fff;
+}
+
+.tsp-programs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* .tsp-program-card {
+  display: flex;
+  background: #ffeede;
+  border-radius: 12px;
+  padding: 16px;
+  gap: 16px;
+  align-items: flex-start;
+} */
+
+
+
+.tsp-program-image {
+  flex: 0 0 250px;  /* Pehle 200px tha, ab 250px */
+  max-width: 250px;
+  height: 428px;    /* Pehle 120px tha, ab 150px */
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+
+
+.tsp-program-image .LazyLoadImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tsp-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: #1d239f;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.desc-list {
+  padding-left: 18px;
+  margin-bottom: 8px;
+}
+
+.desc-list li {
+  font-size: 13px;
+  margin-bottom: 4px;
+  font-weight: 500;
+  line-height: 1.4;
+  list-style: none;
+  position: relative;
+  padding-left: 16px;
+}
+
+
+.desc-list li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #db4e32;
+  font-size: 12px;
+}
+
+
+
+.tsp-program-content {
+  flex: 1;
+}
+
+.tsp-program-content h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+}
+
+.tsp-program-content ul {
+  padding-left: 18px;
+  margin-bottom: 8px;
+}
+
+.tsp-program-content ul li {
+  font-size: 13px;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+/* .tsp-program-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+} */
+
+.tsp-program-price-row h4 {
+  font-size: 18px;
+  color: #000;
+}
+
+.tsp-program-price-row del {
+  font-size: 12px;
+  color: #888;
+}
+/* 
+.tsp-program-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tsp-program-buttons button {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+} */
+
+.tsp-program-buttons button:first-child {
+  background: #db4e32;
+  color: #fff;
+}
+
+.tsp-program-buttons .demo-btn {
+  background: #f96e46;
+  color: #fff;
+}
+
+.tsp-show-all-button {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.tsp-show-all-button button {
+  padding: 10px 20px;
+  background: #1d239f;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tsp-show-all-button button:hover {
+  background: #151a8a;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tsp-program-content h3{
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+.tsp-program-price-row h4{
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.desc-list li {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+
+
+
+
+
+
+
+.tsp-program-content ul {
+  overflow-y: auto;
+  max-height: 150px; /* ya jitna tu chahe */
+}
+
+.tsp-program-card {
+  display: flex;
+  background: #ffeede;
+  border-radius: 12px;
+  padding: 16px;
+  gap: 16px;
+  align-items: stretch;
+  height: 100%;
+}
+
+.tsp-program-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.tsp-program-price-row {
+  margin-top: auto; /* buttons hamesha neeche chipke rahenge */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tsp-program-price-row > div:first-child {
+  margin-bottom: -60px; /* 💥 MRP ko thoda aur niche kheench lega */
+}
+
+.tsp-program-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+   align-items: flex-end;
+}
+
+.tsp-program-buttons button {
+  width: 220px;  /* pura width le button */
+  box-sizing: border-box;
+  
+}
+
+
+
+@media (max-width: 768px) {
+  .tsp-programs-section {
+    padding: 30px 16px;
+  }
+
+  .tsp-programs-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tsp-programs-header h2 {
+    font-size: 32px;
+    text-align: left;
+  }
+
+  .tsp-programs-header h5 {
+    font-size: 16px;
+  }
+
+  .tsp-programs-header p {
+    font-size: 14px;
+    text-align: left;
+    margin-top: -1px;
+    max-width: 100%;
+  }
+
+  .tsp-programs-actions {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .tsp-programs-actions button {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .tsp-programs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tsp-program-card {
+    flex-direction: column;
+    align-items: center;
+    padding: 14px;
+  }
+
+  .tsp-program-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .tsp-program-content h3 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .desc-list li {
+    font-size: 13px;
+    text-align: left;
+  }
+
+  .tsp-program-buttons {
+    width: 100%;
+    align-items: center;
+  }
+
+  .tsp-program-buttons button {
+    width: 100%;
+  }
+
+  .tsp-program-price-row > div:first-child {
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  .tsp-program-price-row h4 {
+    font-size: 20px;
+  }
+
+  .tsp-program-price-row del {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tsp-programs-actions {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    gap: 12px;
+    padding-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tsp-programs-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tsp-programs-actions button {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+

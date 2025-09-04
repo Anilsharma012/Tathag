@@ -1,0 +1,146 @@
+.bulk-upload-container {
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.upload-section {
+    margin-bottom: 30px;
+}
+
+.upload-area {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+    border-color: #1976d2;
+    background: #f8f9fa;
+}
+
+.upload-area .upload-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    color: #1976d2;
+}
+
+.upload-area p {
+    margin: 0;
+    color: #666;
+}
+
+.file-info {
+    margin-top: 10px;
+    color: #1976d2;
+    font-weight: 500;
+}
+
+.template-button {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.template-button:hover {
+    background: #5a6268;
+}
+
+.preview-section {
+    margin: 30px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.sheet-preview {
+    margin-bottom: 20px;
+}
+
+.sheet-preview h4 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.sheet-preview table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.sheet-preview th,
+.sheet-preview td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.sheet-preview th {
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+.upload-controls {
+    margin: 30px 0;
+    text-align: right;
+}
+
+.upload-button {
+    background: #1976d2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.upload-button:hover {
+    background: #1557b0;
+}
+
+.upload-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.upload-status {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.upload-status h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+}
+
+.status-item {
+    padding: 8px 15px;
+    margin: 5px 0;
+    border-radius: 4px;
+}
+
+.status-item.success {
+    background: #d4edda;
+    color: #1557b0;
+}
+
+.status-item.error {
+    background: #f8d7da;
+    color: #dc3545;
+}
+
+.status-item.progress {
+    background: #fff3cd;
+    color: #856404;
+}

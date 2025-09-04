@@ -1,0 +1,125 @@
+/* Container Layout */
+.tc-course-tree-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.tc-course-tree-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Grid Layout */
+.tc-course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Course Card */
+.tc-course-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.tc-course-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Image */
+.tc-course-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+/* Info Section */
+.tc-course-info {
+  padding: 16px;
+  flex: 1;
+}
+
+.tc-course-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #000;
+  font-family: DM serif Display;
+  display: flex;
+}
+
+.tc-course-desc {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+  max-height: 100px;
+  overflow-y: auto;
+  padding-right: 5px;
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE 10+ */
+}
+
+.tc-course-desc::-webkit-scrollbar {
+  display: none;               /* Chrome, Safari */
+}
+
+.tc-view-structure-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.tc-view-structure-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+
+
+/* Price + Button */
+.tc-course-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tc-course-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a73e8;
+}
+
+/* Details Expand */
+.tc-course-details {
+  padding: 12px 16px;
+  background: #f9f9f9;
+  border-top: 1px solid #eee;
+}
+
+.tc-course-details summary {
+  cursor: pointer;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+/* Responsive Fix */
+@media (max-width: 480px) {
+  .tc-course-desc {
+    height: auto;
+  }
+
+  .tc-course-image {
+    height: 140px;
+  }
+}

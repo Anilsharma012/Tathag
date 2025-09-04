@@ -1,0 +1,825 @@
+.tf-resources-section {
+    background-image: url('../../images/resourcesOne.png'); /* 👈 Replace this */
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    position: relative;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .tf-resources-overlay {
+    background-color: rgba(0, 0, 50, 0.6);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+  }
+  
+  .tf-resources-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    margin-top: 250px;
+  }
+  
+  .tf-left-section {
+    flex: 1;
+  }
+  
+  .tf-title {
+    font-size: 64px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    font-family: DM serif Display;
+    display: block;
+    text-align: left;
+  }
+  
+  .tf-enroll-btn {
+    background-color: #f04e30;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    text-align: left;
+  }
+  
+  .tf-right-section {
+    flex: 1.1;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.2;
+    display: block;
+    text-align: left;
+
+  }
+
+  /* ----------- Default (large screens) already present above ---------- */
+
+/* ✅ Tablets (landscape) max-width 1024px */
+@media screen and (max-width: 1024px) {
+    .tf-title {
+      font-size: 48px;
+    }
+  
+    .tf-resources-content {
+      flex-direction: column;
+      margin-top: 150px;
+      text-align: center;
+    }
+  
+    .tf-left-section,
+    .tf-right-section {
+      text-align: center;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .tf-enroll-btn {
+      margin: 0 auto;
+    }
+  }
+  
+  /* ✅ Mobile (portrait) max-width 768px */
+  @media screen and (max-width: 768px) {
+    .tf-title {
+      font-size: 38px;
+    }
+  
+    .tf-enroll-btn {
+      font-size: 14px;
+      padding: 10px 16px;
+    }
+  
+    .tf-right-section {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  
+    .tf-resources-content {
+      margin-top: 100px;
+    }
+  }
+  
+  /* ✅ Small Mobile (under 480px) */
+  @media screen and (max-width: 480px) {
+    .tf-title {
+      font-size: 28px;
+    }
+  
+    .tf-resources-overlay {
+      padding: 0 20px;
+    }
+  
+    .tf-enroll-btn {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .tf-right-section {
+      font-size: 15px;
+    }
+  }
+  
+  
+
+
+
+
+
+
+  .tf-study-section {
+    padding: 60px 80px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .tf-top-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  
+  .tf-buttons-left {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .tf-btn {
+    padding: 8px 24px;
+    border: 1px solid #00057c;
+    background-color: white;
+    color: #00057c;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  
+  
+  .tf-btn-active {
+    background-color: #00057c;
+    color: white;
+  }
+  
+  .tf-icon-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .tf-study-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .tf-left {
+    max-width: 50%;
+  }
+  
+  .tf-tag {
+    color: #EE6A4D;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    display: block;
+    text-align: left;
+  }
+  
+  .tf-heading {
+    font-size: 58px;
+    font-weight: 400;
+    line-height: 1.2;
+    font-family: DM serif Display;
+    display: block;
+    text-align: left;
+    color: #000;
+  }
+  
+  .tf-right {
+    max-width: 40%;
+    margin-top: 50px;
+  }
+  
+  .tf-description {
+    font-size: 16px;
+    /* line-height: 1.6; */
+    color: #000;
+    font-weight: 500;
+    display: block;
+    text-align: left;
+  }
+  
+/* ✅ Tablet View - max 1024px */
+@media screen and (max-width: 1024px) {
+    .tf-study-section {
+      padding: 40px 40px;
+    }
+  
+    .tf-top-filters {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+  
+    .tf-study-content {
+      flex-direction: column;
+      gap: 30px;
+    }
+  
+    .tf-left,
+    .tf-right {
+      max-width: 100%;
+    }
+  
+    .tf-heading {
+      font-size: 42px;
+    }
+  
+    .tf-description {
+      font-size: 15px;
+    }
+  
+    .tf-btn {
+      font-size: 14px;
+      padding: 8px 20px;
+    }
+  }
+  
+  /* ✅ Mobile View - max 768px */
+  @media screen and (max-width: 768px) {
+    .tf-study-section {
+      padding: 30px 20px;
+    }
+  
+    .tf-tag {
+      font-size: 16px;
+      text-align: center;
+    }
+  
+    .tf-heading {
+      font-size: 32px;
+      text-align: center;
+    }
+  
+    .tf-description {
+      text-align: center;
+      font-size: 14px;
+    }
+  
+    .tf-buttons-left {
+      justify-content: center;
+    }
+  
+    .tf-filter-btn {
+      align-self: center;
+    }
+  
+    .tf-top-filters {
+      align-items: center;
+    }
+  }
+  
+  /* ✅ Small Mobile (below 480px) */
+  @media screen and (max-width: 480px) {
+    .tf-heading {
+      font-size: 26px;
+    }
+  
+    .tf-tag {
+      font-size: 14px;
+    }
+  
+    .tf-description {
+      font-size: 13px;
+    }
+  
+    .tf-btn {
+      padding: 6px 16px;
+      font-size: 13px;
+    }
+  
+    .tf-study-section {
+      padding: 20px 15px;
+    }
+  }
+  
+
+
+
+
+
+
+  .tf-grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding: 40px 80px;
+  }
+  
+  .tf-grid-card {
+    background-color: #F4F4F4;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .tf-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .tf-icon-circle {
+    background-color: #001e6c;
+    color: white;
+    font-size: 20px;
+    padding: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+  }
+  
+  .tf-doc-type {
+    color: #1A237E;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  
+  .tf-doc-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: #000;
+    display: block;
+    text-align: left;
+  }
+  
+  .tf-doc-desc {
+    font-size: 14px;
+    color: #000;
+    font-weight: 500;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    display: block;
+    text-align: left;
+  }
+  
+  .tf-download-btn {
+    background-color: #001e6c;
+    color: white;
+    padding: 12px 16px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+  }
+  
+  .tf-download-btn:hover {
+    background-color: #0033aa;
+  }
+  @media screen and (max-width: 1200px) {
+    .tf-grid-wrapper {
+      grid-template-columns: repeat(3, 1fr);
+      padding: 40px 40px;
+    }
+  }
+  
+  @media screen and (max-width: 900px) {
+    .tf-grid-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .tf-grid-wrapper {
+      grid-template-columns: 1fr;
+      padding: 20px 20px;
+    }
+  
+    .tf-download-btn {
+      font-size: 13px;
+      padding: 10px;
+    }
+  
+    .tf-doc-title {
+      font-size: 16px;
+    }
+  
+    .tf-doc-desc {
+      font-size: 13px;
+    }
+  }
+  
+
+
+
+
+
+
+  .tf-video-section {
+    padding: 60px 80px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .tf-video-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  
+  .tf-video-title {
+    font-size: 58px;
+    font-weight: 400;
+    color:#070A22;
+    font-family: 'DM Serif Display';
+    display: block;
+    text-align: left;
+  }
+  
+  .tf-video-subtitle {
+    font-size: 20px;
+    font-weight: 600;
+    
+    color: #000;
+    display: block;
+    text-align: left;
+  }
+  
+  .tf-signup-btn {
+    background-color: #D8583F;
+    color: white;
+    padding: 16px 24px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .tf-video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  
+  .tf-video-card {
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  .tf-video-thumb {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .tf-video-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .tf-play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .tf-video-info {
+    padding: 16px;
+  }
+  
+  .tf-watch-label {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 6px;
+    display: block;
+    text-align: left;
+  }
+  
+  .tf-video-desc {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+    display: block;
+    text-align: left;
+  }
+  /* ✅ Tablet Landscape (max-width: 1024px) */
+@media screen and (max-width: 1024px) {
+    .tf-video-section {
+      padding: 50px 40px;
+    }
+  
+    .tf-video-title {
+      font-size: 42px;
+    }
+  
+    .tf-video-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+  
+    .tf-video-thumb {
+      height: 180px;
+    }
+  
+    .tf-video-desc {
+      font-size: 14px;
+    }
+  }
+  
+  /* ✅ Mobile (max-width: 768px) */
+  @media screen and (max-width: 768px) {
+    .tf-video-section {
+      padding: 40px 20px;
+    }
+  
+    .tf-video-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+  
+    .tf-video-title {
+      font-size: 32px;
+      text-align: left;
+    }
+  
+    .tf-video-subtitle {
+      font-size: 16px;
+      text-align: left;
+    }
+  
+    .tf-signup-btn {
+      align-self: flex-start;
+      font-size: 14px;
+      padding: 12px 20px;
+    }
+  
+    .tf-video-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  
+    .tf-video-thumb {
+      height: 160px;
+    }
+  }
+  
+  /* ✅ Small Mobile (max-width: 480px) */
+  @media screen and (max-width: 480px) {
+    .tf-video-title {
+      font-size: 26px;
+    }
+  
+    .tf-video-subtitle {
+      font-size: 14px;
+    }
+  
+    .tf-watch-label {
+      font-size: 12px;
+    }
+  
+    .tf-video-desc {
+      font-size: 13px;
+    }
+  
+    .tf-play-icon {
+      width: 32px;
+      height: 32px;
+      font-size: 16px;
+    }
+  }
+  
+
+
+
+
+
+
+
+  .tf-pyp-section {
+    padding: 60px 80px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .tf-pyp-heading {
+    margin-bottom: 10px;
+    display: block;
+    text-align: left;
+  }
+  
+  .tf-pyp-title {
+    font-size: 58px;
+    font-weight: 400;
+    font-family: 'DM Serif Display';
+    color: #070A22;
+  }
+  
+  .tf-pyp-subtitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .tf-pyp-grid {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .tf-pyp-filters {
+    flex: 1;
+    min-width: 250px;
+  }
+  
+  .tf-pyp-filters h3 {
+    font-size: 24px;
+    margin-bottom: 32px;
+    font-weight: 600;
+    color: #000;
+    display: block;
+    text-align: left;
+  }
+  
+  .tf-pyp-category {
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #000;
+    display: block;
+    text-align: left;
+  }
+  
+  .tf-category-header {
+    display: flex;
+    align-items: center;
+    
+    cursor: pointer;
+    margin-bottom: 12px;
+  }
+  
+  .tf-dropdown-icon {
+    margin-left: 8px;
+    font-size: 14px;
+  }
+  
+  
+  
+  .tf-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .tf-pyp-cards {
+    flex: 3;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .tf-paper-carding {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+  }
+  
+  .tf-paper-top {
+    display: flex;
+    justify-content: space-between;
+    color: #777777;
+    font-size: 16px;
+    font-weight:700;
+    margin-bottom: 10px;
+  }
+  
+  .tf-pages {
+    color: #2641b5;
+    font-weight: 600;
+  }
+  
+  .tf-paper-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color:#000000;
+    display: block;
+    text-align: left;
+  }
+  
+  .tf-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+   
+  }
+  
+  .tf-tag {
+    background-color: #E0E0E0;
+    font-size: 14px;
+    color:black;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-top:30px;
+  }
+  
+  .tf-download-icon {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 20px;
+    color: #1A237E;
+    cursor: pointer;
+  }
+  @media screen and (max-width: 1024px) {
+    .tf-pyp-grid {
+      flex-direction: column;
+    }
+  
+    .tf-pyp-cards {
+      grid-template-columns: 2fr;
+    }
+  
+    .tf-pyp-title {
+      font-size: 42px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .tf-pyp-section {
+      padding: 40px 20px;
+    }
+  
+    .tf-pyp-title {
+      font-size: 32px;
+    }
+  
+    .tf-pyp-subtitle {
+      font-size: 14px;
+    }
+  
+    .tf-paper-title {
+      font-size: 15px;
+    }
+  
+    .tf-pyp-filters {
+      width: 100%;
+    }
+  }
+    

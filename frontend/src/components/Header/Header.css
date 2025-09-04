@@ -1,0 +1,470 @@
+/* Header Container */
+.header-wrapper {
+  width: 100%;
+}
+
+/* Top Contact Bar - exact copy of bg-tatha-blue-dark text-white py-2 px-4 */
+.top-contact-bar {
+  background-color: #121850;
+  color: white;
+  padding: 8px 16px;
+
+}
+
+/* Container - three columns layout */
+.top-bar-container {
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 0 20px;
+  height: 15px;
+}
+
+/* Contact left - flex with separator */
+.contact-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Contact item - flex items-center space-x-2 */
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Contact separator */
+.contact-separator {
+  margin: 0 8px;
+  color: white;
+}
+
+/* Contact icon - w-4 h-4 */
+.contact-icon {
+  width: 16px;
+  height: 16px;
+}
+
+
+
+.social-icons-center {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.icon-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.icon-circle:hover {
+  transform: scale(1.15);
+}
+
+.social-icon-white {
+  color: white;
+  font-size: 12px;
+}
+
+/* Background styles */
+.instagram-bg {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+
+.youtube-bg {
+  background-color: #FF0000; /* YouTube ka classic red */
+}
+
+.facebook-bg {
+  background-color: #1877f2;
+}
+@media (max-width: 768px) {
+  .social-icons-center {
+    display: none;
+  }
+}
+/* Social icons center - positioned in center */
+/* .social-icons-center {
+  display: flex;
+  align-items: center;
+  margin-left: -250px;
+  gap: 12px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+} */
+
+/* Social icon - w-4 h-4 cursor-pointer hover:text-gray-300 */
+/* .social-icon-facebook {
+  width: 16px;
+  height: 16px;
+  color: #1877f2;
+  cursor: pointer;
+  transition: color 0.15s ease-in-out;
+}
+
+.social-icon-instagram {
+  width: 16px;
+  height: 16px;
+   color: #e1306c;
+  cursor: pointer;
+  transition: color 0.15s ease-in-out;
+}
+
+.social-icon-youtube {
+  width: 16px;
+  height: 16px;
+ color: #ff0000; 
+  cursor: pointer;
+  transition: color 0.15s ease-in-out;
+}
+
+.social-icon:hover {
+  color: #d1d5db;
+} */
+
+/* Custom social icon - w-4 h-4 bg-blue-500 rounded cursor-pointer hover:opacity-80 */
+.custom-social-icon {
+  width: 16px;
+  height: 16px;
+  background-color: #3b82f6;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.custom-social-icon:hover {
+  opacity: 0.8;
+}
+
+/* Download right - positioned on right */
+.download-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  
+  flex-wrap: wrap;
+
+}
+
+/* Download link */
+.download-link {
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  white-space: nowrap;
+  transition: color 0.15s ease-in-out;
+  padding: 2px 6px;
+  border-radius: 3px;
+  transition: all 0.15s ease-in-out;
+}
+
+.download-link:hover {
+  color: #e5e7eb;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile responsive */
+@media (max-width: 1200px) {
+  .download-right {
+    gap: 8px;
+  }
+
+  .download-link {
+    font-size: 11px;
+    padding: 1px 4px;
+  }
+}
+
+@media (max-width: 992px) {
+  .download-right {
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+  }
+}
+
+@media (max-width: 768px) {
+  .social-icons-center {
+    position: static;
+    transform: none;
+  }
+
+  .top-bar-container {
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 16px;
+  }
+
+  .download-right {
+    display: none;
+  }
+  .contact-left {
+  display: none;
+}
+}
+
+/* Main Navigation - exact copy of bg-gradient-to-r from-tatha-blue to-tatha-blue-dark text-white */
+.main-navigation {
+  background: #1A237E;
+  color: white;
+}
+
+/* Nav container - exact copy of container mx-auto px-4 */
+.nav-container {
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* Nav content - exact copy of flex items-center justify-between h-16 */
+.nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 54px;
+}
+
+.logo-img {
+  height: 36px;          /* 👈 Decrease height */
+  max-height: 40px;
+  width: auto;
+  object-fit: contain;
+  margin-top: 4px;        /* optional: vertical alignment */
+}
+
+
+
+/* 
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+
+.logo-text {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+
+.logo-tg {
+  color: #FF6B35;
+}
+
+
+.logo-name {
+  color: white;
+} */
+
+/* Desktop nav - exact copy of hidden lg:flex items-center space-x-8 */
+.desktop-nav {
+  display: none;
+  align-items: center;
+  gap: 32px;
+  margin-left: 15px;
+
+  
+}
+
+@media (min-width: 1024px) {
+  .desktop-nav {
+    display: flex;
+  }
+}
+
+/* Nav link - exact copy of flex items-center space-x-1 hover:text-gray-200 */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: white;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #e5e7eb;
+}
+
+/* Dropdown arrow - exact copy of w-4 h-4 */
+.dropdown-arrow {
+  width: 16px;
+  height: 16px;
+}
+
+/* Nav actions - exact copy of hidden lg:flex items-center space-x-4 */
+.nav-actions {
+  display: none;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (min-width: 1024px) {
+  .nav-actions {
+    display: flex;
+  }
+}
+
+/* Button white - exact copy of bg-white text-tatha-blue px-4 py-2 rounded font-medium hover:bg-gray-100 transition-colors */
+.btn-white {
+  background-color: white;
+  color: #3949AB;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-white:hover {
+  background-color: #f3f4f6;
+}
+
+/* Button orange - exact copy of bg-tatha-orange text-white px-4 py-2 rounded font-medium hover:bg-tatha-orange-dark transition-colors */
+.btn-orange {
+  background-color: #FF6B35;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-orange:hover {
+  background-color: #E55722;
+}
+
+/* Login link - exact copy of text-white hover:text-gray-200 */
+.login-link {
+  color: white;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out;
+}
+
+.login-link:hover {
+  color: #e5e7eb;
+}
+
+/* Mobile menu button - exact copy of lg:hidden */
+.mobile-menu-btn {
+  display: block;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+  .mobile-menu-btn {
+    display: none;
+  }
+}
+
+/* Menu icon - exact copy of w-6 h-6 */
+.menu-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Mobile menu - exact copy of lg:hidden py-4 border-t border-white/20 */
+.mobile-menu {
+  display: block;
+  padding: 16px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (min-width: 1024px) {
+  .mobile-menu {
+    display: none;
+  }
+}
+
+/* Mobile nav - exact copy of flex flex-col space-y-4 */
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Mobile link - exact copy of hover:text-gray-200 */
+.mobile-link {
+  color: white;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out;
+}
+
+.mobile-link:hover {
+  color: #e5e7eb;
+}
+
+/* Mobile actions - exact copy of pt-4 border-t border-white/20 space-y-2 */
+.mobile-actions {
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Mobile button white - exact copy of w-full bg-white text-tatha-blue px-4 py-2 rounded font-medium */
+.mobile-btn-white {
+  width: 100%;
+  background-color: white;
+  color: #3949AB;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Mobile button orange - exact copy of w-full bg-tatha-orange text-white px-4 py-2 rounded font-medium */
+.mobile-btn-orange {
+  width: 100%;
+  background-color: #FF6B35;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Mobile login - exact copy of block text-center text-white */
+.mobile-login {
+  display: block;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+}

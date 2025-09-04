@@ -1,0 +1,7 @@
+.lead-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:70}
+.lead-modal{background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.2);width:92vw;max-width:860px;max-height:90vh;display:flex;flex-direction:column}
+.lead-modal-header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #eef2ff}
+.lead-close{border:0;background:#f3f4f6;border-radius:8px;width:32px;height:32px;cursor:pointer}
+.lead-modal-body{padding:8px}
+.lead-iframe-wrap{position:relative;width:100%;height:70vh;border-radius:8px;overflow:hidden}
+@media (max-width:640px){.lead-iframe-wrap{height:75vh}}
