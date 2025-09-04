@@ -833,6 +833,7 @@ app.use("/api/mock-tests", mockTestRoutes);
     app.use("/api/practice-tests", practiceTestRoutes);
     app.use("/api", require("./routes/nextStep"));
     app.use("/api/admin", require("./routes/batchesAdmin"));
+    app.use("/api/admin/academics", require("./routes/adminAcademics"));
 
 // ======================= Global Error Handler ==========================
 app.use((err, req, res, next) => {
