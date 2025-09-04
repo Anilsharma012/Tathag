@@ -13,9 +13,12 @@ axios.defaults.timeout = 20000;
 // Add request interceptor for debugging
 axios.interceptors.request.use(
   (config) => {
-    // Check for token in all possible localStorage keys
-    const token = localStorage.getItem('authToken') || localStorage.getItem('token') || localStorage.getItem('adminToken');
-    if (token) {
+    // Respect explicit header if already provided by the caller
+    const hasAuth = !!(config.headers && config.headers.Authorization);
+    // Prefer admin token for admin routes; otherwise fallback
+    const token = localStorage.getItem('adminToken') || localStorage.getItem('authToken') || localStorage.getItem('token');
+    if (!hasAuth && token) {
+      config.headers = config.headers || {};
       config.headers.Authorization = `Bearer ${token}`;
     }
     console.log(`Making ${config.method?.toUpperCase()} request to: ${config.baseURL}${config.url}`);
