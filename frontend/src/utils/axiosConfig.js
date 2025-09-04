@@ -21,7 +21,8 @@ axios.interceptors.request.use(
       config.headers = config.headers || {};
       config.headers.Authorization = `Bearer ${token}`;
     }
-    console.log(`Making ${config.method?.toUpperCase()} request to: ${config.baseURL}${config.url}`);
+    const prefix = (typeof window !== 'undefined' && window.location) ? window.location.origin : (config.baseURL || '');
+    console.log(`Making ${config.method?.toUpperCase()} request to: ${prefix}${config.url}`);
     return config;
   },
   (error) => {
