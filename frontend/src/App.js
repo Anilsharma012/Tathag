@@ -301,6 +301,16 @@ const AppContent = () => {
           }
         />
 
+        {/* Batch Management */}
+        <Route
+          path="/admin/batch-management"
+          element={
+            <PrivateRoute tokenName="adminToken">
+              <BatchManagement />
+            </PrivateRoute>
+          }
+        />
+
         {/* Evaluation */}
         <Route
           path="/admin/evaluation"
