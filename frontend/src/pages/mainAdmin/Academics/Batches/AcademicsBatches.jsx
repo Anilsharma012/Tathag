@@ -40,10 +40,6 @@ const AcademicsBatches = () => {
     endAt: '',
     joinUrl: ''
   });
-  const [recordingForm, setRecordingForm] = useState({
-    sessionId: '',
-    recordingUrl: ''
-  });
   const [bulkMarkForm, setBulkMarkForm] = useState({
     subject: 'A',
     enrollmentIds: []
