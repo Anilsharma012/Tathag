@@ -124,16 +124,8 @@ const CoursePanel = ({
           const action = shouldBeAttached ? 'add' : 'remove';
           const courseIds = [course.courseId];
           
-          const response = await fetch(`/api/admin/academics/batches/${batch.id}/courses`, {
-            method: 'PATCH',
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ courseIds, action })
-          });
-
-          if (!response.ok) {
+          const response = await req('patch', `/api/admin/academics/batches/${batch.id}/courses`, { data: { courseIds, action } });
+          if (!response || !response.data || response.status >= 400) {
             throw new Error(`Failed to update batch ${batch.name}`);
           }
         }
