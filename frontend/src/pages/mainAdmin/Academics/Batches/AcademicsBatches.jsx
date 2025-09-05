@@ -9,7 +9,6 @@ import {
 } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import AdminLayout from '../../AdminLayout/AdminLayout';
-import Table from '../../../../components/shared/Table/Table';
 import Drawer, { FormDrawer } from '../../../../components/shared/Drawer/Drawer';
 import SubjectChip, { StatusChip } from '../../../../components/shared/SubjectChip/SubjectChip';
 import CourseSubjectMatrix from './CourseSubjectMatrix';
