@@ -61,7 +61,7 @@ const AcademicsBatches = () => {
   const fetchBatchesData = async () => {
     try {
       setLoading(true);
-      const response = await req('get', '/api/admin/academics/batches', { params: { with: 'courses,stats' } });
+      const response = await req('get', '/admin/academics/batches', { params: { with: 'courses,stats' } });
       const result = response.data;
       
       if (result.success) {
@@ -108,7 +108,7 @@ const AcademicsBatches = () => {
     if (!confirmed) return;
     
     try {
-      const response = await req('patch', `/api/admin/academics/batches/${selectedBatch}/current-subject`, { data: { currentSubject: nextSubject } });
+      const response = await req('patch', `/admin/academics/batches/${selectedBatch}/current-subject`, { data: { currentSubject: nextSubject } });
       const result = response.data;
       
       if (result.success) {
@@ -132,7 +132,7 @@ const AcademicsBatches = () => {
     }
     
     try {
-      const response = await req('post', '/api/admin/sessions', { data: {
+      const response = await req('post', '/admin/sessions', { data: {
         batchId: selectedBatch,
         subject: sessionForm.subject,
         startAt: sessionForm.startAt,
@@ -168,7 +168,7 @@ const AcademicsBatches = () => {
     if (!confirmed) return;
     
     try {
-      const response = await req('patch', '/api/admin/academics/progress/bulk-done', { data: {
+      const response = await req('patch', '/admin/academics/progress/bulk-done', { data: {
         enrollmentIds: selectedStudents.map(s => s.enrollmentId),
         subject: bulkMarkForm.subject
       }});
