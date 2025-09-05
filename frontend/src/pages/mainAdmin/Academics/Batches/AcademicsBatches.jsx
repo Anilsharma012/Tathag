@@ -168,25 +168,11 @@ const AcademicsBatches = () => {
     if (!confirmed) return;
     
     try {
-      const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
-      
-      const response = await fetch('/api/admin/academics/progress/bulk-done', {
-        method: 'PATCH',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          enrollmentIds: selectedStudents.map(s => s.enrollmentId),
-          subject: bulkMarkForm.subject
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const result = await response.json();
+      const response = await req('patch', '/api/admin/academics/progress/bulk-done', { data: {
+        enrollmentIds: selectedStudents.map(s => s.enrollmentId),
+        subject: bulkMarkForm.subject
+      }});
+      const result = response.data;
       
       if (result.success) {
         toast.success(`Marked ${selectedStudents.length} students as done for Subject ${bulkMarkForm.subject}`);
