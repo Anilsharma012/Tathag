@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import Drawer from '../../../../components/shared/Drawer/Drawer';
 import SubjectChip from '../../../../components/shared/SubjectChip/SubjectChip';
 import './CoursePanel.css';
+import { req } from '../../../../utils/http';
 
 const CoursePanel = ({ 
   isOpen = false, 
