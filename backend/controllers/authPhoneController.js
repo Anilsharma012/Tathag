@@ -12,18 +12,7 @@ exports.sendPhoneOtp = async (req, res) => {
 
     const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
 
-    // Development mode: skip database operations
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`🔥 DEV MODE: OTP for ${phoneNumber} is ${otpCode}`);
-      res.status(200).json({
-        message: "✅ OTP sent successfully!",
-        devMode: true,
-        otp: otpCode
-      });
-      return;
-    }
-
-    // Production mode: use database
+    // Always use DB, even in dev (prevents random OTP acceptance)
     let user = await User.findOne({ phoneNumber });
     if (!user) {
       user = new User({ phoneNumber, isPhoneVerified: false });
@@ -31,9 +20,21 @@ exports.sendPhoneOtp = async (req, res) => {
     }
 
     await OTP.create({ userId: user._id, otpCode });
-    await sendOtpPhoneUtil(phoneNumber, otpCode);
 
-    res.status(200).json({ message: "✅ OTP sent successfully!" });
+    try {
+      await sendOtpPhoneUtil(phoneNumber, otpCode);
+      return res.status(200).json({ message: "✅ OTP sent successfully!" });
+    } catch (e) {
+      console.error("❌ SMS provider error:", e?.message || e);
+      try {
+        if (user.email) {
+          const { sendOtpEmailUtil } = require("../utils/SendOtp");
+          await sendOtpEmailUtil(user.email, otpCode);
+          return res.status(200).json({ message: "✅ OTP sent to registered email." });
+        }
+      } catch {}
+      return res.status(502).json({ message: "Failed to send OTP. Please try again later." });
+    }
   } catch (error) {
     console.error("❌ Error sending OTP:", error);
     res.status(500).json({ message: "Server error", error: error.message });
