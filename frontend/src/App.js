@@ -467,6 +467,9 @@ const AppContent = () => {
         <Route path="/explore-blog" element={<ExploreBlog />} />
         <Route path="/instruction" element={<Instruction />} />
 
+        {/* ViewCourse - batch-wise subject unlock */}
+        <Route path="/courses/:courseId/batches/:batchId/view" element={React.createElement(require('./components/ViewCourse/ViewCourse.jsx').default)} />
+
         <Route path="/student" element={<StudentLayout />}>
           <Route path="/student/dashboard" element={<StudentDashboard />} />
           <Route path="practice-tests" element={<StudentPracticeTests />} />
