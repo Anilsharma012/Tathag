@@ -61,20 +61,8 @@ const AcademicsBatches = () => {
   const fetchBatchesData = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
-      
-      const response = await fetch('/api/admin/academics/batches?with=courses,stats', {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const result = await response.json();
+      const response = await req('get', '/api/admin/academics/batches', { params: { with: 'courses,stats' } });
+      const result = response.data;
       
       if (result.success) {
         setData(result);
