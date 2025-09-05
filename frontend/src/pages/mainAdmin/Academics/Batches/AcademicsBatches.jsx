@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { 
-  FiPlay, 
-  FiPlus, 
-  FiUsers, 
-  FiClock,
-  FiCheck,
+import {
+  FiPlus,
+  FiUsers,
   FiArrowRight,
-  FiSettings,
   FiVideo,
-  FiCheckSquare 
+  FiCheckSquare
 } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import AdminLayout from '../../AdminLayout/AdminLayout';
