@@ -34,7 +34,7 @@ const StudentQueues = ({
 
     try {
       setLoadingStudents(true);
-      const response = await req('get', `/api/admin/academics/students/${batchId}`);
+      const response = await req('get', `/admin/academics/students/${batchId}`);
       const result = response.data;
       
       if (result.success) {
@@ -60,7 +60,7 @@ const StudentQueues = ({
 
   const markStudentDone = async (student, subject) => {
     try {
-      const response = await req('patch', '/api/admin/academics/progress/bulk-done', { data: {
+      const response = await req('patch', '/admin/academics/progress/bulk-done', { data: {
         enrollmentIds: [student.enrollmentId],
         subject: subject || student.nextSubject
       }});
