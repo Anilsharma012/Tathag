@@ -14,6 +14,7 @@ import AdminLayout from '../../AdminLayout/AdminLayout';
 import StatusCard from '../../../../components/shared/StatusCard/StatusCard';
 import { BatchChip } from '../../../../components/shared/SubjectChip/SubjectChip';
 import './AcademicsOverview.css';
+import { req } from '../../../../utils/http';
 
 const AcademicsOverview = () => {
   const navigate = useNavigate();
