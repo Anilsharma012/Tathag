@@ -61,7 +61,7 @@ const CoursePanel = ({
       
       // Fetch sessions for all batch IDs
       const responses = await Promise.all(
-        batchIds.map(batchId => req('get', `/api/batch/sessions`, { params: { batchId } }))
+        batchIds.map(batchId => req('get', `/batch/sessions`, { params: { batchId } }))
       );
       const sessionData = responses.map(r => r.data);
 
@@ -92,7 +92,7 @@ const CoursePanel = ({
     if (!confirmed) return;
     
     try {
-      const response = await req('patch', `/api/admin/academics/courses/${course.courseId}/start-subject`, { data: { startSubject: startSubjectForm } });
+      const response = await req('patch', `/admin/academics/courses/${course.courseId}/start-subject`, { data: { startSubject: startSubjectForm } });
       const result = response.data;
       
       if (result.success) {
@@ -124,7 +124,7 @@ const CoursePanel = ({
           const action = shouldBeAttached ? 'add' : 'remove';
           const courseIds = [course.courseId];
           
-          const response = await req('patch', `/api/admin/academics/batches/${batch.id}/courses`, { data: { courseIds, action } });
+          const response = await req('patch', `/admin/academics/batches/${batch.id}/courses`, { data: { courseIds, action } });
           if (!response || !response.data || response.status >= 400) {
             throw new Error(`Failed to update batch ${batch.name}`);
           }
