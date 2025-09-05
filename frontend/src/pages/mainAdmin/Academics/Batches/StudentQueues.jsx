@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import Table from '../../../../components/shared/Table/Table';
 import SubjectChip from '../../../../components/shared/SubjectChip/SubjectChip';
 import './StudentQueues.css';
+import { req } from '../../../../utils/http';
 
 const StudentQueues = ({ 
   batchId, 
