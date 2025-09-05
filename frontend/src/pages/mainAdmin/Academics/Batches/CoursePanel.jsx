@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiRotateCcw, FiLink, FiUnlink, FiCalendar, FiVideo, FiPlay } from 'react-icons/fi';
+import { FiRotateCcw, FiLink, FiCalendar, FiVideo, FiPlay } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import Drawer from '../../../../components/shared/Drawer/Drawer';
 import SubjectChip from '../../../../components/shared/SubjectChip/SubjectChip';
