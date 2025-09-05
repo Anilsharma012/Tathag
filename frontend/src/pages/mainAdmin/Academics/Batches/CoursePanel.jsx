@@ -92,22 +92,8 @@ const CoursePanel = ({
     if (!confirmed) return;
     
     try {
-      const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
-      
-      const response = await fetch(`/api/admin/academics/courses/${course.courseId}/start-subject`, {
-        method: 'PATCH',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ startSubject: startSubjectForm })
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const result = await response.json();
+      const response = await req('patch', `/api/admin/academics/courses/${course.courseId}/start-subject`, { data: { startSubject: startSubjectForm } });
+      const result = response.data;
       
       if (result.success) {
         toast.success(`Start subject changed to ${startSubjectForm}`);
