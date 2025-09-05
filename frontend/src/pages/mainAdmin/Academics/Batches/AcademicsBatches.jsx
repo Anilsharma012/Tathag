@@ -10,7 +10,7 @@ import {
 import { toast } from 'react-toastify';
 import AdminLayout from '../../AdminLayout/AdminLayout';
 import { FormDrawer } from '../../../../components/shared/Drawer/Drawer';
-import SubjectChip, { StatusChip } from '../../../../components/shared/SubjectChip/SubjectChip';
+import SubjectChip from '../../../../components/shared/SubjectChip/SubjectChip';
 import CourseSubjectMatrix from './CourseSubjectMatrix';
 import StudentQueues from './StudentQueues';
 import CoursePanel from './CoursePanel';
