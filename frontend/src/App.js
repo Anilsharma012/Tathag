@@ -116,6 +116,8 @@ import OCRDashboard from "./pages/mainAdmin/Evaluation/OCRDashboard";
 import AdminReports from "./pages/mainAdmin/Reports/AdminReports";
 import AdminLiveClasses from "./pages/mainAdmin/LiveClasses/AdminLiveClasses";
 import BatchManagement from "./pages/mainAdmin/BatchManagement/BatchManagement";
+import AcademicsOverview from "./pages/mainAdmin/Academics/Overview/AcademicsOverview";
+import AcademicsBatches from "./pages/mainAdmin/Academics/Batches/AcademicsBatches";
 import TeacherLiveClasses from "./pages/MainSubAdmin/LiveClasses/TeacherLiveClasses";
 import StudentLiveClasses from "./pages/Student/LiveClasses/StudentLiveClasses";
 import PurchaseHistory from "./pages/Student/PurchaseHistory/PurchaseHistory";
@@ -301,7 +303,25 @@ const AppContent = () => {
           }
         />
 
-        {/* Batch Management */}
+        {/* Academics */}
+        <Route
+          path="/admin/academics/overview"
+          element={
+            <PrivateRoute tokenName="adminToken">
+              <AcademicsOverview />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/academics/batches"
+          element={
+            <PrivateRoute tokenName="adminToken">
+              <AcademicsBatches />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Batch Management (legacy) */}
         <Route
           path="/admin/batch-management"
           element={
