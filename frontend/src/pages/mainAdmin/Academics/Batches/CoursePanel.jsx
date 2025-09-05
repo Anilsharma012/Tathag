@@ -45,8 +45,6 @@ const CoursePanel = ({
     
     try {
       setLoadingSessions(true);
-      const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
-      
       // Get sessions for all subjects for this course's batches
       const batchIds = batches
         .filter(batch => (batch.courseIds || []).some(cId => 
@@ -111,8 +109,6 @@ const CoursePanel = ({
     if (!course) return;
     
     try {
-      const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
-      
       // Update each batch's course attachment
       for (const batch of batches) {
         const isCurrentlyAttached = (batch.courseIds || []).some(cId => 
