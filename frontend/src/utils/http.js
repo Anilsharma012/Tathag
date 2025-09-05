@@ -57,8 +57,9 @@ export const req = async (method, url, options = {}) => {
     case 'get': return http.get(url, options);
     case 'post': return http.post(url, options?.data ?? options.body ?? options);
     case 'put': return http.put(url, options?.data ?? options.body ?? options);
+    case 'patch': return http.patch(url, options?.data ?? options.body ?? options);
     case 'delete': return http.delete(url, options);
-    default: return http(m, url, options);
+    default: return http({ method: m, url, ...(options || {}) });
   }
 };
 
