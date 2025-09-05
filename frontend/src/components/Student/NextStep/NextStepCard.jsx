@@ -54,17 +54,15 @@ const NextStepCard = ({ courseId }) => {
   const withinJoinWindow = canJoin && (Date.now() >= (new Date(sess.startAt).getTime() - 10*60*1000)) && (Date.now() <= new Date(sess.endAt).getTime());
 
   // Derive course type (P/Q/R/S) from startSubject; default 'T'
-  const courseType = useMemo(() => {
-    const map = { A: 'P', B: 'Q', C: 'R', D: 'S' };
-    const ss = data?.course?.startSubject;
-    return map[ss] || 'T';
-  }, [data]);
-  const leftDays = useMemo(() => {
-    if (data?.validity?.leftDays != null) return data.validity.leftDays;
-    const vt = data?.enrollment?.validTill ? new Date(data.enrollment.validTill) : null;
-    if (!vt) return null;
-    return Math.max(0, Math.ceil((vt.getTime() - Date.now()) / (1000*60*60*24)));
-  }, [data]);
+  const map = { A: 'P', B: 'Q', C: 'R', D: 'S' };
+  const courseType = map[data?.course?.startSubject] || 'T';
+  const leftDays = (data?.validity?.leftDays != null)
+    ? data.validity.leftDays
+    : (() => {
+        const vt = data?.enrollment?.validTill ? new Date(data.enrollment.validTill) : null;
+        if (!vt) return null;
+        return Math.max(0, Math.ceil((vt.getTime() - Date.now()) / (1000*60*60*24)));
+      })();
 
   return (
     <div className="ns-card">
