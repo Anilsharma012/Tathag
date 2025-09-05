@@ -108,22 +108,8 @@ const AcademicsBatches = () => {
     if (!confirmed) return;
     
     try {
-      const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
-      
-      const response = await fetch(`/api/admin/academics/batches/${selectedBatch}/current-subject`, {
-        method: 'PATCH',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ currentSubject: nextSubject })
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const result = await response.json();
+      const response = await req('patch', `/api/admin/academics/batches/${selectedBatch}/current-subject`, { data: { currentSubject: nextSubject } });
+      const result = response.data;
       
       if (result.success) {
         toast.success(`Batch advanced to Subject ${nextSubject}`);
