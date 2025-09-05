@@ -33,7 +33,7 @@ const AcademicsOverview = () => {
   const fetchOverviewData = async () => {
     try {
       setLoading(true);
-      const response = await req('get', '/api/admin/academics/overview');
+      const response = await req('get', '/admin/academics/overview');
       const result = response.data;
       
       if (result.success) {
