@@ -434,4 +434,121 @@ router.patch('/batches/:batchId/courses', async (req, res) => {
   }
 });
 
+// POST /api/admin/academics/seed-demo-course - create demo data for testing flows
+router.post('/seed-demo-course', async (req, res) => {
+  try {
+    const { scenario = 'P', courseName } = req.body || {};
+    const now = new Date();
+
+    // 1) Ensure demo student exists
+    const User = require('../models/UserSchema');
+    const demoEmail = 'demo@test.com';
+    let demoUser = await User.findOneAndUpdate(
+      { email: demoEmail },
+      { $setOnInsert: { email: demoEmail, name: 'Demo Student', role: 'student' } },
+      { upsert: true, new: true }
+    );
+
+    // 2) Create Course
+    const Course = require('../models/course/Course');
+    const name = courseName || `Demo Course ${new Date().toISOString().slice(0,10)}`;
+    const course = await Course.create({
+      name,
+      description: 'Demo seeded course for flow testing',
+      price: 0,
+      createdBy: req.user.id,
+      startSubject: 'A',
+      subjects: ['A','B','C','D'],
+      validityMonths: 24,
+      published: true,
+      locked: false,
+    });
+
+    // 3) Create/attach Batch
+    let batch = await Batch.findOne({ name: 'Master Demo Batch' });
+    if (!batch) batch = await Batch.create({ name: 'Master Demo Batch', currentSubject: 'A', courseIds: [] });
+
+    const attachSet = new Set((batch.courseIds || []).map(id=>String(id)));
+    if (!attachSet.has(String(course._id))) {
+      batch.courseIds.push(course._id);
+      await batch.save();
+    }
+
+    // Determine scenario specifics
+    const scenarioMap = {
+      P: { done: ['A','B'], current: 'C' },
+      Q: { done: ['B','C','D'], current: 'A' },
+      R: { done: ['C'], current: 'D' },
+      S: { done: ['D'], current: 'A' },
+      T: { done: [], current: 'A' },
+    };
+    const cfg = scenarioMap[scenario] || scenarioMap.P;
+
+    if (batch.currentSubject !== cfg.current) {
+      batch.currentSubject = cfg.current;
+      await batch.save();
+    }
+
+    // 4) Create Enrollment (valid 400 days)
+    const Enrollment = require('../models/Enrollment');
+    let enrollment = await Enrollment.findOne({ userId: demoUser._id, courseId: course._id });
+    if (!enrollment) {
+      enrollment = await Enrollment.create({
+        userId: demoUser._id,
+        courseId: course._id,
+        joinedAt: now,
+        validTill: new Date(now.getTime() + 400*24*60*60*1000),
+        status: 'active'
+      });
+    }
+
+    // 5) Subject progress per scenario
+    const SubjectProgress = require('../models/SubjectProgress');
+    for (const s of cfg.done) {
+      await SubjectProgress.updateOne(
+        { enrollmentId: enrollment._id, subject: s },
+        { $set: { status: 'done' } },
+        { upsert: true }
+      );
+    }
+
+    // 6) Sessions: upcoming live for batch.currentSubject, recordings for done
+    const Session = require('../models/Session');
+    const startAt = new Date(now.getTime() + 2*60*1000); // starts in 2 min
+    const endAt = new Date(startAt.getTime() + 60*60*1000);
+    await Session.create({
+      batchId: batch._id,
+      subject: batch.currentSubject,
+      startAt,
+      endAt,
+      joinUrl: 'https://meet.google.com/demo-join'
+    });
+
+    for (const s of cfg.done) {
+      await Session.create({
+        batchId: batch._id,
+        subject: s,
+        startAt: new Date(now.getTime() - 7*24*60*60*1000),
+        endAt: new Date(now.getTime() - 7*24*60*60*1000 + 60*60*1000),
+        joinUrl: 'https://meet.google.com/past',
+        recordingUrl: `https://videos.example.com/${s}/recording.mp4`
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Demo course, batch, enrollment and sessions created',
+      data: {
+        course: { id: course._id, name: course.name },
+        batch: { id: batch._id, name: batch.name, currentSubject: batch.currentSubject },
+        enrollment: { id: enrollment._id, userId: demoUser._id, validTill: enrollment.validTill },
+        scenario: scenario,
+      }
+    });
+  } catch (error) {
+    console.error('Seed demo error:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 module.exports = router;
