@@ -40,10 +40,7 @@ const AcademicsBatches = () => {
     endAt: '',
     joinUrl: ''
   });
-  const [bulkMarkForm, setBulkMarkForm] = useState({
-    subject: 'A',
-    enrollmentIds: []
-  });
+  const bulkMarkForm = { subject: 'A', enrollmentIds: [] };
 
   // Student selection
   const [selectedStudents, setSelectedStudents] = useState([]);
