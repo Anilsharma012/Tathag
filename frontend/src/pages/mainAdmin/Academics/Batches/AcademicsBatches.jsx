@@ -30,7 +30,6 @@ const AcademicsBatches = () => {
   
   // Drawer states
   const [sessionDrawer, setSessionDrawer] = useState(false);
-  const [recordingDrawer, setRecordingDrawer] = useState(false);
   const [coursePanelOpen, setCoursePanelOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
   
