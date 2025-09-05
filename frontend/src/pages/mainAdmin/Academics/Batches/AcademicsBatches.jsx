@@ -233,9 +233,9 @@ const AcademicsBatches = () => {
                   Schedule Live
                 </button>
                 
-                <button 
+                <button
                   className="btn btn-secondary"
-                  onClick={() => setRecordingDrawer(true)}
+                  onClick={() => toast.info('Attach Recording coming soon')}
                 >
                   <FiVideo />
                   Attach Recording
