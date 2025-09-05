@@ -34,20 +34,8 @@ const StudentQueues = ({
 
     try {
       setLoadingStudents(true);
-      const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
-      
-      const response = await fetch(`/api/admin/academics/students/${batchId}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const result = await response.json();
+      const response = await req('get', `/api/admin/academics/students/${batchId}`);
+      const result = response.data;
       
       if (result.success) {
         setStudentsData(result);
