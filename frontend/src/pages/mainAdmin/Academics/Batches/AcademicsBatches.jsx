@@ -20,6 +20,7 @@ import CourseSubjectMatrix from './CourseSubjectMatrix';
 import StudentQueues from './StudentQueues';
 import CoursePanel from './CoursePanel';
 import './AcademicsBatches.css';
+import { req } from '../../../../utils/http';
 
 const AcademicsBatches = () => {
   const location = useLocation();
