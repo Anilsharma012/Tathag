@@ -48,24 +48,6 @@ exports.verifyPhoneOtp = async (req, res) => {
       return res.status(400).json({ message: "❌ Phone number and OTP required!" });
     }
 
-    // Development mode: accept any 6-digit OTP
-    if (process.env.NODE_ENV === 'development') {
-      if (otpCode.length === 6 && /^\d+$/.test(otpCode)) {
-        const token = jwt.sign({ phoneNumber, id: "dev_user_id" }, process.env.JWT_SECRET || 'test_secret_key_for_development', { expiresIn: '30d' });
-        console.log(`🔥 DEV MODE: OTP verified for ${phoneNumber}`);
-
-        res.status(200).json({
-          message: "✅ OTP verified successfully!",
-          token,
-          user: { phoneNumber, name: "Dev User", _id: "dev_user_id" },
-          redirectTo: "/user-details",
-          devMode: true
-        });
-        return;
-      } else {
-        return res.status(400).json({ message: "❌ Invalid OTP format!" });
-      }
-    }
 
     // Production mode: use database
     let user = await User.findOne({ phoneNumber });
@@ -119,7 +101,7 @@ exports.loginWithPhone = async (req, res) => {
 
     let user = await User.findOne({ phoneNumber });
     if (!user || !user.isPhoneVerified) {
-      return res.status(404).json({ message: "❌ User not found or not verified!" });
+      return res.status(404).json({ message: "�� User not found or not verified!" });
     }
 
     const otpRecord = await OTP.findOne({ userId: user._id }).sort({ createdAt: -1 });
