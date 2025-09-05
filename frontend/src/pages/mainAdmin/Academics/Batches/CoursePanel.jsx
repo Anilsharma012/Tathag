@@ -60,27 +60,18 @@ const CoursePanel = ({
       }
       
       // Fetch sessions for all batch IDs
-      const sessionsPromises = batchIds.map(batchId =>
-        fetch(`/api/admin/batch/sessions?batchId=${batchId}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        })
+      const responses = await Promise.all(
+        batchIds.map(batchId => req('get', `/api/batch/sessions`, { params: { batchId } }))
       );
-      
-      const responses = await Promise.all(sessionsPromises);
-      const sessionData = await Promise.all(
-        responses.map(response => response.json())
-      );
-      
+      const sessionData = responses.map(r => r.data);
+
       // Combine and sort sessions
       const allSessions = sessionData
         .filter(data => data.success)
         .flatMap(data => data.items || [])
         .sort((a, b) => new Date(b.startAt) - new Date(a.startAt))
         .slice(0, 10); // Last 10 sessions
-      
+
       setSessions(allSessions);
     } catch (error) {
       console.error('Fetch sessions error:', error);
