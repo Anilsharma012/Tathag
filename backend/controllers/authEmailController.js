@@ -13,28 +13,7 @@ exports.sendEmailOtp = async (req, res) => {
     // Generate 6-digit OTP
     const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
 
-    // Development mode: skip database operations but still send email
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`🔥 DEV MODE: OTP for ${email} is ${otpCode}`);
-
-      // Try to send actual email
-      try {
-        await sendOtpEmailUtil(email, otpCode);
-        console.log(`📧 Email sent to ${email}`);
-      } catch (emailError) {
-        console.log(`❌ Email failed for ${email}:`, emailError.message);
-      }
-
-      res.status(200).json({
-        message: "OTP sent successfully",
-        devMode: true,
-        otp: otpCode  // Include OTP in response for testing
-      });
-      return;
-    }
-
-    // Production mode: use database
-    // Delete old OTPs for this email
+    // Always use DB, even in dev; do not expose OTP in response
     await OTP.deleteMany({ email });
 
     // Find or create user
@@ -47,7 +26,7 @@ exports.sendEmailOtp = async (req, res) => {
     // Save OTP
     await OTP.create({ userId: user._id, otpCode });
 
-    // Send OTP email
+    // Send OTP email (uses Ethereal in dev)
     await sendOtpEmailUtil(email, otpCode);
 
     res.status(200).json({ message: "OTP sent successfully" });
@@ -62,26 +41,7 @@ exports.verifyEmailOtp = async (req, res) => {
     const { email, otpCode } = req.body;
     if (!email || !otpCode) return res.status(400).json({ message: "Email and OTP required" });
 
-    // Development mode: accept any 6-digit OTP
-    if (process.env.NODE_ENV === 'development') {
-      if (otpCode.length === 6 && /^\d+$/.test(otpCode)) {
-        const token = jwt.sign({ email, id: "dev_user_id" }, process.env.JWT_SECRET || 'test_secret_key_for_development', { expiresIn: '30d' });
-        console.log(`🔥 DEV MODE: OTP verified for ${email}`);
-
-        res.status(200).json({
-          message: "OTP verified successfully",
-          token,
-          user: { email, name: "Dev User", _id: "dev_user_id" },
-          redirectTo: "/user-details",
-          devMode: true
-        });
-        return;
-      } else {
-        return res.status(400).json({ message: "Invalid OTP format" });
-      }
-    }
-
-    // Production mode: use database
+    // Use database for verification in all environments
     let user = await User.findOne({ email });
     if (!user) return res.status(400).json({ message: "User not found" });
 
