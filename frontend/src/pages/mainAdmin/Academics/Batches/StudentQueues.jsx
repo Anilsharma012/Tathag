@@ -60,25 +60,11 @@ const StudentQueues = ({
 
   const markStudentDone = async (student, subject) => {
     try {
-      const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
-      
-      const response = await fetch('/api/admin/academics/progress/bulk-done', {
-        method: 'PATCH',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          enrollmentIds: [student.enrollmentId],
-          subject: subject || student.nextSubject
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const result = await response.json();
+      const response = await req('patch', '/api/admin/academics/progress/bulk-done', { data: {
+        enrollmentIds: [student.enrollmentId],
+        subject: subject || student.nextSubject
+      }});
+      const result = response.data;
       
       if (result.success) {
         toast.success(`Marked ${student.name} as done for Subject ${subject || student.nextSubject}`);
