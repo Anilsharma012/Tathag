@@ -291,9 +291,9 @@ const AcademicsBatches = () => {
                   Advance to Next Subject
                 </button>
                 
-                <button 
+                <button
                   className="btn btn-secondary"
-                  onClick={() => setSessionDrawer(true)}
+                  onClick={() => { setSessionForm(f => ({...f, subject: selectedBatchData.currentSubject })); setSessionDrawer(true); }}
                 >
                   <FiPlus />
                   Schedule Live

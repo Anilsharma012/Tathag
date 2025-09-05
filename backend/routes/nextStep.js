@@ -37,11 +37,25 @@ router.get('/student/next-step', authMiddleware, async (req, res) => {
 
     // find master batch covering this course
     const batch = await Batch.findOne({ courseIds: course._id }) || await Batch.findOne();
-    const joinable = !!(enrollment.status === 'active' && next && batch && batch.currentSubject === next && !validityOver);
 
-    // fetch nearest sessions for current (and next) subject
-    const subjectForQuery = joinable ? next : next; // sessions we show are for next anyway
-    const sessions = await Session.find({ subject: subjectForQuery, batchId: batch?._id }).sort({ startAt: 1 }).limit(5);
+    // fetch nearest sessions for the subject we want the student to work on next
+    const sessions = next && batch ? await Session.find({ subject: next, batchId: batch._id }).sort({ startAt: 1 }).limit(5) : [];
+
+    // live joinable only within time window: startAt - 10m .. endAt
+    const liveWindowSession = sessions.find(s => {
+      const startWindow = new Date(new Date(s.startAt).getTime() - 10 * 60 * 1000);
+      const end = new Date(s.endAt);
+      return now >= startWindow && now <= end;
+    }) || null;
+
+    const joinable = !!(
+      enrollment.status === 'active' &&
+      next &&
+      batch &&
+      batch.currentSubject === next &&
+      !validityOver &&
+      liveWindowSession
+    );
 
     const resp = {
       success:true,
@@ -51,6 +65,8 @@ router.get('/student/next-step', authMiddleware, async (req, res) => {
       batch: batch ? { id: String(batch._id), name: batch.name, currentSubject: batch.currentSubject } : null,
       joinable,
       validityOver,
+      validity: { validTill: enrollment.validTill, leftDays: Math.max(0, Math.ceil((new Date(enrollment.validTill) - now) / (1000*60*60*24))) },
+      session: liveWindowSession ? { id:String(liveWindowSession._id), startAt: liveWindowSession.startAt, endAt: liveWindowSession.endAt, joinUrl: liveWindowSession.joinUrl } : null,
       sessions: sessions.map(s => ({ id:String(s._id), startAt:s.startAt, endAt:s.endAt, joinUrl:s.joinUrl, recordingUrl:s.recordingUrl }))
     };
 
