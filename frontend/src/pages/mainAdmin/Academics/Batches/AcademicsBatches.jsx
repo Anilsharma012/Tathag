@@ -132,28 +132,14 @@ const AcademicsBatches = () => {
     }
     
     try {
-      const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
-      
-      const response = await fetch('/api/admin/sessions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          batchId: selectedBatch,
-          subject: sessionForm.subject,
-          startAt: sessionForm.startAt,
-          endAt: sessionForm.endAt,
-          joinUrl: sessionForm.joinUrl
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const result = await response.json();
+      const response = await req('post', '/api/admin/sessions', { data: {
+        batchId: selectedBatch,
+        subject: sessionForm.subject,
+        startAt: sessionForm.startAt,
+        endAt: sessionForm.endAt,
+        joinUrl: sessionForm.joinUrl
+      }});
+      const result = response.data;
       
       if (result.success) {
         toast.success('Session scheduled successfully');
