@@ -119,6 +119,7 @@ import BatchManagement from "./pages/mainAdmin/BatchManagement/BatchManagement";
 import TeacherLiveClasses from "./pages/MainSubAdmin/LiveClasses/TeacherLiveClasses";
 import StudentLiveClasses from "./pages/Student/LiveClasses/StudentLiveClasses";
 import PurchaseHistory from "./pages/Student/PurchaseHistory/PurchaseHistory";
+import ViewCourse from "./components/ViewCourse/ViewCourse";
 
 // Auto-login functionality is handled in AppContent useEffect
 
