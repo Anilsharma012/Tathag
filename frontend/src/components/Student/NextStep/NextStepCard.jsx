@@ -53,13 +53,31 @@ const NextStepCard = ({ courseId }) => {
   const sess = (data.sessions||[])[0];
   const withinJoinWindow = canJoin && (Date.now() >= (new Date(sess.startAt).getTime() - 10*60*1000)) && (Date.now() <= new Date(sess.endAt).getTime());
 
+  // Derive course type (P/Q/R/S) from startSubject; default 'T'
+  const courseType = useMemo(() => {
+    const map = { A: 'P', B: 'Q', C: 'R', D: 'S' };
+    const ss = data?.course?.startSubject;
+    return map[ss] || 'T';
+  }, [data]);
+  const leftDays = useMemo(() => {
+    if (data?.validity?.leftDays != null) return data.validity.leftDays;
+    const vt = data?.enrollment?.validTill ? new Date(data.enrollment.validTill) : null;
+    if (!vt) return null;
+    return Math.max(0, Math.ceil((vt.getTime() - Date.now()) / (1000*60*60*24)));
+  }, [data]);
+
   return (
     <div className="ns-card">
       <div className="ns-header">
         <div className="ns-title">Your Next Step</div>
         <div className="ns-chips">
           <span className="ns-badge">{data.course?.name}</span>
-          <span className="ns-badge">valid till {new Date(data.enrollment?.validTill).toLocaleDateString()}</span>
+          <span className="ns-badge">Course {courseType}</span>
+          {leftDays != null ? (
+            <span className="ns-badge">{leftDays}d left</span>
+          ) : (
+            <span className="ns-badge">valid till {new Date(data.enrollment?.validTill).toLocaleDateString()}</span>
+          )}
         </div>
       </div>
       {canJoin ? (
@@ -72,7 +90,7 @@ const NextStepCard = ({ courseId }) => {
         <div className="ns-cta">
           <div className="ns-cta-title">Watch Recorded – Subject <SubjectChip s={data.nextSubject||'-'}/></div>
           <SessionList items={data.sessions||[]}/>
-          <div className="ns-muted">Backlog: watch before next live</div>
+          <div className="ns-muted">Backlog</div>
         </div>
       )}
     </div>
