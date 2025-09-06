@@ -400,7 +400,6 @@ const TestList = ({ topicId }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setQuestions(res.data.questions || []);
-      setSelectedTestId(testId);
       setShowModal(true);
     } catch (err) {
       console.error("❌ Failed to load questions:", err);
