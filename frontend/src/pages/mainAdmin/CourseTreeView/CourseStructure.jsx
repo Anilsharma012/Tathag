@@ -52,6 +52,8 @@ const CourseStructure = () => {
   const [includeSectionalTests, setIncludeSectionalTests] = useState(true);
   const [running, setRunning] = useState(false);
   const [progress, setProgress] = useState([]);
+  const [batchProgress, setBatchProgress] = useState({ processed: 0, total: 0 });
+  const [lastSummary, setLastSummary] = useState(null);
 
   const addStep = (t) => setProgress((p) => [...p, { t, at: Date.now() }]);
   const sleep = (ms) => new Promise(r=>setTimeout(r, ms));
