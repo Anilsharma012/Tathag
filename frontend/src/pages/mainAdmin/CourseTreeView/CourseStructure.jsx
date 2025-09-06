@@ -179,6 +179,8 @@ const CourseStructure = () => {
                 chapter={ch}
                 course={course}
                 subject={subjects.find((s) => s._id === activeSubject)}
+                locks={locks}
+                onOpenLock={(itemScope,item)=> setLockModal({ open:true, item, scope: itemScope })}
               />
             ))}
           </div>
