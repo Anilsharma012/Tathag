@@ -315,7 +315,6 @@ async function upsertSubject(targetCourseId, payload, session) {
 }
 async function upsertChapter(targetCourseId, payload, session) {
   const { title, order, slug, subjectSlug } = payload;
-  const subject = await Subject.findOne({ courseId: targetCourseId, name: new RegExp('.*', 'i') }).where('name').regex(new RegExp(`^`, 'i')); // placeholder to allow session chaining
   const bySlug = (txt) => slugify(String(txt || ''), { lower: true, strict: true });
   const subjects = await Subject.find({ courseId: targetCourseId }).session(session);
   const subj = subjects.find(s => bySlug(s.name) === subjectSlug);
