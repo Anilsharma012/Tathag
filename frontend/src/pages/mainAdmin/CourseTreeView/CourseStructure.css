@@ -331,3 +331,7 @@ body {
 .tz-progress{margin-top:12px;border:1px dashed #e5e7eb;border-radius:8px;padding:10px}
 .tz-progress-item{font-size:13px;color:#374151;margin-bottom:6px}
 .tz-empty{padding:12px;color:#6b7280}
+.tz-progress-bar{width:100%;height:8px;background:#f3f4f6;border-radius:9999px;overflow:hidden;margin:6px 0}
+.tz-progress-fill{height:100%;background:#2563eb;width:0;transition:width .3s ease}
+.tz-progress-actions{display:flex;justify-content:flex-end;margin-top:8px}
+.tz-progress-rows{margin-bottom:8px}
