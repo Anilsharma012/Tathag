@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const BatchSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true, trim: true },
+  code: { type: String, default: null, trim: true },
   // Legacy field used elsewhere in the app; keep for backward compatibility
   currentSubject: { type: String, enum: ['A','B','C','D'], default: 'A', index: true },
   // Legacy: batches could be attached to multiple courses
