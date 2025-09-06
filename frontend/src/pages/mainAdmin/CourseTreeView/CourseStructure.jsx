@@ -191,9 +191,22 @@ const CourseStructure = () => {
                       <button className="tz-primary-btn" disabled={running} onClick={startSend}>{running?'Sending…':'Send Now'}</button>
                     </div>
                   </div>
-                  {progress.length>0 && (
+                  {(progress.length>0 || batchProgress.total>0) && (
                     <div className="tz-progress">
+                      {batchProgress.total>0 && (
+                        <div className="tz-progress-rows">
+                          <div className="tz-progress-item">Batches: {batchProgress.processed}/{batchProgress.total}</div>
+                          <div className="tz-progress-bar">
+                            <div className="tz-progress-fill" style={{ width: `${batchProgress.total? Math.min(100, Math.round((batchProgress.processed/batchProgress.total)*100)) : 0}%` }} />
+                          </div>
+                        </div>
+                      )}
                       {progress.map((p,i)=>(<div key={i} className="tz-progress-item">{p.t}</div>))}
+                      {lastSummary && lastSummary.incomplete && (
+                        <div className="tz-progress-actions">
+                          <button className="tz-btn" onClick={startSend} disabled={running}>Resume</button>
+                        </div>
+                      )}
                     </div>
                   )}
                 </>
