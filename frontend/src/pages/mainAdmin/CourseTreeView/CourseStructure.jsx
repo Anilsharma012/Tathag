@@ -286,8 +286,9 @@ const ChapterCard = ({ chapter, course, subject, locks, onOpenLock }) => {
         {topics.length > 0 ? (
           <ul className="tz-topic-list">
             {topics.map((topic) => (
-              <li key={topic._id} className="tz-topic-item">
+              <li key={topic._id} className="tz-topic-item" onDoubleClick={()=> onOpenLock('topic', { id: topic._id, title: topic.name })}>
                 📗 {topic.name}
+                <span className={`tz-badge tz-badge-${locks[String(topic._id)]||'unlocked'}`}>{(locks[String(topic._id)]||'unlocked')}</span>
                 <TestList topicId={topic._id} />
               </li>
             ))}
@@ -347,7 +348,7 @@ const TestList = ({ topicId }) => {
       {showModal && (
         <div className="tz-modal-overlay" onClick={() => setShowModal(false)}>
           <div className="tz-modal" onClick={(e) => e.stopPropagation()}>
-            <h3 className="tz-modal-title">🧪 Questions</h3>
+            <h3 className="tz-modal-title">���� Questions</h3>
             <button className="tz-modal-close" onClick={() => setShowModal(false)}>
               ❌
             </button>
