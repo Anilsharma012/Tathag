@@ -274,7 +274,10 @@ const ChapterCard = ({ chapter, course, subject, locks, onOpenLock }) => {
 
   return (
     <details className="tz-chapter-card" onToggle={handleToggle}>
-      <summary>{chapter.name}</summary>
+      <summary onDoubleClick={()=> onOpenLock('section', { id: chapter._id, title: chapter.name })}>
+        {chapter.name}
+        <span className={`tz-badge tz-badge-${locks[String(chapter._id)]||'unlocked'}`}>{(locks[String(chapter._id)]||'unlocked')}</span>
+      </summary>
       <div className="tz-chapter-content">
         <p className="tz-chapter-path">
           Under {course?.name} / {subject?.name}
