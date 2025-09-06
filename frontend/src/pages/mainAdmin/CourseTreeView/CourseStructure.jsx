@@ -248,9 +248,100 @@ const CourseStructure = () => {
           </div>
         )}
       </div>
+
+      {lockOpen && (
+        <div className="tz-drawer" onClick={()=>setLockOpen(false)}>
+          <div className="tz-drawer-panel" onClick={(e)=>e.stopPropagation()}>
+            <div className="tz-drawer-header">
+              <h3>Lock Manager</h3>
+              <button className="tz-modal-close" onClick={()=>setLockOpen(false)}>❌</button>
+            </div>
+            <div className="tz-drawer-body">
+              <label>Batch</label>
+              <select className="tz-input" value={selectedBatch} onChange={(e)=>setSelectedBatch(e.target.value)}>
+                {batches.map(b=> <option key={b._id} value={b._id}>{b.name}{b.code?` (${b.code})`:''}</option>)}
+              </select>
+              <div className="tz-scope-tabs">
+                {['subject','section','topic'].map(s=> (
+                  <button key={s} className={`tz-scope-tab ${scope===s?'active':''}`} onClick={()=>setScope(s)}>{s[0].toUpperCase()+s.slice(1)}s</button>
+                ))}
+              </div>
+              <label className="tz-row"><input type="checkbox" checked={autoLock} onChange={(e)=>setAutoLock(e.target.checked)} /> Auto-lock siblings when setting Active</label>
+              <div className="tz-actions" style={{marginTop:8}}>
+                <button className="tz-btn" onClick={async()=>{ await applyGlobal('lock'); }}>Lock All</button>
+                <button className="tz-btn" onClick={async()=>{ await applyGlobal('unlock'); }}>Unlock All</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {lockModal.open && (
+        <div className="tz-modal-overlay" onClick={()=>setLockModal({open:false,item:null,scope:null})}>
+          <div className="tz-modal" onClick={(e)=>e.stopPropagation()}>
+            <h3 className="tz-modal-title">Change access – {lockModal.item?.title}</h3>
+            <button className="tz-modal-close" onClick={()=>setLockModal({open:false,item:null,scope:null})}>❌</button>
+            <div className="tz-confirm">
+              <div className="tz-row"><label><input type="radio" name="lockop" value="setActive" defaultChecked /> Set Active</label></div>
+              <div className="tz-row"><label><input type="radio" name="lockop" value="lock" /> Lock</label></div>
+              <div className="tz-row"><label><input type="radio" name="lockop" value="unlock" /> Unlock</label></div>
+              <div className="tz-row"><label>Schedule unlock <input type="datetime-local" id="unlockAt" className="tz-input" /></label></div>
+              <div className="tz-actions">
+                <button className="tz-btn" onClick={()=>setLockModal({open:false,item:null,scope:null})}>Cancel</button>
+                <button className="tz-primary-btn" onClick={async()=>{ await applySingle(); }}>Apply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </AdminLayout>
   );
 };
+
+async function postLocks(body){
+  const token = localStorage.getItem("adminToken");
+  return axios.post('/api/locks/apply', body, { headers:{ Authorization:`Bearer ${token}` }});
+}
+
+async function dryRun(body){
+  const token = localStorage.getItem("adminToken");
+  return axios.post('/api/locks/apply', { ...body, dryRun:true }, { headers:{ Authorization:`Bearer ${token}` }});
+}
+
+async function applyGlobal(op){
+  const token = localStorage.getItem("adminToken");
+  if (!selectedBatch) { alert('Select a batch'); return; }
+  const items = scope==='subject' ? subjects : scope==='section' ? chapters : [];
+  const actions = items.map(it=> ({ scope, targetId: it._id, op }));
+  const base = { courseId, batchId: selectedBatch, actions, idempotencyKey: `${courseId}:${selectedBatch}:${scope}:${op}:${Date.now()}` };
+  try {
+    await dryRun(base);
+  } catch(e){ alert(e?.response?.data?.message || 'Dry-run failed'); return; }
+  // chunking 50
+  for (let i=0;i<actions.length;i+=50){
+    const chunk = actions.slice(i,i+50);
+    let attempt=0; let delay=500;
+    while (attempt<=2){
+      try{ await postLocks({ ...base, actions: chunk }); break; } catch(err){ attempt++; if (attempt>2) throw err; await new Promise(r=>setTimeout(r, delay)); delay*=3; }
+    }
+  }
+  await loadLocks();
+}
+
+async function applySingle(){
+  const token = localStorage.getItem("adminToken");
+  if (!selectedBatch) { alert('Select a batch'); return; }
+  const modal = document.querySelector('input[name="lockop"]:checked');
+  const op = modal ? modal.value : 'setActive';
+  const unlockAtEl = document.getElementById('unlockAt');
+  const unlockAt = unlockAtEl && unlockAtEl.value ? new Date(unlockAtEl.value).toISOString() : undefined;
+  const action = { scope: lockModal.scope, targetId: lockModal.item.id, op, autoLockSiblings: autoLock, schedule: unlockAt? { unlockAt }: undefined };
+  const base = { courseId, batchId: selectedBatch, actions: [action], idempotencyKey: `${courseId}:${selectedBatch}:${lockModal.scope}:${lockModal.item.id}:${op}` };
+  try { await dryRun(base); } catch(e){ alert(e?.response?.data?.message || 'Validation failed'); return; }
+  // apply
+  let attempt=0; let delay=500; while(attempt<=2){ try{ await postLocks(base); break; } catch(err){ attempt++; if (attempt>2) throw err; await new Promise(r=>setTimeout(r, delay)); delay*=3; } }
+  await loadLocks(); setLockModal({open:false,item:null,scope:null});
+}
 
 const ChapterCard = ({ chapter, course, subject, locks, onOpenLock }) => {
   const [topics, setTopics] = useState([]);
@@ -348,7 +439,7 @@ const TestList = ({ topicId }) => {
       {showModal && (
         <div className="tz-modal-overlay" onClick={() => setShowModal(false)}>
           <div className="tz-modal" onClick={(e) => e.stopPropagation()}>
-            <h3 className="tz-modal-title">���� Questions</h3>
+            <h3 className="tz-modal-title">🧪 Questions</h3>
             <button className="tz-modal-close" onClick={() => setShowModal(false)}>
               ❌
             </button>
