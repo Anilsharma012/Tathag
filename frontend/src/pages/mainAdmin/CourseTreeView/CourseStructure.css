@@ -316,3 +316,18 @@ body {
   font-style: italic;
 }
 
+/* New controls for Send to Next */
+.tz-heading-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.tz-primary-btn{background:#2563eb;color:#fff;border:0;border-radius:8px;padding:8px 12px;cursor:pointer}
+.tz-primary-btn:disabled{opacity:.6;cursor:not-allowed}
+.tz-input{width:100%;border:1px solid #e5e7eb;border-radius:8px;padding:10px;margin:8px 0}
+.tz-course-list{max-height:360px;overflow:auto;border:1px solid #eee;border-radius:8px}
+.tz-course-row{display:flex;align-items:center;justify-content:space-between;padding:10px;border-bottom:1px solid #f3f4f6}
+.tz-course-name{font-weight:600}
+.tz-course-sub{font-size:12px;color:#6b7280}
+.tz-btn{border:1px solid #e5e7eb;border-radius:8px;padding:6px 10px;background:#fff;cursor:pointer}
+.tz-confirm .tz-row{margin:6px 0}
+.tz-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+.tz-progress{margin-top:12px;border:1px dashed #e5e7eb;border-radius:8px;padding:10px}
+.tz-progress-item{font-size:13px;color:#374151;margin-bottom:6px}
+.tz-empty{padding:12px;color:#6b7280}
