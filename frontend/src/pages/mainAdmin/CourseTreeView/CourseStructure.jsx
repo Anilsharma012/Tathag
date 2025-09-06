@@ -381,7 +381,6 @@ const ChapterCard = ({ chapter, course, subject, locks, onOpenLock }) => {
 
 const TestList = ({ topicId }) => {
   const [tests, setTests] = useState([]);
-  const [selectedTestId, setSelectedTestId] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const token = localStorage.getItem("adminToken");
