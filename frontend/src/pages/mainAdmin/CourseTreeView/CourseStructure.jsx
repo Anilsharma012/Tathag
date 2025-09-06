@@ -252,7 +252,7 @@ const CourseStructure = () => {
   );
 };
 
-const ChapterCard = ({ chapter, course, subject }) => {
+const ChapterCard = ({ chapter, course, subject, locks, onOpenLock }) => {
   const [topics, setTopics] = useState([]);
   const [expanded, setExpanded] = useState(false);
 
