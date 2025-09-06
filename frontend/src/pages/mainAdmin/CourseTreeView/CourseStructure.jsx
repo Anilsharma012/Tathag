@@ -163,8 +163,10 @@ const CourseStructure = () => {
               key={sub._id}
               onClick={() => setActiveSubject(sub._id)}
               className={`tz-subject-tab ${activeSubject === sub._id ? "active" : ""}`}
+              onDoubleClick={()=> setLockModal({ open:true, item:{ id: sub._id, title: sub.name }, scope:'subject' })}
             >
               {sub.name}
+              <span className={`tz-badge tz-badge-${locks[String(sub._id)]||'unlocked'}`}>{(locks[String(sub._id)]||'unlocked')}</span>
             </button>
           ))}
         </div>
