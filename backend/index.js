@@ -807,8 +807,6 @@ app.use("/api/chapters", chapterRoute);
 app.use("/api/topics", topicRoutes);
 app.use("/api/tests", testRoutes);
 app.use("/api/questions", questionRoutes);
-app.use("/api", require("./routes/locks"));
-app.use("/api", require("./routes/batchesQuery"));
 app.use("/api/responses", responseRoutes);
 app.use("/api/upload", uploadRoute);
 app.use("/api/study-materials", require("./routes/StudyMaterialRoute"));
@@ -836,8 +834,7 @@ app.use("/api/mock-tests", mockTestRoutes);
     app.use("/api", require("./routes/nextStep"));
     app.use("/api/admin", require("./routes/batchesAdmin"));
     app.use("/api/admin/academics", require("./routes/adminAcademics"));
-    app.use("/api", require("./routes/lessons"));
-
+    
 // ======================= Global Error Handler ==========================
 app.use((err, req, res, next) => {
     console.error("❌ Global Error:", err.message);

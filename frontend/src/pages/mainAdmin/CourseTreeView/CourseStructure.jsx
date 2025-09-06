@@ -53,33 +53,6 @@ const CourseStructure = () => {
   const [batchProgress, setBatchProgress] = useState({ processed: 0, total: 0 });
   const [lastSummary, setLastSummary] = useState(null);
 
-  // Lock Manager state
-  const [lockOpen, setLockOpen] = useState(false);
-  const [batches, setBatches] = useState([]);
-  const [selectedBatch, setSelectedBatch] = useState('');
-  const [scope, setScope] = useState('subject');
-  const [autoLock, setAutoLock] = useState(true);
-  const [locks, setLocks] = useState({}); // key: itemId -> status
-  const [lockModal, setLockModal] = useState({ open:false, item:null, scope:null });
-
-  const loadBatches = async () => {
-    try {
-      const res = await axios.get(`/api/batches?courseId=${courseId}`, { headers:{ Authorization:`Bearer ${token}` } });
-      setBatches(res.data.items||[]);
-      if (!selectedBatch && (res.data.items||[]).length) setSelectedBatch(res.data.items[0]._id);
-    } catch(e){ console.error('batches error', e); }
-  };
-  const loadLocks = async () => {
-    if (!selectedBatch) return;
-    try {
-      const res = await axios.get(`/api/locks/state?courseId=${courseId}&batchId=${selectedBatch}`, { headers:{ Authorization:`Bearer ${token}` } });
-      const map = {}; (res.data.states||[]).forEach(s=>{ map[String(s.itemId)] = s.status; });
-      setLocks(map);
-    } catch(e){ console.error('locks error', e); }
-  };
-  useEffect(()=>{ if (lockOpen) { loadBatches(); } }, [lockOpen]);
-  useEffect(()=>{ loadLocks(); }, [selectedBatch]);
-
   const addStep = (t) => setProgress((p) => [...p, { t, at: Date.now() }]);
   const sleep = (ms) => new Promise(r=>setTimeout(r, ms));
 
@@ -143,45 +116,12 @@ const CourseStructure = () => {
     }
   };
 
-  const postLocks = async (body) => axios.post('/api/locks/apply', body, { headers:{ Authorization:`Bearer ${token}` }});
-  const dryRunLocks = async (body) => axios.post('/api/locks/apply', { ...body, dryRun:true }, { headers:{ Authorization:`Bearer ${token}` }});
-
-  const applyGlobal = async (op) => {
-    if (!selectedBatch) { alert('Select a batch'); return; }
-    const items = scope==='subject' ? subjects : scope==='section' ? chapters : [];
-    const actions = items.map(it=> ({ scope, targetId: it._id, op }));
-    const base = { courseId, batchId: selectedBatch, actions, idempotencyKey: `${courseId}:${selectedBatch}:${scope}:${op}:${Date.now()}` };
-    try { await dryRunLocks(base); } catch(e){ alert(e?.response?.data?.message || 'Dry-run failed'); return; }
-    for (let i=0;i<actions.length;i+=50){
-      const chunk = actions.slice(i,i+50);
-      let attempt=0; let delay=500;
-      while (attempt<=2){
-        try{ await postLocks({ ...base, actions: chunk }); break; } catch(err){ attempt++; if (attempt>2) throw err; await new Promise(r=>setTimeout(r, delay)); delay*=3; }
-      }
-    }
-    await loadLocks();
-  };
-
-  const applySingle = async () => {
-    if (!selectedBatch) { alert('Select a batch'); return; }
-    const modal = document.querySelector('input[name="lockop"]:checked');
-    const op = modal ? modal.value : 'setActive';
-    const unlockAtEl = document.getElementById('unlockAt');
-    const unlockAt = unlockAtEl && unlockAtEl.value ? new Date(unlockAtEl.value).toISOString() : undefined;
-    const action = { scope: lockModal.scope, targetId: lockModal.item.id, op, autoLockSiblings: autoLock, schedule: unlockAt? { unlockAt }: undefined };
-    const base = { courseId, batchId: selectedBatch, actions: [action], idempotencyKey: `${courseId}:${selectedBatch}:${lockModal.scope}:${lockModal.item.id}:${op}` };
-    try { await dryRunLocks(base); } catch(e){ alert(e?.response?.data?.message || 'Validation failed'); return; }
-    let attempt=0; let delay=500; while(attempt<=2){ try{ await postLocks(base); break; } catch(err){ attempt++; if (attempt>2) throw err; await new Promise(r=>setTimeout(r, delay)); delay*=3; } }
-    await loadLocks(); setLockModal({open:false,item:null,scope:null});
-  };
-
   return (
     <AdminLayout>
       <div className="tz-container">
         <div className="tz-heading-row">
           <h1 className="tz-heading">📚 {course?.name} - Structure</h1>
           <div style={{display:'flex',gap:8}}>
-            <button className="tz-btn" onClick={()=>{ setLockOpen(true); }} disabled={running}>Lock Manager</button>
             <button className="tz-primary-btn" onClick={()=>{setPickOpen(true); loadCourses();}} disabled={running}>
               {running ? 'Sending...' : 'Send to Next'}
             </button>
@@ -194,10 +134,8 @@ const CourseStructure = () => {
               key={sub._id}
               onClick={() => setActiveSubject(sub._id)}
               className={`tz-subject-tab ${activeSubject === sub._id ? "active" : ""}`}
-              onDoubleClick={()=> setLockModal({ open:true, item:{ id: sub._id, title: sub.name }, scope:'subject' })}
             >
               {sub.name}
-              <span className={`tz-badge tz-badge-${locks[String(sub._id)]||'unlocked'}`}>{(locks[String(sub._id)]||'unlocked')}</span>
             </button>
           ))}
         </div>
@@ -210,8 +148,6 @@ const CourseStructure = () => {
                 chapter={ch}
                 course={course}
                 subject={subjects.find((s) => s._id === activeSubject)}
-                locks={locks}
-                onOpenLock={(itemScope,item)=> setLockModal({ open:true, item, scope: itemScope })}
               />
             ))}
           </div>
@@ -279,58 +215,11 @@ const CourseStructure = () => {
           </div>
         )}
       </div>
-
-      {lockOpen && (
-        <div className="tz-drawer" onClick={()=>setLockOpen(false)}>
-          <div className="tz-drawer-panel" onClick={(e)=>e.stopPropagation()}>
-            <div className="tz-drawer-header">
-              <h3>Lock Manager</h3>
-              <button className="tz-modal-close" onClick={()=>setLockOpen(false)}>❌</button>
-            </div>
-            <div className="tz-drawer-body">
-              <label>Batch</label>
-              <select className="tz-input" value={selectedBatch} onChange={(e)=>setSelectedBatch(e.target.value)}>
-                {batches.map(b=> <option key={b._id} value={b._id}>{b.name}{b.code?` (${b.code})`:''}</option>)}
-              </select>
-              <div className="tz-scope-tabs">
-                {['subject','section','topic'].map(s=> (
-                  <button key={s} className={`tz-scope-tab ${scope===s?'active':''}`} onClick={()=>setScope(s)}>{s[0].toUpperCase()+s.slice(1)}s</button>
-                ))}
-              </div>
-              <label className="tz-row"><input type="checkbox" checked={autoLock} onChange={(e)=>setAutoLock(e.target.checked)} /> Auto-lock siblings when setting Active</label>
-              <div className="tz-actions" style={{marginTop:8}}>
-                <button className="tz-btn" onClick={async()=>{ await applyGlobal('lock'); }}>Lock All</button>
-                <button className="tz-btn" onClick={async()=>{ await applyGlobal('unlock'); }}>Unlock All</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {lockModal.open && (
-        <div className="tz-modal-overlay" onClick={()=>setLockModal({open:false,item:null,scope:null})}>
-          <div className="tz-modal" onClick={(e)=>e.stopPropagation()}>
-            <h3 className="tz-modal-title">Change access – {lockModal.item?.title}</h3>
-            <button className="tz-modal-close" onClick={()=>setLockModal({open:false,item:null,scope:null})}>❌</button>
-            <div className="tz-confirm">
-              <div className="tz-row"><label><input type="radio" name="lockop" value="setActive" defaultChecked /> Set Active</label></div>
-              <div className="tz-row"><label><input type="radio" name="lockop" value="lock" /> Lock</label></div>
-              <div className="tz-row"><label><input type="radio" name="lockop" value="unlock" /> Unlock</label></div>
-              <div className="tz-row"><label>Schedule unlock <input type="datetime-local" id="unlockAt" className="tz-input" /></label></div>
-              <div className="tz-actions">
-                <button className="tz-btn" onClick={()=>setLockModal({open:false,item:null,scope:null})}>Cancel</button>
-                <button className="tz-primary-btn" onClick={async()=>{ await applySingle(); }}>Apply</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </AdminLayout>
   );
 };
 
-
-const ChapterCard = ({ chapter, course, subject, locks, onOpenLock }) => {
+const ChapterCard = ({ chapter, course, subject }) => {
   const [topics, setTopics] = useState([]);
   const [expanded, setExpanded] = useState(false);
 
@@ -352,9 +241,8 @@ const ChapterCard = ({ chapter, course, subject, locks, onOpenLock }) => {
 
   return (
     <details className="tz-chapter-card" onToggle={handleToggle}>
-      <summary onDoubleClick={()=> onOpenLock('section', { id: chapter._id, title: chapter.name })}>
+      <summary>
         {chapter.name}
-        <span className={`tz-badge tz-badge-${locks[String(chapter._id)]||'unlocked'}`}>{(locks[String(chapter._id)]||'unlocked')}</span>
       </summary>
       <div className="tz-chapter-content">
         <p className="tz-chapter-path">
@@ -364,9 +252,8 @@ const ChapterCard = ({ chapter, course, subject, locks, onOpenLock }) => {
         {topics.length > 0 ? (
           <ul className="tz-topic-list">
             {topics.map((topic) => (
-              <li key={topic._id} className="tz-topic-item" onDoubleClick={()=> onOpenLock('topic', { id: topic._id, title: topic.name })}>
+              <li key={topic._id} className="tz-topic-item">
                 📗 {topic.name}
-                <span className={`tz-badge tz-badge-${locks[String(topic._id)]||'unlocked'}`}>{(locks[String(topic._id)]||'unlocked')}</span>
                 <TestList topicId={topic._id} />
               </li>
             ))}
@@ -420,7 +307,6 @@ const TestList = ({ topicId }) => {
         ))}
       </ul>
 
-      {/* Modal View */}
       {showModal && (
         <div className="tz-modal-overlay" onClick={() => setShowModal(false)}>
           <div className="tz-modal" onClick={(e) => e.stopPropagation()}>
@@ -430,7 +316,6 @@ const TestList = ({ topicId }) => {
             </button>
             <div className="tz-question-scroll">
               {questions.length > 0 ? questions.map((q, idx) => {
-                // Safety check for question object
                 if (!q || !q._id) {
                   return (
                     <div key={`error-${idx}`} className="tz-question-block">
@@ -450,7 +335,6 @@ const TestList = ({ topicId }) => {
                     {q.image && <img src={`/uploads/${q.image}`} alt="question-img" className="tz-question-image" />}
                     <ul className="tz-options-list">
                       {q.options && typeof q.options === 'object' && !Array.isArray(q.options) ? (
-                        // Handle new object-based options format {A: "text", B: "text", ...}
                         Object.entries(q.options).map(([key, value]) => (
                           <li
                             key={key}
@@ -460,7 +344,6 @@ const TestList = ({ topicId }) => {
                           </li>
                         ))
                       ) : q.options && Array.isArray(q.options) ? (
-                        // Handle legacy array-based options format ["text1", "text2", ...]
                         q.options.map((opt, i) => (
                           <li
                             key={i}
@@ -479,7 +362,6 @@ const TestList = ({ topicId }) => {
                         <span dangerouslySetInnerHTML={{ __html: q.explanation }} />
                       </div>
                     )}
-                    {/* Debug info */}
                     <div style={{fontSize: "10px", color: "#888", marginTop: "5px"}}>
                       Difficulty: {q.difficulty || "N/A"} | Marks: {q.marks || "N/A"}
                     </div>
