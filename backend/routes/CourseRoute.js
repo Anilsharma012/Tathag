@@ -134,6 +134,202 @@ router.get('/:courseId/batches/:batchId/view', async (req, res) => {
 // ✅ READ all courses or by ID (ADMIN - after public routes)
 router.get("/", authMiddleware, checkPermission("course_read"), getCourses);
 
+// Build normalized structure nodes for a course
+async function buildStructure(courseId) {
+  const subjects = await Subject.find({ courseId }).sort({ order: 1, name: 1 });
+  const chaptersBySubject = await Chapter.find({ courseId }).sort({ order: 1, name: 1 });
+  const topicsByChapter = await Topic.find({ course: courseId }).sort({ order: 1, name: 1 });
+
+  const chaptersGrouped = chaptersBySubject.reduce((acc, ch) => {
+    const k = String(ch.subjectId);
+    (acc[k] = acc[k] || []).push(ch);
+    return acc;
+  }, {});
+  const topicsGrouped = topicsByChapter.reduce((acc, t) => {
+    const k = String(t.chapter);
+    (acc[k] = acc[k] || []).push(t);
+    return acc;
+  }, {});
+
+  const node = (doc, titleKey) => ({
+    _id: doc._id,
+    title: doc[titleKey],
+    slug: slugify(String(doc[titleKey] || ''), { lower: true, strict: true }),
+    order: doc.order || 0,
+    children: []
+  });
+
+  const structure = subjects.map(s => {
+    const sNode = node(s, 'name');
+    const chapters = (chaptersGrouped[String(s._id)] || []).map(ch => {
+      const chNode = node(ch, 'name');
+      chNode.children = (topicsGrouped[String(ch._id)] || []).map(tp => node(tp, 'name'));
+      return chNode;
+    });
+    sNode.children = chapters;
+    return sNode;
+  });
+  return structure;
+}
+
+// GET /api/courses/:id/structure
+router.get('/:id/structure', authMiddleware, checkPermission('course_read'), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const course = await Course.findById(id);
+    if (!course) return res.status(404).json({ success:false, message:'Course not found' });
+    const structure = await buildStructure(id);
+    res.json({ success:true, course:{ _id: course._id, name: course.name, title: course.title }, structure });
+  } catch (e) {
+    console.error('structure error:', e);
+    res.status(500).json({ success:false, message: e.message });
+  }
+});
+
+// POST /api/courses/copy-structure
+router.post('/copy-structure', authMiddleware, checkPermission('course_update'), async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+  try {
+    const { sourceCourseId, targetCourseId, mode = 'MERGE', includeSectionalTests = true } = req.body;
+    const dryRun = (req.query.dryRun === '1' || req.query.dryRun === 'true');
+    if (!sourceCourseId || !targetCourseId) return res.status(400).json({ success:false, message:'sourceCourseId and targetCourseId are required' });
+    if (String(sourceCourseId) === String(targetCourseId)) return res.status(400).json({ success:false, message:'Source and target cannot be same' });
+
+    const source = await Course.findById(sourceCourseId);
+    const target = await Course.findById(targetCourseId);
+    if (!source || !target) return res.status(404).json({ success:false, message:'Course not found' });
+
+    const srcStructure = await buildStructure(sourceCourseId);
+    const tgtStructure = await buildStructure(targetCourseId);
+
+    // Helper maps by slug
+    const mapBySlug = (arr) => arr.reduce((m, n) => (m[n.slug] = n, m), {});
+
+    let copiedSections = 0; // subjects + chapters
+    let copiedLessons = 0; // topics
+    let skipped = 0;
+
+    // Fetch DB entities for target to upsert
+    const tgtSubjectsDocs = await Subject.find({ courseId: targetCourseId });
+
+    const subjectSlugToDoc = {};
+    tgtSubjectsDocs.forEach(d => {
+      subjectSlugToDoc[slugify(String(d.name || ''), { lower:true, strict:true })] = d;
+    });
+
+    for (const sNode of srcStructure) {
+      // upsert subject by slug
+      let subjectDoc = subjectSlugToDoc[sNode.slug];
+      if (!subjectDoc) {
+        copiedSections++;
+        if (!dryRun) {
+          subjectDoc = await Subject.create([{ courseId: targetCourseId, name: sNode.title, order: sNode.order }], { session });
+          subjectDoc = subjectDoc[0];
+        }
+      } else {
+        // update name/order if changed
+        if (!dryRun && (subjectDoc.name !== sNode.title || (subjectDoc.order||0) !== (sNode.order||0))) {
+          subjectDoc.name = sNode.title;
+          subjectDoc.order = sNode.order || 0;
+          await subjectDoc.save({ session });
+        } else {
+          skipped++;
+        }
+      }
+
+      // chapters under subject
+      const tgtChapters = await Chapter.find({ courseId: targetCourseId, subjectId: subjectDoc?._id || undefined }, null, { session });
+      const chSlugMap = {};
+      tgtChapters.forEach(c => chSlugMap[slugify(String(c.name||''), {lower:true, strict:true})] = c);
+
+      for (const chNode of (sNode.children || [])) {
+        let chDoc = chSlugMap[chNode.slug];
+        if (!chDoc) {
+          copiedSections++;
+          if (!dryRun) {
+            chDoc = await Chapter.create([{ courseId: targetCourseId, subjectId: subjectDoc._id, name: chNode.title, order: chNode.order }], { session });
+            chDoc = chDoc[0];
+          }
+        } else {
+          if (!dryRun && (chDoc.name !== chNode.title || (chDoc.order||0)!==(chNode.order||0))) {
+            chDoc.name = chNode.title;
+            chDoc.order = chNode.order || 0;
+            await chDoc.save({ session });
+          } else {
+            skipped++;
+          }
+        }
+
+        // topics as lessons
+        const tgtTopics = await Topic.find({ course: targetCourseId, subject: subjectDoc?._id, chapter: chDoc?._id }, null, { session });
+        const tpSlugMap = {};
+        tgtTopics.forEach(t => tpSlugMap[slugify(String(t.name||''), {lower:true, strict:true})] = t);
+
+        for (const tpNode of (chNode.children || [])) {
+          let tpDoc = tpSlugMap[tpNode.slug];
+          if (!tpDoc) {
+            copiedLessons++;
+            if (!dryRun) {
+              tpDoc = await Topic.create([{ course: targetCourseId, subject: subjectDoc._id, chapter: chDoc._id, name: tpNode.title, order: tpNode.order }], { session });
+              tpDoc = tpDoc[0];
+            }
+          } else {
+            if (!dryRun && (tpDoc.name !== tpNode.title || (tpDoc.order||0)!==(tpNode.order||0))) {
+              tpDoc.name = tpNode.title;
+              tpDoc.order = tpNode.order || 0;
+              await tpDoc.save({ session });
+            } else {
+              skipped++;
+            }
+          }
+
+          if (!dryRun && includeSectionalTests) {
+            // Best-effort: ensure at least a placeholder test exists per topic if any existed in source
+            const srcTestsCount = await Test.countDocuments({ course: sourceCourseId, topic: tpDoc?._id });
+            if (srcTestsCount > 0) {
+              const tgtTests = await Test.find({ course: targetCourseId, topic: tpDoc._id });
+              if (tgtTests.length === 0) {
+                await Test.create([{ course: targetCourseId, subject: subjectDoc._id, chapter: chDoc._id, topic: tpDoc._id, title: `${tpNode.title} - Test`, duration: 30, totalMarks: 0 }], { session });
+              }
+            }
+          }
+        }
+      }
+    }
+
+    if (mode === 'OVERWRITE' && !dryRun) {
+      // Replace: remove any subject/chapters/topics in target not present by slug in source
+      const srcSubjectSlugs = new Set(srcStructure.map(n => n.slug));
+      const tgtSubjectsAll = await Subject.find({ courseId: targetCourseId }, null, { session });
+      for (const s of tgtSubjectsAll) {
+        const sSlug = slugify(String(s.name||''), {lower:true, strict:true});
+        if (!srcSubjectSlugs.has(sSlug)) {
+          await Topic.deleteMany({ course: targetCourseId, subject: s._id }, { session });
+          await Chapter.deleteMany({ courseId: targetCourseId, subjectId: s._id }, { session });
+          await Subject.deleteOne({ _id: s._id }, { session });
+        }
+      }
+    }
+
+    if (dryRun) {
+      await session.abortTransaction();
+      session.endSession();
+      return res.json({ success:true, dryRun:true, copied:{ sections: copiedSections, lessons: copiedLessons }, skipped, mode });
+    }
+
+    await session.commitTransaction();
+    session.endSession();
+
+    res.json({ success:true, copied:{ sections: copiedSections, lessons: copiedLessons }, skipped, mode });
+  } catch (e) {
+    await session.abortTransaction();
+    session.endSession();
+    console.error('copy-structure error:', e);
+    res.status(500).json({ success:false, message: e.message });
+  }
+});
+
 router.get(
   "/:id",
   authMiddleware,
