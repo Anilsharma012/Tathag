@@ -91,15 +91,15 @@ const CourseStructure = () => {
 
     addStep('2) Dry-run estimate');
     let dryRes; try {
-      dryRes = await fetchWithRetry(()=>axios.post(`/api/courses/copy-structure?dryRun=1`,{ sourceCourseId: courseId, targetCourseId: selectedTarget._id, mode, includeSectionalTests, plan:{ batchSize:50, retries:2 } },{headers:{Authorization:`Bearer ${token}`}}));
+      dryRes = await fetchWithRetry(()=>axios.post(`/api/courses/copy-structure?dryRun=1`,{ sourceCourseId: courseId, targetCourseId: selectedTarget._id, mode: String(mode||'MERGE').toLowerCase(), includeSectionalTests, plan:{ batchSize:50, retries:2 } },{headers:{Authorization:`Bearer ${token}`}}));
       const plan = dryRes?.data?.plan; if (plan) setBatchProgress({ processed: 0, total: plan.totalBatches||0 });
-    } catch(e){ console.error(e); alert('Dry-run failed'); setRunning(false); return; }
+    } catch(e){ console.error(e); const msg = e?.response?.data?.message || e?.response?.data || e.message || 'Dry-run failed'; alert(msg); setRunning(false); return; }
 
     addStep('3) Copying in batches');
     let realRes; try {
-      realRes = await fetchWithRetry(()=>axios.post(`/api/courses/copy-structure`,{ sourceCourseId: courseId, targetCourseId: selectedTarget._id, mode, includeSectionalTests, plan:{ batchSize:50, retries:2 } },{headers:{Authorization:`Bearer ${token}`}}));
+      realRes = await fetchWithRetry(()=>axios.post(`/api/courses/copy-structure`,{ sourceCourseId: courseId, targetCourseId: selectedTarget._id, mode: String(mode||'MERGE').toLowerCase(), includeSectionalTests, plan:{ batchSize:50, retries:2 } },{headers:{Authorization:`Bearer ${token}`}}));
       if (realRes?.data?.batches) setBatchProgress(realRes.data.batches);
-    } catch(e){ console.error(e); alert('Copy failed'); setRunning(false); return; }
+    } catch(e){ console.error(e); const msg = e?.response?.data?.message || e?.response?.data || e.message || 'Copy failed'; alert(msg); setRunning(false); return; }
 
     addStep('4) Final verify');
     try {
