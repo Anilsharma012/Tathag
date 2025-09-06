@@ -152,6 +152,53 @@ const CourseStructure = () => {
         ) : (
           <div className="tz-no-chapters">No chapters available for this subject.</div>
         )}
+
+        {pickOpen && (
+          <div className="tz-modal-overlay" onClick={()=>setPickOpen(false)}>
+            <div className="tz-modal" onClick={(e)=>e.stopPropagation()}>
+              <h3 className="tz-modal-title">Send structure to…</h3>
+              <button className="tz-modal-close" onClick={()=>setPickOpen(false)}>❌</button>
+
+              {!selectedTarget ? (
+                <>
+                  <input className="tz-input" placeholder="Search courses" value={search} onChange={(e)=>setSearch(e.target.value)} />
+                  <div className="tz-course-list">
+                    {filteredCourses.map(c => (
+                      <div className="tz-course-row" key={c._id}>
+                        <div>
+                          <div className="tz-course-name">{c.name || c.title}</div>
+                          <div className="tz-course-sub">{c.slug} {c.batchYear ? `• ${c.batchYear}`:''}</div>
+                        </div>
+                        <button className="tz-btn" onClick={()=>setSelectedTarget(c)}>Select</button>
+                      </div>
+                    ))}
+                    {filteredCourses.length===0 && <div className="tz-empty">No courses</div>}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="tz-confirm">
+                    <div className="tz-row"><strong>Target:</strong> {selectedTarget.name || selectedTarget.title}</div>
+                    <div className="tz-row">
+                      <label><input type="radio" name="mode" value="MERGE" checked={mode==='MERGE'} onChange={()=>setMode('MERGE')} /> MERGE</label>
+                      <label style={{marginLeft:12}}><input type="radio" name="mode" value="OVERWRITE" checked={mode==='OVERWRITE'} onChange={()=>setMode('OVERWRITE')} /> OVERWRITE</label>
+                    </div>
+                    <label className="tz-row"><input type="checkbox" checked={includeSectionalTests} onChange={(e)=>setIncludeSectionalTests(e.target.checked)} /> Include sectional tests</label>
+                    <div className="tz-actions">
+                      <button className="tz-btn" onClick={()=>setSelectedTarget(null)}>Back</button>
+                      <button className="tz-primary-btn" disabled={running} onClick={startSend}>{running?'Sending…':'Send Now'}</button>
+                    </div>
+                  </div>
+                  {progress.length>0 && (
+                    <div className="tz-progress">
+                      {progress.map((p,i)=>(<div key={i} className="tz-progress-item">{p.t}</div>))}
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </AdminLayout>
   );
