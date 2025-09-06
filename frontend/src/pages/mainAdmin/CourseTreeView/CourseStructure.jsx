@@ -144,6 +144,38 @@ const CourseStructure = () => {
     }
   };
 
+  const postLocks = async (body) => axios.post('/api/locks/apply', body, { headers:{ Authorization:`Bearer ${token}` }});
+  const dryRunLocks = async (body) => axios.post('/api/locks/apply', { ...body, dryRun:true }, { headers:{ Authorization:`Bearer ${token}` }});
+
+  const applyGlobal = async (op) => {
+    if (!selectedBatch) { alert('Select a batch'); return; }
+    const items = scope==='subject' ? subjects : scope==='section' ? chapters : [];
+    const actions = items.map(it=> ({ scope, targetId: it._id, op }));
+    const base = { courseId, batchId: selectedBatch, actions, idempotencyKey: `${courseId}:${selectedBatch}:${scope}:${op}:${Date.now()}` };
+    try { await dryRunLocks(base); } catch(e){ alert(e?.response?.data?.message || 'Dry-run failed'); return; }
+    for (let i=0;i<actions.length;i+=50){
+      const chunk = actions.slice(i,i+50);
+      let attempt=0; let delay=500;
+      while (attempt<=2){
+        try{ await postLocks({ ...base, actions: chunk }); break; } catch(err){ attempt++; if (attempt>2) throw err; await new Promise(r=>setTimeout(r, delay)); delay*=3; }
+      }
+    }
+    await loadLocks();
+  };
+
+  const applySingle = async () => {
+    if (!selectedBatch) { alert('Select a batch'); return; }
+    const modal = document.querySelector('input[name="lockop"]:checked');
+    const op = modal ? modal.value : 'setActive';
+    const unlockAtEl = document.getElementById('unlockAt');
+    const unlockAt = unlockAtEl && unlockAtEl.value ? new Date(unlockAtEl.value).toISOString() : undefined;
+    const action = { scope: lockModal.scope, targetId: lockModal.item.id, op, autoLockSiblings: autoLock, schedule: unlockAt? { unlockAt }: undefined };
+    const base = { courseId, batchId: selectedBatch, actions: [action], idempotencyKey: `${courseId}:${selectedBatch}:${lockModal.scope}:${lockModal.item.id}:${op}` };
+    try { await dryRunLocks(base); } catch(e){ alert(e?.response?.data?.message || 'Validation failed'); return; }
+    let attempt=0; let delay=500; while(attempt<=2){ try{ await postLocks(base); break; } catch(err){ attempt++; if (attempt>2) throw err; await new Promise(r=>setTimeout(r, delay)); delay*=3; } }
+    await loadLocks(); setLockModal({open:false,item:null,scope:null});
+  };
+
   return (
     <AdminLayout>
       <div className="tz-container">
