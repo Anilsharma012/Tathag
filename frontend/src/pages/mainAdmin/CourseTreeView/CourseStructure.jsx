@@ -42,10 +42,89 @@ const CourseStructure = () => {
       .catch((err) => console.error("Failed to load chapters:", err));
   }, [activeSubject]);
 
+  // Send to Next state
+  const [pickOpen, setPickOpen] = useState(false);
+  const [coursesList, setCoursesList] = useState([]);
+  const [search, setSearch] = useState('');
+  const [selectedTarget, setSelectedTarget] = useState(null);
+  const [mode, setMode] = useState('MERGE');
+  const [includeSectionalTests, setIncludeSectionalTests] = useState(true);
+  const [running, setRunning] = useState(false);
+  const [progress, setProgress] = useState([]);
+
+  const addStep = (t) => setProgress((p) => [...p, { t, at: Date.now() }]);
+  const sleep = (ms) => new Promise(r=>setTimeout(r, ms));
+
+  const loadCourses = async () => {
+    try {
+      const res = await axios.get('/api/courses', { headers:{ Authorization:`Bearer ${token}` } });
+      const items = res.data.courses || res.data || [];
+      setCoursesList(items.filter((c)=>c._id !== courseId));
+    } catch (e) {
+      console.error('Failed to load courses:', e);
+    }
+  };
+
+  const filteredCourses = coursesList.filter(c => {
+    const q = search.toLowerCase();
+    return (c.name||c.title||'').toLowerCase().includes(q) || (c.slug||'').includes(q) || String(c.batchYear||'').includes(q);
+  });
+
+  const fetchWithRetry = async (fn, tries=3) => {
+    let delay = 500;
+    for (let i=0;i<tries;i++) {
+      try { return await fn(); } catch(e){
+        if (i===tries-1) throw e; if (!(e.response && e.response.status<500)) { await sleep(delay); delay*=3; continue; } await sleep(delay); delay*=3;
+      }
+    }
+  };
+
+  const startSend = async () => {
+    if (!selectedTarget) return;
+    setRunning(true); setProgress([]);
+    addStep('1) Fetch source structure');
+    try {
+      await fetchWithRetry(()=>axios.get(`/api/courses/${courseId}/structure`,{headers:{Authorization:`Bearer ${token}`}}));
+    } catch (e) { console.error(e); alert('Error fetching source'); setRunning(false); return; }
+
+    addStep('2) Dry-run estimate');
+    let dryRes; try {
+      dryRes = await fetchWithRetry(()=>axios.post(`/api/courses/copy-structure?dryRun=1`,{ sourceCourseId: courseId, targetCourseId: selectedTarget._id, mode, includeSectionalTests },{headers:{Authorization:`Bearer ${token}`}}));
+    } catch(e){ console.error(e); alert('Dry-run failed'); setRunning(false); return; }
+
+    addStep('3) Copy sections');
+    let realRes; try {
+      realRes = await fetchWithRetry(()=>axios.post(`/api/courses/copy-structure`,{ sourceCourseId: courseId, targetCourseId: selectedTarget._id, mode, includeSectionalTests },{headers:{Authorization:`Bearer ${token}`}}));
+    } catch(e){ console.error(e); alert('Copy failed'); setRunning(false); return; }
+
+    addStep('4) Final verify');
+    try {
+      const tgt = await fetchWithRetry(()=>axios.get(`/api/courses/${selectedTarget._id}/structure`,{headers:{Authorization:`Bearer ${token}`}}));
+      const countNodes = (arr)=>arr.reduce((s,n)=>s+1+(n.children?countNodes(n.children):0),0);
+      const planned = (dryRes?.data?.copied?.sections||0)+(dryRes?.data?.copied?.lessons||0);
+      const total = countNodes(tgt.data.structure||[]);
+      if (Math.abs(total - planned) > 1 && mode==='MERGE') {
+        // fix pass
+        addStep('Fix pass');
+        try {
+          await fetchWithRetry(()=>axios.post(`/api/courses/copy-structure`,{ sourceCourseId: courseId, targetCourseId: selectedTarget._id, mode:'MERGE', includeSectionalTests },{headers:{Authorization:`Bearer ${token}`}}));
+        } catch(e){ console.warn('Fix pass failed', e); }
+      }
+      alert(`Done. Copied ${realRes?.data?.copied?.sections||0} sections, ${realRes?.data?.copied?.lessons||0} lessons; Skipped ${realRes?.data?.skipped||0}.`);
+    } finally {
+      setRunning(false);
+    }
+  };
+
   return (
     <AdminLayout>
       <div className="tz-container">
-        <h1 className="tz-heading">📚 {course?.name} - Structure</h1>
+        <div className="tz-heading-row">
+          <h1 className="tz-heading">📚 {course?.name} - Structure</h1>
+          <button className="tz-primary-btn" onClick={()=>{setPickOpen(true); loadCourses();}} disabled={running}>
+            {running ? 'Sending...' : 'Send to Next'}
+          </button>
+        </div>
 
         <div className="tz-subject-tabs">
           {subjects.map((sub) => (
