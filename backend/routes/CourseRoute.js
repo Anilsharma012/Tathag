@@ -12,6 +12,14 @@ const {
   getPublishedCourseById
 } = require("../controllers/CourseController");
 
+const mongoose = require('mongoose');
+const slugify = require('slugify');
+const Course = require('../models/course/Course');
+const Subject = require('../models/course/Subject');
+const Chapter = require('../models/course/Chapter');
+const Topic = require('../models/course/Topic');
+const Test = require('../models/course/Test');
+
 // ✅ Auth & Permission Middleware
 const { authMiddleware } = require("../middleware/authMiddleware");
 const { checkPermission } = require("../middleware/permissionMiddleware");
