@@ -330,50 +330,6 @@ const CourseStructure = () => {
   );
 };
 
-async function postLocks(body){
-  const token = localStorage.getItem("adminToken");
-  return axios.post('/api/locks/apply', body, { headers:{ Authorization:`Bearer ${token}` }});
-}
-
-async function dryRun(body){
-  const token = localStorage.getItem("adminToken");
-  return axios.post('/api/locks/apply', { ...body, dryRun:true }, { headers:{ Authorization:`Bearer ${token}` }});
-}
-
-async function applyGlobal(op){
-  const token = localStorage.getItem("adminToken");
-  if (!selectedBatch) { alert('Select a batch'); return; }
-  const items = scope==='subject' ? subjects : scope==='section' ? chapters : [];
-  const actions = items.map(it=> ({ scope, targetId: it._id, op }));
-  const base = { courseId, batchId: selectedBatch, actions, idempotencyKey: `${courseId}:${selectedBatch}:${scope}:${op}:${Date.now()}` };
-  try {
-    await dryRun(base);
-  } catch(e){ alert(e?.response?.data?.message || 'Dry-run failed'); return; }
-  // chunking 50
-  for (let i=0;i<actions.length;i+=50){
-    const chunk = actions.slice(i,i+50);
-    let attempt=0; let delay=500;
-    while (attempt<=2){
-      try{ await postLocks({ ...base, actions: chunk }); break; } catch(err){ attempt++; if (attempt>2) throw err; await new Promise(r=>setTimeout(r, delay)); delay*=3; }
-    }
-  }
-  await loadLocks();
-}
-
-async function applySingle(){
-  const token = localStorage.getItem("adminToken");
-  if (!selectedBatch) { alert('Select a batch'); return; }
-  const modal = document.querySelector('input[name="lockop"]:checked');
-  const op = modal ? modal.value : 'setActive';
-  const unlockAtEl = document.getElementById('unlockAt');
-  const unlockAt = unlockAtEl && unlockAtEl.value ? new Date(unlockAtEl.value).toISOString() : undefined;
-  const action = { scope: lockModal.scope, targetId: lockModal.item.id, op, autoLockSiblings: autoLock, schedule: unlockAt? { unlockAt }: undefined };
-  const base = { courseId, batchId: selectedBatch, actions: [action], idempotencyKey: `${courseId}:${selectedBatch}:${lockModal.scope}:${lockModal.item.id}:${op}` };
-  try { await dryRun(base); } catch(e){ alert(e?.response?.data?.message || 'Validation failed'); return; }
-  // apply
-  let attempt=0; let delay=500; while(attempt<=2){ try{ await postLocks(base); break; } catch(err){ attempt++; if (attempt>2) throw err; await new Promise(r=>setTimeout(r, delay)); delay*=3; } }
-  await loadLocks(); setLockModal({open:false,item:null,scope:null});
-}
 
 const ChapterCard = ({ chapter, course, subject, locks, onOpenLock }) => {
   const [topics, setTopics] = useState([]);
