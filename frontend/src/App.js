@@ -119,6 +119,7 @@ import BatchManagement from "./pages/mainAdmin/BatchManagement/BatchManagement";
 import TeacherLiveClasses from "./pages/MainSubAdmin/LiveClasses/TeacherLiveClasses";
 import StudentLiveClasses from "./pages/Student/LiveClasses/StudentLiveClasses";
 import PurchaseHistory from "./pages/Student/PurchaseHistory/PurchaseHistory";
+import ViewCourse from "./components/ViewCourse/ViewCourse";
 
 // Auto-login functionality is handled in AppContent useEffect
 
@@ -466,6 +467,9 @@ const AppContent = () => {
         <Route path="/my-courses" element={<Mycourse />} />
         <Route path="/explore-blog" element={<ExploreBlog />} />
         <Route path="/instruction" element={<Instruction />} />
+
+        {/* ViewCourse - batch-wise subject unlock */}
+        <Route path="/courses/:courseId/batches/:batchId/view" element={<ViewCourse />} />
 
         <Route path="/student" element={<StudentLayout />}>
           <Route path="/student/dashboard" element={<StudentDashboard />} />

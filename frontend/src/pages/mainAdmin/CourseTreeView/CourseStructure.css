@@ -54,14 +54,14 @@ body {
 
 .tz-chapters-grid {
   display: flex;
-  flex-direction: column; /* 🟢 Yeh line change kari gayi hai */
+  flex-direction: column;
   gap: 1rem;
 }
 
 .tz-chapter-card {
-  width: 100%; /* full width */
-  max-width: 700px; /* optional: limit width for large screens */
-  margin: 0 auto; /* center align */
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .tz-chapter-card summary {
@@ -122,10 +122,6 @@ body {
   text-align: center;
 }
 
-
-
-
-
 .tz-topic-list {
   display: flex;
   flex-direction: column;
@@ -156,7 +152,6 @@ body {
   color: #1d4ed8;
 }
 
-/* Responsive Tweaks */
 @media screen and (max-width: 768px) {
   .tz-topic-item {
     font-size: 0.85rem;
@@ -180,8 +175,6 @@ body {
     padding-left: 0.5rem;
   }
 }
-
-
 
 .tz-test-list {
   margin-top: 0.4rem;
@@ -214,7 +207,6 @@ body {
   border-radius: 6px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .tz-test-item {
     font-size: 0.8rem;
@@ -226,9 +218,6 @@ body {
     padding: 0.4rem 0.6rem;
   }
 }
-
-
-
 
 .tz-modal-overlay {
   position: fixed;
@@ -316,3 +305,22 @@ body {
   font-style: italic;
 }
 
+/* New controls for Send to Next */
+.tz-heading-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.tz-primary-btn{background:#2563eb;color:#fff;border:0;border-radius:8px;padding:8px 12px;cursor:pointer}
+.tz-primary-btn:disabled{opacity:.6;cursor:not-allowed}
+.tz-input{width:100%;border:1px solid #e5e7eb;border-radius:8px;padding:10px;margin:8px 0}
+.tz-course-list{max-height:360px;overflow:auto;border:1px solid #eee;border-radius:8px}
+.tz-course-row{display:flex;align-items:center;justify-content:space-between;padding:10px;border-bottom:1px solid #f3f4f6}
+.tz-course-name{font-weight:600}
+.tz-course-sub{font-size:12px;color:#6b7280}
+.tz-btn{border:1px solid #e5e7eb;border-radius:8px;padding:6px 10px;background:#fff;cursor:pointer}
+.tz-confirm .tz-row{margin:6px 0}
+.tz-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+.tz-progress{margin-top:12px;border:1px dashed #e5e7eb;border-radius:8px;padding:10px}
+.tz-progress-item{font-size:13px;color:#374151;margin-bottom:6px}
+.tz-empty{padding:12px;color:#6b7280}
+.tz-progress-bar{width:100%;height:8px;background:#f3f4f6;border-radius:9999px;overflow:hidden;margin:6px 0}
+.tz-progress-fill{height:100%;background:#2563eb;width:0;transition:width .3s ease}
+.tz-progress-actions{display:flex;justify-content:flex-end;margin-top:8px}
+.tz-progress-rows{margin-bottom:8px}
