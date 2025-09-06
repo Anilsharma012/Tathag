@@ -84,7 +84,7 @@ const CourseStructure = () => {
 
   const startSend = async () => {
     if (!selectedTarget) return;
-    setRunning(true); setProgress([]);
+    setRunning(true); setProgress([]); setLastSummary(null); setBatchProgress({ processed: 0, total: 0 });
     addStep('1) Fetch source structure');
     try {
       await fetchWithRetry(()=>axios.get(`/api/courses/${courseId}/structure`,{headers:{Authorization:`Bearer ${token}`}}));
@@ -92,28 +92,27 @@ const CourseStructure = () => {
 
     addStep('2) Dry-run estimate');
     let dryRes; try {
-      dryRes = await fetchWithRetry(()=>axios.post(`/api/courses/copy-structure?dryRun=1`,{ sourceCourseId: courseId, targetCourseId: selectedTarget._id, mode, includeSectionalTests },{headers:{Authorization:`Bearer ${token}`}}));
+      dryRes = await fetchWithRetry(()=>axios.post(`/api/courses/copy-structure?dryRun=1`,{ sourceCourseId: courseId, targetCourseId: selectedTarget._id, mode, includeSectionalTests, plan:{ batchSize:50, retries:2 } },{headers:{Authorization:`Bearer ${token}`}}));
+      const plan = dryRes?.data?.plan; if (plan) setBatchProgress({ processed: 0, total: plan.totalBatches||0 });
     } catch(e){ console.error(e); alert('Dry-run failed'); setRunning(false); return; }
 
-    addStep('3) Copy sections');
+    addStep('3) Copying in batches');
     let realRes; try {
-      realRes = await fetchWithRetry(()=>axios.post(`/api/courses/copy-structure`,{ sourceCourseId: courseId, targetCourseId: selectedTarget._id, mode, includeSectionalTests },{headers:{Authorization:`Bearer ${token}`}}));
+      realRes = await fetchWithRetry(()=>axios.post(`/api/courses/copy-structure`,{ sourceCourseId: courseId, targetCourseId: selectedTarget._id, mode, includeSectionalTests, plan:{ batchSize:50, retries:2 } },{headers:{Authorization:`Bearer ${token}`}}));
+      if (realRes?.data?.batches) setBatchProgress(realRes.data.batches);
     } catch(e){ console.error(e); alert('Copy failed'); setRunning(false); return; }
 
     addStep('4) Final verify');
     try {
-      const tgt = await fetchWithRetry(()=>axios.get(`/api/courses/${selectedTarget._id}/structure`,{headers:{Authorization:`Bearer ${token}`}}));
-      const countNodes = (arr)=>arr.reduce((s,n)=>s+1+(n.children?countNodes(n.children):0),0);
-      const planned = (dryRes?.data?.copied?.sections||0)+(dryRes?.data?.copied?.lessons||0);
-      const total = countNodes(tgt.data.structure||[]);
-      if (Math.abs(total - planned) > 1 && mode==='MERGE') {
-        // fix pass
-        addStep('Fix pass');
-        try {
-          await fetchWithRetry(()=>axios.post(`/api/courses/copy-structure`,{ sourceCourseId: courseId, targetCourseId: selectedTarget._id, mode:'MERGE', includeSectionalTests },{headers:{Authorization:`Bearer ${token}`}}));
-        } catch(e){ console.warn('Fix pass failed', e); }
-      }
-      alert(`Done. Copied ${realRes?.data?.copied?.sections||0} sections, ${realRes?.data?.copied?.lessons||0} lessons; Skipped ${realRes?.data?.skipped||0}.`);
+      const data = realRes?.data || {};
+      const success = !!data.success;
+      const copied = data.copied || {};
+      const skipped = data.skipped || 0;
+      const verify = data.verify || {};
+      const errors = data.errors || [];
+      setLastSummary({ success, copied, skipped, verify, errors, incomplete: data.incomplete });
+      const okHash = verify && verify.matched;
+      alert(`Copied ${copied.sections||0} sections, ${copied.lessons||0} lessons, ${copied.quizzes||0} quizzes. Skipped ${skipped}. Hash ${okHash?'matched ✔':'mismatch ✖'}`);
     } finally {
       setRunning(false);
     }
