@@ -54,6 +54,33 @@ const CourseStructure = () => {
   const [batchProgress, setBatchProgress] = useState({ processed: 0, total: 0 });
   const [lastSummary, setLastSummary] = useState(null);
 
+  // Lock Manager state
+  const [lockOpen, setLockOpen] = useState(false);
+  const [batches, setBatches] = useState([]);
+  const [selectedBatch, setSelectedBatch] = useState('');
+  const [scope, setScope] = useState('subject');
+  const [autoLock, setAutoLock] = useState(true);
+  const [locks, setLocks] = useState({}); // key: itemId -> status
+  const [lockModal, setLockModal] = useState({ open:false, item:null, scope:null });
+
+  const loadBatches = async () => {
+    try {
+      const res = await axios.get(`/api/batches?courseId=${courseId}`, { headers:{ Authorization:`Bearer ${token}` } });
+      setBatches(res.data.items||[]);
+      if (!selectedBatch && (res.data.items||[]).length) setSelectedBatch(res.data.items[0]._id);
+    } catch(e){ console.error('batches error', e); }
+  };
+  const loadLocks = async () => {
+    if (!selectedBatch) return;
+    try {
+      const res = await axios.get(`/api/locks/state?courseId=${courseId}&batchId=${selectedBatch}`, { headers:{ Authorization:`Bearer ${token}` } });
+      const map = {}; (res.data.states||[]).forEach(s=>{ map[String(s.itemId)] = s.status; });
+      setLocks(map);
+    } catch(e){ console.error('locks error', e); }
+  };
+  useEffect(()=>{ if (lockOpen) { loadBatches(); } }, [lockOpen]);
+  useEffect(()=>{ loadLocks(); }, [selectedBatch]);
+
   const addStep = (t) => setProgress((p) => [...p, { t, at: Date.now() }]);
   const sleep = (ms) => new Promise(r=>setTimeout(r, ms));
 
