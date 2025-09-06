@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import AdminLayout from "../AdminLayout/AdminLayout";
 import "./CourseStructure.css";
-import ReactModal from "react-modal";
 
 const CourseStructure = () => {
   const { courseId } = useParams();
