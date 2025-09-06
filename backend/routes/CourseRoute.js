@@ -52,8 +52,6 @@ router.get("/student/published-courses", getPublishedCourses);
 router.get("/student/published-courses/:id", getPublishedCourseById);
 
 // ✅ Batch-wise subject view (public, user optional)
-const Course = require('../models/course/Course');
-const Subject = require('../models/course/Subject');
 const Batch = require('../models/Batch');
 const UserProgress = require('../models/UserProgress');
 
