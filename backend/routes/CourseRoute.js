@@ -19,7 +19,7 @@ const Subject = require('../models/course/Subject');
 const Chapter = require('../models/course/Chapter');
 const Topic = require('../models/course/Topic');
 const Test = require('../models/course/Test');
-const Question = require('../models/course/Question');
+const Question = require('../models/test/Question');
 const crypto = require('crypto');
 
 // ✅ Auth & Permission Middleware
