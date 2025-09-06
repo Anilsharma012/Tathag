@@ -149,9 +149,12 @@ const CourseStructure = () => {
       <div className="tz-container">
         <div className="tz-heading-row">
           <h1 className="tz-heading">📚 {course?.name} - Structure</h1>
-          <button className="tz-primary-btn" onClick={()=>{setPickOpen(true); loadCourses();}} disabled={running}>
-            {running ? 'Sending...' : 'Send to Next'}
-          </button>
+          <div style={{display:'flex',gap:8}}>
+            <button className="tz-btn" onClick={()=>{ setLockOpen(true); }} disabled={running}>Lock Manager</button>
+            <button className="tz-primary-btn" onClick={()=>{setPickOpen(true); loadCourses();}} disabled={running}>
+              {running ? 'Sending...' : 'Send to Next'}
+            </button>
+          </div>
         </div>
 
         <div className="tz-subject-tabs">
