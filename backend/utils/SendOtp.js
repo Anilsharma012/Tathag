@@ -1,7 +1,6 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 const axios = require("axios");
-const nodemailer = require('nodemailer');
 
 // Create transporter with better error handling
 const createTransporter = async () => {
